@@ -530,6 +530,85 @@ def build_sector_linkage(candidate_pool):
     ]
 
 
+def build_event_templates():
+    return [
+        {
+            "name": "机器人/Tesla 催化",
+            "watch": "发布会、订单、量产节点、供应链确认。",
+            "buy_expectation": "只在板块未高潮、核心零部件放量转强时看预期。",
+            "sell_news_risk": "若事件前已连续加速，发布当天更偏兑现风险。",
+            "system_rule": "先确认龙头/中军地位，再决定是否进入核心候选。"
+        },
+        {
+            "name": "业绩预告",
+            "watch": "利润增速、订单能见度、毛利率、是否超一致预期。",
+            "buy_expectation": "预告前趋势温和、估值未透支、板块资金回流时才可计划。",
+            "sell_news_risk": "业绩落地但股价放量滞涨，按买预期卖事实处理。",
+            "system_rule": "逻辑兑现不等于继续买，先看增量信息。"
+        },
+        {
+            "name": "政策会议/产业政策",
+            "watch": "政策是否有预算、订单、牌照、试点城市或明确时间表。",
+            "buy_expectation": "政策前只看中军和趋势核心，不做后排纯题材。",
+            "sell_news_risk": "只有口号没有落地路径，冲高后容易退潮。",
+            "system_rule": "轮动题材只给小仓，不按主线仓位处理。"
+        },
+        {
+            "name": "半导体涨价/缺货",
+            "watch": "涨价品类、持续周期、库存位置、公司是否真的受益。",
+            "buy_expectation": "必须看到板块资金由流出转回流，且中军放量反包。",
+            "sell_news_risk": "若涨价已被广泛讨论且股价已大涨，按晚周期处理。",
+            "system_rule": "运行 Lynch 周期检查：我是早买，还是在热闹时接最后一棒。"
+        },
+        {
+            "name": "产品发布/客户认证",
+            "watch": "客户级别、认证是否转订单、收入弹性、替代难度。",
+            "buy_expectation": "平台突破 + 放量 + 大客户逻辑可证伪时才纳入。",
+            "sell_news_risk": "发布只有概念没有订单，按题材兑现风险处理。",
+            "system_rule": "原始买入理由必须能被验证，也必须能被证伪。"
+        },
+    ]
+
+
+def build_post_review_score(themes, market_gate, candidate_pool, alerts, freshness):
+    top_theme = themes[0] if themes else {"name": "无", "flow_score_100m_yuan": 0}
+    dimensions = [
+        {
+            "name": "主线识别",
+            "score": 85 if top_theme["flow_score_100m_yuan"] > 250 else 65,
+            "note": f"最强主线为 {top_theme['name']}，资金强度 {top_theme['flow_score_100m_yuan']} 亿。"
+        },
+        {
+            "name": "市场门",
+            "score": 80 if market_gate["status"] == "市场门打开" else (60 if market_gate["status"] == "市场门半开" else 45),
+            "note": market_gate["advice"]
+        },
+        {
+            "name": "候选质量",
+            "score": min(90, 50 + len(candidate_pool["core"]) * 12 + len(candidate_pool["watch"])),
+            "note": f"核心候选 {len(candidate_pool['core'])} 个，观察池 {len(candidate_pool['watch'])} 个。"
+        },
+        {
+            "name": "风险纪律",
+            "score": 70 if len(alerts) <= 2 else 55,
+            "note": f"系统预警 {len(alerts)} 条，按预警降级仓位。"
+        },
+        {
+            "name": "数据可靠",
+            "score": 90 if freshness["is_current"] else 50,
+            "note": freshness["message"]
+        },
+    ]
+    total = round(sum(item["score"] for item in dimensions) / len(dimensions), 1)
+    if total >= 75:
+        conclusion = "系统状态可用，但仍必须等买点确认。"
+    elif total >= 60:
+        conclusion = "系统可用于观察，交易动作需要降级。"
+    else:
+        conclusion = "系统只适合复盘，不适合直接开新仓。"
+    return {"total": total, "conclusion": conclusion, "dimensions": dimensions}
+
+
 SYSTEM_RULES = [
     {
         "title": "数据先验",
@@ -624,6 +703,8 @@ def main():
     top_summary = build_top_summary(sorted_themes, market_gate, freshness)
     execution_checklist = build_execution_checklist(sorted_themes, market_gate, freshness)
     sector_linkage = build_sector_linkage(candidate_pool)
+    event_templates = build_event_templates()
+    post_review_score = build_post_review_score(sorted_themes, market_gate, candidate_pool, alerts, freshness)
 
     report = {
         "generated_at": date.today().isoformat(),
@@ -633,6 +714,8 @@ def main():
         "top_summary": top_summary,
         "execution_checklist": execution_checklist,
         "sector_linkage": sector_linkage,
+        "event_templates": event_templates,
+        "post_review_score": post_review_score,
         "market_view": {
             "summary": "主线资金集中在机器人、汽车链和新能源车；半导体/芯片链大幅流出。下一交易日优先观察主线分歧后的承接，而不是追一致高潮。",
             "cycle_position": "机器人高潮后分歧，汽车链承接，低空/军工轮动，贵金属防守，半导体弱修复观察。",

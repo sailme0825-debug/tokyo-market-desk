@@ -108,6 +108,33 @@ function renderStockResult(report) {
         <ul>${report.data_sources.map((item) => `<li>${htmlEscape(item)}</li>`).join("")}</ul>
       </section>
     </div>
+
+    <div class="stock-detail-page">
+      <section>
+        <h3>角色审计</h3>
+        <ul>${(judgment.detail?.role_audit || []).map((item) => `<li>${htmlEscape(item)}</li>`).join("")}</ul>
+      </section>
+      <section>
+        <h3>触发条件</h3>
+        <div class="trigger-grid">
+          ${(judgment.detail?.trigger_status || []).map((item) => `
+            <div class="${item.status === "通过" ? "pass" : item.status === "偏高" ? "warn" : ""}">
+              <b>${htmlEscape(item.name)}</b>
+              <span>${htmlEscape(item.status)}</span>
+              <small>${htmlEscape(item.note)}</small>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+      <section>
+        <h3>下一步动作</h3>
+        <ul>${(judgment.detail?.next_actions || []).map((item) => `<li>${htmlEscape(item)}</li>`).join("")}</ul>
+      </section>
+      <section>
+        <h3>禁止动作</h3>
+        <ul>${(judgment.detail?.do_not_do || []).map((item) => `<li>${htmlEscape(item)}</li>`).join("")}</ul>
+      </section>
+    </div>
   `;
 }
 
@@ -411,6 +438,46 @@ function renderSectorLinkage(linkage) {
   renderGroup(0);
 }
 
+function renderEventTemplates(templates) {
+  const root = document.getElementById("eventTemplates");
+  root.innerHTML = (templates || []).map((item) => `
+    <article class="event-card">
+      <h3>${htmlEscape(item.name)}</h3>
+      <dl>
+        <div><dt>观察</dt><dd>${htmlEscape(item.watch)}</dd></div>
+        <div><dt>买预期</dt><dd>${htmlEscape(item.buy_expectation)}</dd></div>
+        <div><dt>兑现风险</dt><dd>${htmlEscape(item.sell_news_risk)}</dd></div>
+        <div><dt>系统规则</dt><dd>${htmlEscape(item.system_rule)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+}
+
+function renderPostReviewScore(score) {
+  const root = document.getElementById("postReviewScore");
+  if (!score) {
+    root.innerHTML = `<p class="empty-line">暂无复盘评分。</p>`;
+    return;
+  }
+  root.innerHTML = `
+    <div class="review-total">
+      <strong>${score.total}</strong>
+      <span>${htmlEscape(score.conclusion)}</span>
+    </div>
+    <div class="review-dimensions">
+      ${score.dimensions.map((item) => `
+        <article>
+          <div>
+            <b>${htmlEscape(item.name)}</b>
+            <span>${htmlEscape(item.note)}</span>
+          </div>
+          <strong>${item.score}</strong>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
 function renderCandidatePool(pool) {
   const core = pool.core.length ? pool.core : [];
   const watch = pool.watch || [];
@@ -480,6 +547,8 @@ async function boot() {
   renderEmotionDashboard(report.emotion_dashboard);
   renderExecutionChecklist(report.execution_checklist || []);
   renderSectorLinkage(report.sector_linkage || []);
+  renderEventTemplates(report.event_templates || []);
+  renderPostReviewScore(report.post_review_score);
   renderThemes(report.themes);
   renderPulseCards(report.themes);
   renderSystemRules(report.systems.rules || []);

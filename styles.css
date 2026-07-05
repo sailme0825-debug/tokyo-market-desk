@@ -671,6 +671,185 @@ h1 {
   gap: 8px;
 }
 
+.stock-detail-page {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stock-detail-page section,
+.event-card,
+.review-total,
+.review-dimensions article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.stock-detail-page section {
+  padding: 10px;
+}
+
+.stock-detail-page h3,
+.event-card h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.stock-detail-page ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.trigger-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.trigger-grid div {
+  display: grid;
+  gap: 3px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #ffffff;
+}
+
+.trigger-grid div.pass {
+  border-color: rgba(22, 133, 109, 0.24);
+  background: var(--green-bg);
+}
+
+.trigger-grid div.warn {
+  border-color: rgba(166, 107, 18, 0.25);
+  background: var(--amber-bg);
+}
+
+.trigger-grid b,
+.trigger-grid span,
+.trigger-grid small {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.trigger-grid b {
+  color: var(--ink);
+}
+
+.trigger-grid span {
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.trigger-grid small {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.event-templates,
+.post-review {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.event-card {
+  padding: 10px;
+}
+
+.event-card dl {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.event-card dl div {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 8px;
+}
+
+.event-card dt,
+.event-card dd {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.event-card dt {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.event-card dd {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.review-total {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+}
+
+.review-total strong {
+  color: var(--blue);
+  font-size: 36px;
+  line-height: 1;
+}
+
+.review-total span {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 850;
+}
+
+.review-dimensions {
+  display: grid;
+  gap: 8px;
+}
+
+.review-dimensions article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 8px;
+  align-items: center;
+  padding: 9px;
+}
+
+.review-dimensions b {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.review-dimensions span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.review-dimensions strong {
+  color: var(--red);
+  font-size: 18px;
+  text-align: right;
+}
+
 .judgment-grid,
 .stock-plan-grid,
 .trade-grid {
@@ -1321,6 +1500,8 @@ h1 {
   .cycle-axis,
   .stock-metrics,
   .stock-plan-grid,
+  .stock-detail-page,
+  .trigger-grid,
   .judgment-grid,
   .judgment-card ul,
   .pulse-grid,
