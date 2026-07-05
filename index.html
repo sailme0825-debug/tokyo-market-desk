@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tokyo A股情绪周期判断台</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar" aria-label="概览">
+        <div>
+          <p class="kicker">Tokyo Market Desk</p>
+          <h1>A股情绪周期判断台</h1>
+        </div>
+        <div class="status-strip">
+          <span id="judgeDate">判断日 --</span>
+          <span id="sourceDate">数据日 --</span>
+          <span id="verifyStatus">核验中</span>
+        </div>
+      </section>
+
+      <section id="freshnessBanner" class="freshness-banner" hidden></section>
+
+      <section class="one-screen-panel" aria-label="一屏结论">
+        <div class="decision-grid">
+          <div>
+            <span>市场门</span>
+            <strong id="quickMarketGate">--</strong>
+          </div>
+          <div>
+            <span>今日主线</span>
+            <strong id="quickMainline">--</strong>
+          </div>
+          <div>
+            <span>今日动作</span>
+            <strong id="quickAction">--</strong>
+          </div>
+          <div>
+            <span>数据状态</span>
+            <strong id="quickFreshness">--</strong>
+          </div>
+        </div>
+        <div id="quickTaboo" class="quick-taboo">--</div>
+      </section>
+
+      <section class="summary-grid" aria-label="每日判断">
+        <div class="panel main-panel">
+          <div class="panel-head">
+            <span>明日总判断</span>
+            <strong id="cyclePosition">--</strong>
+          </div>
+          <p id="marketSummary" class="summary-text">加载中...</p>
+          <div class="rule-band" id="buyRule">--</div>
+        </div>
+
+        <div class="panel rules-panel">
+          <div class="panel-head">
+            <span>系统铁律</span>
+            <strong>先规则，后判断</strong>
+          </div>
+          <ul class="system-list">
+            <li id="researchSystem">--</li>
+            <li id="riskSystem">--</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="dashboard-grid" aria-label="市场门与预警">
+        <div class="panel">
+          <div class="panel-head">
+            <span>大盘市场门</span>
+            <strong id="marketGateStatus">--</strong>
+          </div>
+          <div id="marketGate" class="market-gate"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <span>系统预警</span>
+            <strong>风控优先</strong>
+          </div>
+          <div id="alertList" class="alert-list"></div>
+        </div>
+      </section>
+
+      <section class="stock-search-panel" aria-label="个股检索判断">
+        <div class="section-title">
+          <span>个股检索</span>
+          <strong>她模型 + v5/v6 直接判断</strong>
+        </div>
+        <div class="stock-search-bar">
+          <label for="stockQuery">股票代码或名称</label>
+          <div class="stock-search-control">
+            <input id="stockQuery" type="search" placeholder="例如：三花智控 / 002050 / 拓普集团" autocomplete="off">
+            <button id="stockSearchButton" type="button">判断</button>
+          </div>
+        </div>
+        <div id="stockResult" class="stock-result empty-state">
+          输入 A 股代码或名称，系统会先检索行情，再按你的两套规则给出研究判断、买卖点、失效条件和仓位约束。
+        </div>
+      </section>
+
+      <section class="pulse-board" aria-label="资金脉冲">
+        <div class="section-title">
+          <span>资金脉冲</span>
+          <strong>主线 / 承接 / 轮动 / 退潮</strong>
+        </div>
+        <div id="pulseCards" class="pulse-grid"></div>
+      </section>
+
+      <section class="dashboard-grid" aria-label="核心候选与情绪周期">
+        <div class="panel">
+          <div class="panel-head">
+            <span>核心候选池</span>
+            <strong>1-3 核心 / 5-8 观察</strong>
+          </div>
+          <div id="candidatePool" class="candidate-pool"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <span>情绪周期仪表</span>
+            <strong>阶段决定仓位</strong>
+          </div>
+          <div id="emotionDashboard" class="emotion-dashboard"></div>
+        </div>
+      </section>
+
+      <section class="dashboard-grid" aria-label="执行清单与板块联动">
+        <div class="panel">
+          <div class="panel-head">
+            <span>明日执行清单</span>
+            <strong>只看 3-5 条</strong>
+          </div>
+          <div id="executionChecklist" class="execution-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <span>板块-个股联动</span>
+            <strong>点板块看候选</strong>
+          </div>
+          <div id="sectorLinkage" class="sector-linkage"></div>
+        </div>
+      </section>
+
+      <section class="panel rulebook-panel" aria-label="交易系统规则">
+        <div class="panel-head">
+          <span>交易系统规则</span>
+          <strong>她模型 + v5/v6</strong>
+        </div>
+        <div id="systemRules" class="rulebook-grid"></div>
+      </section>
+
+      <section class="layout">
+        <div class="panel">
+          <div class="panel-head">
+            <span>热门板块情绪周期</span>
+            <strong>按资金强弱排序</strong>
+          </div>
+          <div id="themeList" class="theme-list"></div>
+        </div>
+
+        <aside class="side-stack">
+          <div class="panel">
+            <div class="panel-head">
+              <span>行业流入 Top 10</span>
+              <strong>亿元</strong>
+            </div>
+            <div id="industryBars" class="bar-list"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <span>概念流入 Top 10</span>
+              <strong>亿元</strong>
+            </div>
+            <div id="conceptBars" class="bar-list"></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel compliance-panel">
+        <div class="panel-head">
+          <span>公开合规提示</span>
+          <strong>研究工具，不是荐股</strong>
+        </div>
+        <div class="compliance-grid">
+          <div><b>表达方式</b><span>使用“条件买点、退出条件、观察池”，避免公开页面写成无条件买入/卖出指令。</span></div>
+          <div><b>责任边界</b><span>所有结论必须保留数据口径、失效条件、仓位约束和风险提示。</span></div>
+          <div><b>系统定位</b><span>这是个人交易复盘与决策辅助工具，不构成投资建议或收益承诺。</span></div>
+        </div>
+      </section>
+
+      <section class="panel verify-panel">
+        <div class="panel-head">
+          <span>数据核验</span>
+          <strong>东方财富 BK 口径</strong>
+        </div>
+        <div id="verification" class="verify-grid"></div>
+        <p id="disclaimer" class="disclaimer"></p>
+      </section>
+    </main>
+
+    <script src="./site-config.js"></script>
+    <script src="./report-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
