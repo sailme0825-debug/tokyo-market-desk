@@ -188,6 +188,88 @@ def row_to_public(row, rank):
     }
 
 
+def is_noisy_sector(name):
+    noisy = [
+        "融资融券", "富时罗素", "标准普尔", "深股通", "沪股通", "昨日", "预亏预减", "ST股", "转债",
+        "机构重仓", "证金持股", "基金重仓", "HS300", "MSCI", "大盘价值", "小盘", "红利股",
+        "风格", "破净", "价值股", "高股息", "低价股", "反转股", "绩优股", "一季报", "三季报",
+        "年报", "预增", "预减", "扭亏", "GDR", "QFII", "社保", "养老金", "参股",
+        "中特估", "超级品牌", "其他", "综合",
+    ]
+    return any(key in name for key in noisy)
+
+
+def is_defensive_sector(name):
+    return any(key in name for key in ["贵金属", "银行", "电力", "煤炭", "公用", "保险", "红利", "高股息"])
+
+
+def infer_mainline_role(name, flow, phase, source):
+    if is_defensive_sector(name):
+        return "防守主线"
+    if flow <= -20 or phase == "退潮":
+        return "退潮观察"
+    if flow >= 20 and phase in ["发酵", "加速", "高潮"]:
+        return "题材主线" if source == "概念" else "行业主线"
+    if flow >= 8 and phase == "启动":
+        return "题材分支" if source == "概念" else "行业分支"
+    if flow >= 3:
+        return "主线观察"
+    return "分歧观察"
+
+
+def mainline_score(row):
+    if is_noisy_sector(row["name"]):
+        return -9999
+    phase_bonus = {"高潮": 18, "加速": 22, "发酵": 24, "启动": 12, "修复": 8, "分歧": -8, "退潮": -35}.get(row["phase"], 0)
+    source_bonus = 6 if row["source"] == "概念" else 0
+    defense_penalty = 18 if is_defensive_sector(row["name"]) else 0
+    broad_penalty = 4 if "Ⅱ" in row["name"] else 0
+    rank_bonus = max(0, 18 - min(row.get("rank", 99), 18))
+    return row["flow_score_100m_yuan"] * 1.15 + phase_bonus + source_bonus + rank_bonus - defense_penalty - broad_penalty
+
+
+def dynamic_mainline_rows(industry, concept):
+    rows = []
+    for source, source_rows in [("行业", industry), ("概念", concept)]:
+        for index, row in enumerate(source_rows, 1):
+            flow = yi(row["f62"])
+            phase = cycle_phase_for_sector(row["f14"], flow, source)
+            role = infer_mainline_role(row["f14"], flow, phase, source)
+            item = {
+                "rank": index,
+                "code": row["f12"],
+                "name": row["f14"],
+                "source": source,
+                "role": role,
+                "flow_score_100m_yuan": flow,
+                "emotion_stage": phase,
+                "phase": phase,
+                "expectation": cycle_rule_for_phase(phase),
+                "intraday_rule": f"{role}：{cycle_rule_for_phase(phase)}",
+                "trade_plan": {
+                    "bias": f"{role}，{phase}",
+                    "analysis": cycle_rule_for_phase(phase),
+                    "buy_points": [cycle_rule_for_phase(phase)],
+                    "sell_points": ["跌回资金榜后排、板块转退潮、核心股承接失败。"],
+                    "invalidation": "资金转负或核心中军无法承接。",
+                    "position": "按阶段降级，不超过系统仓位上限。",
+                },
+                "watch_points": [{"code": row["f12"], "name": row["f14"], "flow": flow}],
+                "risk_points": [],
+            }
+            item["score"] = round(mainline_score(item), 1)
+            item["is_system_mainline"] = (
+                item["score"] >= 8
+                and flow > 0
+                and not is_noisy_sector(item["name"])
+                and role not in ["防守主线", "退潮观察", "分歧观察"]
+            )
+            rows.append(item)
+    selected = sorted([row for row in rows if row["is_system_mainline"]], key=lambda row: row["score"], reverse=True)[:30]
+    fallback = sorted([row for row in rows if not is_noisy_sector(row["name"])], key=lambda row: row["score"], reverse=True)[:18]
+    return selected or fallback
+
+
 def collect_theme(theme, industry, concept):
     rows = []
     all_rows = [("industry", row) for row in industry] + [("concept", row) for row in concept]
@@ -778,7 +860,8 @@ def main():
             }
         )
 
-    sorted_themes = sorted(theme_reports, key=lambda x: x["flow_score_100m_yuan"], reverse=True)
+    sorted_themes = dynamic_mainline_rows(industry, concept)
+    watch_themes = sorted(theme_reports, key=lambda x: x["flow_score_100m_yuan"], reverse=True)
     market_gate = build_market_gate(industry, concept)
     candidate_pool = build_candidate_pool()
     emotion_dashboard = build_emotion_dashboard(sorted_themes, industry, concept)
@@ -815,6 +898,7 @@ def main():
         "emotion_dashboard": emotion_dashboard,
         "alerts": alerts,
         "themes": sorted_themes,
+        "watch_themes": watch_themes,
         "industry_top10": [row_to_public(row, i) for i, row in enumerate(industry[:10], 1)],
         "concept_top10": [row_to_public(row, i) for i, row in enumerate(concept[:10], 1)],
         "industry_all": [row_to_public(row, i) for i, row in enumerate(industry, 1)],

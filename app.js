@@ -292,7 +292,7 @@ function renderLiveSectorTabs(payload) {
     concept: payload.concept_top5 || [],
   };
   const sections = [
-    ["system", "系统主线", rankings.system || []],
+    ["system", "动态主线", rankings.system || []],
     ["industry", "行业资金", rankings.industry || []],
     ["concept", "概念资金", rankings.concept || []],
   ];
@@ -329,11 +329,12 @@ function renderLiveSectorRow(row) {
   const stage = row.emotion_stage || stageClassFromFlow(flow);
   const role = row.role || row.source || "资金";
   const rule = row.intraday_rule || intradayRuleFromFlow(row.name, flow);
+  const score = row.score !== undefined ? ` · ${row.score}分` : "";
   return `
     <article class="${flow < 0 ? "live-sector-weak" : ""}">
       <div>
         <b>${rank}${htmlEscape(row.name)}</b>
-        <span>${htmlEscape(stage)} · ${htmlEscape(role)} ${row.code ? `· ${htmlEscape(row.code)}` : ""}</span>
+        <span>${htmlEscape(stage)} · ${htmlEscape(role)}${score} ${row.code ? `· ${htmlEscape(row.code)}` : ""}</span>
       </div>
       <strong class="${flow < 0 ? "stock-down" : "stock-up"}">${yuan.format(flow)}亿</strong>
       <p>${htmlEscape(rule)}</p>

@@ -155,6 +155,68 @@ function rawSectorRows(rows, source) {
   });
 }
 
+function isNoisySector(name) {
+  return /融资融券|富时罗素|标准普尔|深股通|沪股通|昨日|预亏预减|ST股|转债|机构重仓|证金持股|基金重仓|HS300|MSCI|大盘价值|小盘|红利股|风格|破净|价值股|高股息|低价股|反转股|绩优股|一季报|三季报|年报|预增|预减|扭亏|GDR|QFII|社保|养老金|参股|中特估|超级品牌|其他|综合/.test(name);
+}
+
+function isDefensiveSector(name) {
+  return /贵金属|银行|电力|煤炭|公用|保险|红利|高股息/.test(name);
+}
+
+function inferMainlineRole(name, flow, phase, source) {
+  if (isDefensiveSector(name)) return "防守主线";
+  if (flow <= -20 || phase === "退潮") return "退潮观察";
+  if (flow >= 20 && ["发酵", "加速", "高潮"].includes(phase)) return source === "概念" ? "题材主线" : "行业主线";
+  if (flow >= 8 && phase === "启动") return source === "概念" ? "题材分支" : "行业分支";
+  if (flow >= 3) return "主线观察";
+  return "分歧观察";
+}
+
+function mainlineScore(row) {
+  if (isNoisySector(row.name)) return -9999;
+  const flow = Number(row.flow_score_100m_yuan ?? row.flow ?? 0);
+  const phaseBonus = {
+    高潮: 18,
+    加速: 22,
+    发酵: 24,
+    启动: 12,
+    修复: 8,
+    分歧: -8,
+    退潮: -35,
+  }[row.phase] || 0;
+  const sourceBonus = row.source === "概念" ? 6 : 0;
+  const defensePenalty = isDefensiveSector(row.name) ? 18 : 0;
+  const broadPenalty = /Ⅱ/.test(row.name) ? 4 : 0;
+  const rankBonus = Math.max(0, 18 - Math.min(row.rank || 99, 18));
+  return flow * 1.15 + phaseBonus + sourceBonus + rankBonus - defensePenalty - broadPenalty;
+}
+
+function buildDynamicMainlines(industryRows, conceptRows) {
+  const allRows = [...industryRows, ...conceptRows].map((row) => {
+    const phase = cyclePhaseForSector(row.name, row.flow_score_100m_yuan, row.source);
+    const role = inferMainlineRole(row.name, row.flow_score_100m_yuan, phase, row.source);
+    const score = mainlineScore({ ...row, phase });
+    return {
+      ...row,
+      phase,
+      emotion_stage: phase,
+      role,
+      score: Number(score.toFixed(1)),
+      is_system_mainline: score >= 8 && row.flow_score_100m_yuan > 0 && !isNoisySector(row.name) && !["防守主线", "退潮观察", "分歧观察"].includes(role),
+      intraday_rule: `${role}：${cycleRuleForPhase(phase)}`,
+    };
+  });
+  const selected = allRows
+    .filter((row) => row.is_system_mainline)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 30);
+  const fallback = allRows
+    .filter((row) => !isNoisySector(row.name))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 18);
+  return selected.length ? selected : fallback;
+}
+
 function cyclePhaseForSector(name, flow, source) {
   if (/贵金属|银行|电力|煤炭|公用|保险/.test(name) && flow > 0) return "修复";
   if (flow >= 150) return "高潮";
@@ -325,9 +387,10 @@ async function buildLiveReport() {
     Promise.all(CANDIDATE_UNIVERSE.map(async (item) => ({ ...item, quote: await fetchQuote(item.symbol) }))),
   ]);
 
-  const themes = THEMES.map((theme) => collectTheme(theme, industry, concept)).sort((a, b) => b.flow_score_100m_yuan - a.flow_score_100m_yuan);
   const industryRows = rawSectorRows(industry, "行业");
   const conceptRows = rawSectorRows(concept, "概念");
+  const themes = buildDynamicMainlines(industryRows, conceptRows);
+  const watchThemes = THEMES.map((theme) => collectTheme(theme, industry, concept)).sort((a, b) => b.flow_score_100m_yuan - a.flow_score_100m_yuan);
   const indices = indexQuotes.map((item) => ({
     name: item.name,
     price: item.quote?.price ?? null,
@@ -361,6 +424,7 @@ async function buildLiveReport() {
     gate,
     indices,
     themes,
+    watch_themes: watchThemes,
     emotion_dashboard: buildEmotionDashboardFromSectors(themes, industryRows, conceptRows),
     sector_rankings: {
       system: themes,
