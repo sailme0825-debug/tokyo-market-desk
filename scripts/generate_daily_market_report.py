@@ -733,6 +733,8 @@ def main():
         "themes": sorted_themes,
         "industry_top10": [row_to_public(row, i) for i, row in enumerate(industry[:10], 1)],
         "concept_top10": [row_to_public(row, i) for i, row in enumerate(concept[:10], 1)],
+        "industry_all": [row_to_public(row, i) for i, row in enumerate(industry, 1)],
+        "concept_all": [row_to_public(row, i) for i, row in enumerate(concept, 1)],
         "verification": make_verification(industry, concept),
         "disclaimer": "公开研究页面仅用于复盘和交易计划，不构成投资建议或收益承诺。",
     }

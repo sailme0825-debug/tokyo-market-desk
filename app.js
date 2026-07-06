@@ -297,7 +297,7 @@ function renderLiveSectorTabs(payload) {
   ];
   return `
     <div class="live-sector-tabs">
-      ${sections.map(([key, label], index) => `<button type="button" class="${index === 0 ? "active" : ""}" data-live-sector="${key}">${label}</button>`).join("")}
+      ${sections.map(([key, label, rows], index) => `<button type="button" class="${index === 0 ? "active" : ""}" data-live-sector="${key}">${label}<small>${rows.length}</small></button>`).join("")}
     </div>
     <div class="live-sector-panels">
       ${sections.map(([key, , rows], index) => `
@@ -450,13 +450,17 @@ function renderThemes(themes) {
 
 function renderBars(id, rows) {
   const root = document.getElementById(id);
+  if (!rows?.length) {
+    root.innerHTML = `<p class="empty-line">暂无板块资金数据。</p>`;
+    return;
+  }
   const max = Math.max(...rows.map((row) => Math.abs(row.main_net_inflow_100m_yuan)), 1);
   root.innerHTML = rows
     .map((row) => {
       const width = Math.max(4, Math.round((Math.abs(row.main_net_inflow_100m_yuan) / max) * 100));
       return `
         <div class="bar-row">
-          <div class="bar-name" title="${row.name}">${row.name}</div>
+          <div class="bar-name" title="${row.name}">#${row.rank ?? ""} ${row.name}</div>
           <div class="bar-track" aria-hidden="true">
             <div class="bar-fill" style="width:${width}%"></div>
           </div>
@@ -716,8 +720,8 @@ async function boot() {
   renderThemes(report.themes);
   renderPulseCards(report.themes);
   renderSystemRules(report.systems.rules || []);
-  renderBars("industryBars", report.industry_top10);
-  renderBars("conceptBars", report.concept_top10);
+  renderBars("industryBars", report.industry_all || report.industry_top10);
+  renderBars("conceptBars", report.concept_all || report.concept_top10);
   renderVerification(report.verification);
 
   document.getElementById("stockSearchButton").addEventListener("click", searchStock);

@@ -139,8 +139,8 @@ function intradayRuleForRawSector(name, flow, rank, source) {
   return "资金强度一般，降低优先级，只作轮动观察。";
 }
 
-function rawSectorRows(rows, source, limit) {
-  return rows.slice(0, limit).map((row, index) => {
+function rawSectorRows(rows, source) {
+  return rows.map((row, index) => {
     const flow = yi(row.f62);
     return {
       rank: index + 1,
@@ -273,12 +273,12 @@ async function buildLiveReport() {
     themes,
     sector_rankings: {
       system: themes,
-      industry: rawSectorRows(industry, "行业", 12),
-      concept: rawSectorRows(concept, "概念", 16),
+      industry: rawSectorRows(industry, "行业"),
+      concept: rawSectorRows(concept, "概念"),
     },
     candidates,
-    industry_top5: industry.slice(0, 12).map(publicRow),
-    concept_top5: concept.slice(0, 16).map(publicRow),
+    industry_top5: industry.map(publicRow),
+    concept_top5: concept.map(publicRow),
     system_boundary: "盘中实时判断只做条件过滤和风险提示，不给无条件买卖指令。",
   };
 }

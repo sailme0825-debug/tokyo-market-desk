@@ -1,59 +1,46 @@
 {
   "generated_at": "2026-07-06",
-  "source_data_date": "2026-07-03",
+  "source_data_date": "2026-07-06",
   "judge_date": "2026-07-07",
   "data_freshness": {
-    "is_current": false,
-    "status": "非当日数据",
-    "message": "数据日期不是今天，页面结论默认降级为历史复盘/待刷新。"
+    "is_current": true,
+    "status": "当日数据",
+    "message": "数据日期与生成日期一致。"
   },
   "top_summary": {
     "market_gate": "市场门收紧",
-    "mainline": "机器人/人形机器人",
+    "mainline": "贵金属",
     "action": "只观察",
     "taboo": "不追一致高开；不买后排情绪；不在市场门收紧时加仓。",
-    "freshness": "非当日数据"
+    "freshness": "当日数据"
   },
   "execution_checklist": [
-    {
-      "title": "先刷新数据",
-      "body": "当前不是当日数据，所有买点先按历史复盘处理。"
-    },
     {
       "title": "市场门",
       "body": "控制仓位，优先观察和防守，避免情绪化开新仓。"
     },
     {
-      "title": "机器人/人形机器人",
-      "body": "主线强，但只买分歧确认；强分歧后看前排回封，不追一致高开。"
-    },
-    {
-      "title": "汽车零部件/新能源车/特斯拉链",
-      "body": "承接方向，优先看中军；若机器人分歧，观察汽车链中军能否逆势放量突破。"
+      "title": "贵金属",
+      "body": "防守承接，不做进攻主线；指数走弱或题材炸板率升高时才提高权重。"
     },
     {
       "title": "低空经济/军工/商业航天",
       "body": "轮动支线，小仓试错；只做换手确认，不把缩量秒板当核心。"
     },
     {
-      "title": "贵金属",
-      "body": "防守承接，不做进攻主线；指数走弱或题材炸板率升高时才提高权重。"
+      "title": "汽车零部件/新能源车/特斯拉链",
+      "body": "承接方向，优先看中军；只看有成交确认的趋势核心。"
+    },
+    {
+      "title": "机器人/人形机器人",
+      "body": "主线强，但只买分歧确认；看板块是否补量扩散，优先核心零部件。"
+    },
+    {
+      "title": "禁忌",
+      "body": "不开盘追一致，不买后排，不用情绪替代系统。"
     }
   ],
   "sector_linkage": [
-    {
-      "theme": "机器人执行器",
-      "stocks": [
-        {
-          "code": "603728",
-          "name": "鸣志电器",
-          "role": "弹性观察",
-          "level": "核心候选",
-          "score": 109.6,
-          "reason": "趋势分 4/4，5日量比 2.08，20日突破 是。"
-        }
-      ]
-    },
     {
       "theme": "减速器/汽车链",
       "stocks": [
@@ -62,21 +49,8 @@
           "name": "双环传动",
           "role": "趋势观察",
           "level": "核心候选",
-          "score": 108.7,
-          "reason": "趋势分 4/4，5日量比 1.67，20日突破 是。"
-        }
-      ]
-    },
-    {
-      "theme": "机器人/人形机器人",
-      "stocks": [
-        {
-          "code": "688017",
-          "name": "绿的谐波",
-          "role": "弹性核心",
-          "level": "核心候选",
-          "score": 107.5,
-          "reason": "趋势分 4/4，5日量比 1.55，20日突破 是。"
+          "score": 108.5,
+          "reason": "趋势分 4/4，5日量比 1.49，20日突破 是。"
         }
       ]
     },
@@ -87,17 +61,17 @@
           "code": "601689",
           "name": "拓普集团",
           "role": "中军/趋势核心",
-          "level": "核心候选",
-          "score": 100.7,
-          "reason": "趋势分 4/4，5日量比 1.67，20日突破 否。"
+          "level": "观察池",
+          "score": 82.1,
+          "reason": "趋势分 4/4，5日量比 0.96，20日突破 否。"
         },
         {
           "code": "002050",
           "name": "三花智控",
           "role": "中军/趋势核心",
-          "level": "核心候选",
-          "score": 98.1,
-          "reason": "趋势分 4/4，5日量比 2.52，20日突破 否。"
+          "level": "观察池",
+          "score": 58.4,
+          "reason": "趋势分 3/4，5日量比 0.93，20日突破 否。"
         }
       ]
     },
@@ -108,30 +82,43 @@
           "code": "002916",
           "name": "深南电路",
           "role": "趋势观察",
-          "level": "核心候选",
-          "score": 94.5,
-          "reason": "趋势分 4/4，5日量比 1.36，20日突破 否。"
+          "level": "观察池",
+          "score": 78.4,
+          "reason": "趋势分 4/4，5日量比 0.8，20日突破 否。"
         },
         {
           "code": "002463",
           "name": "沪电股份",
           "role": "趋势观察",
           "level": "暂不纳入",
-          "score": 32.8,
-          "reason": "趋势分 1/4，5日量比 1.03，20日突破 否。"
+          "score": 19.9,
+          "reason": "趋势分 1/4，5日量比 0.67，20日突破 否。"
         }
       ]
     },
     {
-      "theme": "贵金属",
+      "theme": "机器人/人形机器人",
       "stocks": [
         {
-          "code": "600547",
-          "name": "山东黄金",
-          "role": "防守观察",
-          "level": "核心候选",
-          "score": 86.5,
-          "reason": "趋势分 3/4，5日量比 2.31，20日突破 否。"
+          "code": "688017",
+          "name": "绿的谐波",
+          "role": "弹性核心",
+          "level": "观察池",
+          "score": 78.3,
+          "reason": "趋势分 4/4，5日量比 0.78，20日突破 否。"
+        }
+      ]
+    },
+    {
+      "theme": "机器人执行器",
+      "stocks": [
+        {
+          "code": "603728",
+          "name": "鸣志电器",
+          "role": "弹性观察",
+          "level": "观察池",
+          "score": 77.4,
+          "reason": "趋势分 4/4，5日量比 0.85，20日突破 否。"
         }
       ]
     },
@@ -143,8 +130,42 @@
           "name": "紫金矿业",
           "role": "防守中军",
           "level": "观察池",
-          "score": 75.6,
-          "reason": "趋势分 3/4，5日量比 1.47，20日突破 否。"
+          "score": 63.3,
+          "reason": "趋势分 3/4，5日量比 0.68，20日突破 否。"
+        }
+      ]
+    },
+    {
+      "theme": "贵金属",
+      "stocks": [
+        {
+          "code": "600547",
+          "name": "山东黄金",
+          "role": "防守观察",
+          "level": "观察池",
+          "score": 63.3,
+          "reason": "趋势分 3/4，5日量比 1.0，20日突破 否。"
+        }
+      ]
+    },
+    {
+      "theme": "CPO/AI硬件",
+      "stocks": [
+        {
+          "code": "300308",
+          "name": "中际旭创",
+          "role": "修复观察",
+          "level": "暂不纳入",
+          "score": 25.7,
+          "reason": "趋势分 1/4，5日量比 0.77，20日突破 否。"
+        },
+        {
+          "code": "300502",
+          "name": "新易盛",
+          "role": "修复观察",
+          "level": "暂不纳入",
+          "score": 22.7,
+          "reason": "趋势分 1/4，5日量比 0.53，20日突破 否。"
         }
       ]
     },
@@ -156,29 +177,8 @@
           "name": "万丰奥威",
           "role": "轮动核心",
           "level": "暂不纳入",
-          "score": 35.9,
-          "reason": "趋势分 1/4，5日量比 1.23，20日突破 否。"
-        }
-      ]
-    },
-    {
-      "theme": "CPO/AI硬件",
-      "stocks": [
-        {
-          "code": "300502",
-          "name": "新易盛",
-          "role": "修复观察",
-          "level": "暂不纳入",
-          "score": 31.2,
-          "reason": "趋势分 1/4，5日量比 0.92，20日突破 否。"
-        },
-        {
-          "code": "300308",
-          "name": "中际旭创",
-          "role": "修复观察",
-          "level": "暂不纳入",
-          "score": 25.7,
-          "reason": "趋势分 1/4，5日量比 1.05，20日突破 否。"
+          "score": 25.1,
+          "reason": "趋势分 1/4，5日量比 0.72，20日突破 否。"
         }
       ]
     },
@@ -190,8 +190,8 @@
           "name": "中信海直",
           "role": "轮动观察",
           "level": "暂不纳入",
-          "score": 28.1,
-          "reason": "趋势分 1/4，5日量比 0.84，20日突破 否。"
+          "score": 5.4,
+          "reason": "趋势分 0/4，5日量比 0.66，20日突破 否。"
         }
       ]
     }
@@ -239,8 +239,8 @@
     "dimensions": [
       {
         "name": "主线识别",
-        "score": 85,
-        "note": "最强主线为 机器人/人形机器人，资金强度 383.85 亿。"
+        "score": 65,
+        "note": "最强主线为 贵金属，资金强度 5.64 亿。"
       },
       {
         "name": "市场门",
@@ -249,18 +249,18 @@
       },
       {
         "name": "候选质量",
-        "score": 90,
-        "note": "核心候选 3 个，观察池 8 个。"
+        "score": 70,
+        "note": "核心候选 1 个，观察池 8 个。"
       },
       {
         "name": "风险纪律",
         "score": 55,
-        "note": "系统预警 3 条，按预警降级仓位。"
+        "note": "系统预警 4 条，按预警降级仓位。"
       },
       {
         "name": "数据可靠",
-        "score": 50,
-        "note": "数据日期不是今天，页面结论默认降级为历史复盘/待刷新。"
+        "score": 90,
+        "note": "数据日期与生成日期一致。"
       }
     ]
   },
@@ -333,39 +333,39 @@
     "status": "市场门收紧",
     "advice": "控制仓位，优先观察和防守，避免情绪化开新仓。",
     "open_index_count": 0,
-    "sector_heat": 0.44,
-    "positive_industry_count": 63,
-    "positive_concept_count": 193,
+    "sector_heat": 0.21,
+    "positive_industry_count": 37,
+    "positive_concept_count": 75,
     "indices": [
       {
         "name": "上证指数",
         "symbol": "sh000001",
-        "price": 4043.64,
-        "pct": 0.37,
+        "price": 4046.71,
+        "pct": 0.08,
         "trend_score": 0,
         "status": "谨慎"
       },
       {
         "name": "深证成指",
         "symbol": "sz399001",
-        "price": 15597.51,
-        "pct": 0.64,
+        "price": 15541.62,
+        "pct": -0.36,
         "trend_score": 1,
         "status": "谨慎"
       },
       {
         "name": "创业板指",
         "symbol": "sz399006",
-        "price": 4019.93,
-        "pct": 0.07,
+        "price": 3999.28,
+        "pct": -0.51,
         "trend_score": 1,
         "status": "谨慎"
       },
       {
         "name": "沪深300",
         "symbol": "sh000300",
-        "price": 4842.17,
-        "pct": 0.62,
+        "price": 4856.07,
+        "pct": 0.29,
         "trend_score": 1,
         "status": "谨慎"
       }
@@ -374,150 +374,54 @@
   "candidate_pool": {
     "core": [
       {
-        "code": "603728",
-        "symbol": "sh603728",
-        "name": "鸣志电器",
-        "theme": "机器人执行器",
-        "role": "弹性观察",
-        "price": 68.02,
-        "pct": 7.34,
-        "turnover": 6.3,
-        "amount_10000": 177662.0,
-        "score": 109.6,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 62.17,
-          "ma10": 60.49,
-          "ma20": 61.92,
-          "ma60": 61.73,
-          "trend_score": 4,
-          "volume_ratio_5d": 2.08,
-          "breakout_20d": true,
-          "range_position_20d": 100.8
-        },
-        "reason": "趋势分 4/4，5日量比 2.08，20日突破 是。"
-      },
-      {
         "code": "002472",
         "symbol": "sz002472",
         "name": "双环传动",
         "theme": "减速器/汽车链",
         "role": "趋势观察",
-        "price": 47.01,
-        "pct": 9.99,
-        "turnover": 9.97,
-        "amount_10000": 341215.0,
-        "score": 108.7,
+        "price": 48.15,
+        "pct": 3.04,
+        "turnover": 10.48,
+        "amount_10000": 379167.0,
+        "score": 108.5,
         "level": "核心候选",
         "technical": {
-          "ma5": 42.34,
-          "ma10": 41.1,
+          "ma5": 44.2,
+          "ma10": 41.45,
           "ma20": 41.96,
-          "ma60": 40.84,
+          "ma60": 40.78,
           "trend_score": 4,
-          "volume_ratio_5d": 1.67,
+          "volume_ratio_5d": 1.49,
           "breakout_20d": true,
-          "range_position_20d": 110.9
+          "range_position_20d": 113.5
         },
-        "reason": "趋势分 4/4，5日量比 1.67，20日突破 是。"
-      },
-      {
-        "code": "688017",
-        "symbol": "sh688017",
-        "name": "绿的谐波",
-        "theme": "机器人/人形机器人",
-        "role": "弹性核心",
-        "price": 488.0,
-        "pct": 18.15,
-        "turnover": 14.7,
-        "amount_10000": 1252937.0,
-        "score": 107.5,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 420.9,
-          "ma10": 402.0,
-          "ma20": 397.09,
-          "ma60": 305.28,
-          "trend_score": 4,
-          "volume_ratio_5d": 1.55,
-          "breakout_20d": true,
-          "range_position_20d": 120.3
-        },
-        "reason": "趋势分 4/4，5日量比 1.55，20日突破 是。"
+        "reason": "趋势分 4/4，5日量比 1.49，20日突破 是。"
       }
     ],
     "watch": [
       {
-        "code": "603728",
-        "symbol": "sh603728",
-        "name": "鸣志电器",
-        "theme": "机器人执行器",
-        "role": "弹性观察",
-        "price": 68.02,
-        "pct": 7.34,
-        "turnover": 6.3,
-        "amount_10000": 177662.0,
-        "score": 109.6,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 62.17,
-          "ma10": 60.49,
-          "ma20": 61.92,
-          "ma60": 61.73,
-          "trend_score": 4,
-          "volume_ratio_5d": 2.08,
-          "breakout_20d": true,
-          "range_position_20d": 100.8
-        },
-        "reason": "趋势分 4/4，5日量比 2.08，20日突破 是。"
-      },
-      {
         "code": "002472",
         "symbol": "sz002472",
         "name": "双环传动",
         "theme": "减速器/汽车链",
         "role": "趋势观察",
-        "price": 47.01,
-        "pct": 9.99,
-        "turnover": 9.97,
-        "amount_10000": 341215.0,
-        "score": 108.7,
+        "price": 48.15,
+        "pct": 3.04,
+        "turnover": 10.48,
+        "amount_10000": 379167.0,
+        "score": 108.5,
         "level": "核心候选",
         "technical": {
-          "ma5": 42.34,
-          "ma10": 41.1,
+          "ma5": 44.2,
+          "ma10": 41.45,
           "ma20": 41.96,
-          "ma60": 40.84,
+          "ma60": 40.78,
           "trend_score": 4,
-          "volume_ratio_5d": 1.67,
+          "volume_ratio_5d": 1.49,
           "breakout_20d": true,
-          "range_position_20d": 110.9
+          "range_position_20d": 113.5
         },
-        "reason": "趋势分 4/4，5日量比 1.67，20日突破 是。"
-      },
-      {
-        "code": "688017",
-        "symbol": "sh688017",
-        "name": "绿的谐波",
-        "theme": "机器人/人形机器人",
-        "role": "弹性核心",
-        "price": 488.0,
-        "pct": 18.15,
-        "turnover": 14.7,
-        "amount_10000": 1252937.0,
-        "score": 107.5,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 420.9,
-          "ma10": 402.0,
-          "ma20": 397.09,
-          "ma60": 305.28,
-          "trend_score": 4,
-          "volume_ratio_5d": 1.55,
-          "breakout_20d": true,
-          "range_position_20d": 120.3
-        },
-        "reason": "趋势分 4/4，5日量比 1.55，20日突破 是。"
+        "reason": "趋势分 4/4，5日量比 1.49，20日突破 是。"
       },
       {
         "code": "601689",
@@ -525,47 +429,23 @@
         "name": "拓普集团",
         "theme": "机器人/汽车零部件链",
         "role": "中军/趋势核心",
-        "price": 62.43,
-        "pct": 10.01,
-        "turnover": 4.97,
-        "amount_10000": 522350.0,
-        "score": 100.7,
-        "level": "核心候选",
+        "price": 62.7,
+        "pct": 0.43,
+        "turnover": 3.34,
+        "amount_10000": 363518.0,
+        "score": 82.1,
+        "level": "观察池",
         "technical": {
-          "ma5": 56.99,
-          "ma10": 57.04,
-          "ma20": 60.21,
-          "ma60": 62.22,
+          "ma5": 59.06,
+          "ma10": 57.29,
+          "ma20": 59.95,
+          "ma60": 62.33,
           "trend_score": 4,
-          "volume_ratio_5d": 1.67,
+          "volume_ratio_5d": 0.96,
           "breakout_20d": false,
-          "range_position_20d": 58.7
+          "range_position_20d": 60.1
         },
-        "reason": "趋势分 4/4，5日量比 1.67，20日突破 否。"
-      },
-      {
-        "code": "002050",
-        "symbol": "sz002050",
-        "name": "三花智控",
-        "theme": "机器人/汽车零部件链",
-        "role": "中军/趋势核心",
-        "price": 48.99,
-        "pct": 9.06,
-        "turnover": 8.73,
-        "amount_10000": 1537120.0,
-        "score": 98.1,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 44.64,
-          "ma10": 44.1,
-          "ma20": 45.02,
-          "ma60": 46.93,
-          "trend_score": 4,
-          "volume_ratio_5d": 2.52,
-          "breakout_20d": false,
-          "range_position_20d": 95.9
-        },
-        "reason": "趋势分 4/4，5日量比 2.52，20日突破 否。"
+        "reason": "趋势分 4/4，5日量比 0.96，20日突破 否。"
       },
       {
         "code": "002916",
@@ -573,47 +453,71 @@
         "name": "深南电路",
         "theme": "AI硬件/PCB",
         "role": "趋势观察",
-        "price": 454.48,
-        "pct": 7.42,
-        "turnover": 2.65,
-        "amount_10000": 795083.0,
-        "score": 94.5,
-        "level": "核心候选",
+        "price": 448.46,
+        "pct": -1.32,
+        "turnover": 1.71,
+        "amount_10000": 501431.0,
+        "score": 78.4,
+        "level": "观察池",
         "technical": {
-          "ma5": 443.53,
-          "ma10": 442.14,
-          "ma20": 420.02,
-          "ma60": 355.61,
+          "ma5": 446.39,
+          "ma10": 441.25,
+          "ma20": 423.8,
+          "ma60": 359.53,
           "trend_score": 4,
-          "volume_ratio_5d": 1.36,
+          "volume_ratio_5d": 0.8,
           "breakout_20d": false,
-          "range_position_20d": 77.6
+          "range_position_20d": 73.2
         },
-        "reason": "趋势分 4/4，5日量比 1.36，20日突破 否。"
+        "reason": "趋势分 4/4，5日量比 0.8，20日突破 否。"
       },
       {
-        "code": "600547",
-        "symbol": "sh600547",
-        "name": "山东黄金",
-        "theme": "贵金属",
-        "role": "防守观察",
-        "price": 26.08,
-        "pct": 7.86,
-        "turnover": 4.32,
-        "amount_10000": 405813.0,
-        "score": 86.5,
-        "level": "核心候选",
+        "code": "688017",
+        "symbol": "sh688017",
+        "name": "绿的谐波",
+        "theme": "机器人/人形机器人",
+        "role": "弹性核心",
+        "price": 481.9,
+        "pct": -1.25,
+        "turnover": 8.59,
+        "amount_10000": 746878.0,
+        "score": 78.3,
+        "level": "观察池",
         "technical": {
-          "ma5": 24.02,
-          "ma10": 24.39,
-          "ma20": 25.96,
-          "ma60": 31.68,
-          "trend_score": 3,
-          "volume_ratio_5d": 2.31,
+          "ma5": 444.96,
+          "ma10": 410.86,
+          "ma20": 401.54,
+          "ma60": 310.21,
+          "trend_score": 4,
+          "volume_ratio_5d": 0.78,
           "breakout_20d": false,
-          "range_position_20d": 51.8
+          "range_position_20d": 92.4
         },
-        "reason": "趋势分 3/4，5日量比 2.31，20日突破 否。"
+        "reason": "趋势分 4/4，5日量比 0.78，20日突破 否。"
+      },
+      {
+        "code": "603728",
+        "symbol": "sh603728",
+        "name": "鸣志电器",
+        "theme": "机器人执行器",
+        "role": "弹性观察",
+        "price": 66.26,
+        "pct": -2.59,
+        "turnover": 3.25,
+        "amount_10000": 90303.0,
+        "score": 77.4,
+        "level": "观察池",
+        "technical": {
+          "ma5": 64.34,
+          "ma10": 61.09,
+          "ma20": 61.94,
+          "ma60": 61.92,
+          "trend_score": 4,
+          "volume_ratio_5d": 0.85,
+          "breakout_20d": false,
+          "range_position_20d": 79.2
+        },
+        "reason": "趋势分 4/4，5日量比 0.85，20日突破 否。"
       },
       {
         "code": "601899",
@@ -621,97 +525,97 @@
         "name": "紫金矿业",
         "theme": "贵金属/资源",
         "role": "防守中军",
-        "price": 27.82,
-        "pct": 5.78,
-        "turnover": 2.61,
-        "amount_10000": 1506998.0,
-        "score": 75.6,
+        "price": 28.41,
+        "pct": 2.12,
+        "turnover": 1.33,
+        "amount_10000": 786330.0,
+        "score": 63.3,
         "level": "观察池",
         "technical": {
-          "ma5": 26.03,
-          "ma10": 26.55,
-          "ma20": 27.68,
-          "ma60": 31.03,
+          "ma5": 26.56,
+          "ma10": 26.39,
+          "ma20": 27.64,
+          "ma60": 30.97,
           "trend_score": 3,
-          "volume_ratio_5d": 1.47,
+          "volume_ratio_5d": 0.68,
           "breakout_20d": false,
-          "range_position_20d": 51.9
+          "range_position_20d": 60.9
         },
-        "reason": "趋势分 3/4，5日量比 1.47，20日突破 否。"
+        "reason": "趋势分 3/4，5日量比 0.68，20日突破 否。"
+      },
+      {
+        "code": "600547",
+        "symbol": "sh600547",
+        "name": "山东黄金",
+        "theme": "贵金属",
+        "role": "防守观察",
+        "price": 25.93,
+        "pct": -0.58,
+        "turnover": 2.4,
+        "amount_10000": 230171.0,
+        "score": 63.3,
+        "level": "观察池",
+        "technical": {
+          "ma5": 24.5,
+          "ma10": 24.26,
+          "ma20": 25.85,
+          "ma60": 31.45,
+          "trend_score": 3,
+          "volume_ratio_5d": 1.0,
+          "breakout_20d": false,
+          "range_position_20d": 49.9
+        },
+        "reason": "趋势分 3/4，5日量比 1.0，20日突破 否。"
+      },
+      {
+        "code": "002050",
+        "symbol": "sz002050",
+        "name": "三花智控",
+        "theme": "机器人/汽车零部件链",
+        "role": "中军/趋势核心",
+        "price": 47.0,
+        "pct": -4.06,
+        "turnover": 4.28,
+        "amount_10000": 747804.0,
+        "score": 58.4,
+        "level": "观察池",
+        "technical": {
+          "ma5": 45.79,
+          "ma10": 44.27,
+          "ma20": 45.0,
+          "ma60": 47.02,
+          "trend_score": 3,
+          "volume_ratio_5d": 0.93,
+          "breakout_20d": false,
+          "range_position_20d": 73.4
+        },
+        "reason": "趋势分 3/4，5日量比 0.93，20日突破 否。"
       }
     ],
     "all": [
       {
-        "code": "603728",
-        "symbol": "sh603728",
-        "name": "鸣志电器",
-        "theme": "机器人执行器",
-        "role": "弹性观察",
-        "price": 68.02,
-        "pct": 7.34,
-        "turnover": 6.3,
-        "amount_10000": 177662.0,
-        "score": 109.6,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 62.17,
-          "ma10": 60.49,
-          "ma20": 61.92,
-          "ma60": 61.73,
-          "trend_score": 4,
-          "volume_ratio_5d": 2.08,
-          "breakout_20d": true,
-          "range_position_20d": 100.8
-        },
-        "reason": "趋势分 4/4，5日量比 2.08，20日突破 是。"
-      },
-      {
         "code": "002472",
         "symbol": "sz002472",
         "name": "双环传动",
         "theme": "减速器/汽车链",
         "role": "趋势观察",
-        "price": 47.01,
-        "pct": 9.99,
-        "turnover": 9.97,
-        "amount_10000": 341215.0,
-        "score": 108.7,
+        "price": 48.15,
+        "pct": 3.04,
+        "turnover": 10.48,
+        "amount_10000": 379167.0,
+        "score": 108.5,
         "level": "核心候选",
         "technical": {
-          "ma5": 42.34,
-          "ma10": 41.1,
+          "ma5": 44.2,
+          "ma10": 41.45,
           "ma20": 41.96,
-          "ma60": 40.84,
+          "ma60": 40.78,
           "trend_score": 4,
-          "volume_ratio_5d": 1.67,
+          "volume_ratio_5d": 1.49,
           "breakout_20d": true,
-          "range_position_20d": 110.9
+          "range_position_20d": 113.5
         },
-        "reason": "趋势分 4/4，5日量比 1.67，20日突破 是。"
-      },
-      {
-        "code": "688017",
-        "symbol": "sh688017",
-        "name": "绿的谐波",
-        "theme": "机器人/人形机器人",
-        "role": "弹性核心",
-        "price": 488.0,
-        "pct": 18.15,
-        "turnover": 14.7,
-        "amount_10000": 1252937.0,
-        "score": 107.5,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 420.9,
-          "ma10": 402.0,
-          "ma20": 397.09,
-          "ma60": 305.28,
-          "trend_score": 4,
-          "volume_ratio_5d": 1.55,
-          "breakout_20d": true,
-          "range_position_20d": 120.3
-        },
-        "reason": "趋势分 4/4，5日量比 1.55，20日突破 是。"
+        "reason": "趋势分 4/4，5日量比 1.49，20日突破 是。"
       },
       {
         "code": "601689",
@@ -719,47 +623,23 @@
         "name": "拓普集团",
         "theme": "机器人/汽车零部件链",
         "role": "中军/趋势核心",
-        "price": 62.43,
-        "pct": 10.01,
-        "turnover": 4.97,
-        "amount_10000": 522350.0,
-        "score": 100.7,
-        "level": "核心候选",
+        "price": 62.7,
+        "pct": 0.43,
+        "turnover": 3.34,
+        "amount_10000": 363518.0,
+        "score": 82.1,
+        "level": "观察池",
         "technical": {
-          "ma5": 56.99,
-          "ma10": 57.04,
-          "ma20": 60.21,
-          "ma60": 62.22,
+          "ma5": 59.06,
+          "ma10": 57.29,
+          "ma20": 59.95,
+          "ma60": 62.33,
           "trend_score": 4,
-          "volume_ratio_5d": 1.67,
+          "volume_ratio_5d": 0.96,
           "breakout_20d": false,
-          "range_position_20d": 58.7
+          "range_position_20d": 60.1
         },
-        "reason": "趋势分 4/4，5日量比 1.67，20日突破 否。"
-      },
-      {
-        "code": "002050",
-        "symbol": "sz002050",
-        "name": "三花智控",
-        "theme": "机器人/汽车零部件链",
-        "role": "中军/趋势核心",
-        "price": 48.99,
-        "pct": 9.06,
-        "turnover": 8.73,
-        "amount_10000": 1537120.0,
-        "score": 98.1,
-        "level": "核心候选",
-        "technical": {
-          "ma5": 44.64,
-          "ma10": 44.1,
-          "ma20": 45.02,
-          "ma60": 46.93,
-          "trend_score": 4,
-          "volume_ratio_5d": 2.52,
-          "breakout_20d": false,
-          "range_position_20d": 95.9
-        },
-        "reason": "趋势分 4/4，5日量比 2.52，20日突破 否。"
+        "reason": "趋势分 4/4，5日量比 0.96，20日突破 否。"
       },
       {
         "code": "002916",
@@ -767,47 +647,71 @@
         "name": "深南电路",
         "theme": "AI硬件/PCB",
         "role": "趋势观察",
-        "price": 454.48,
-        "pct": 7.42,
-        "turnover": 2.65,
-        "amount_10000": 795083.0,
-        "score": 94.5,
-        "level": "核心候选",
+        "price": 448.46,
+        "pct": -1.32,
+        "turnover": 1.71,
+        "amount_10000": 501431.0,
+        "score": 78.4,
+        "level": "观察池",
         "technical": {
-          "ma5": 443.53,
-          "ma10": 442.14,
-          "ma20": 420.02,
-          "ma60": 355.61,
+          "ma5": 446.39,
+          "ma10": 441.25,
+          "ma20": 423.8,
+          "ma60": 359.53,
           "trend_score": 4,
-          "volume_ratio_5d": 1.36,
+          "volume_ratio_5d": 0.8,
           "breakout_20d": false,
-          "range_position_20d": 77.6
+          "range_position_20d": 73.2
         },
-        "reason": "趋势分 4/4，5日量比 1.36，20日突破 否。"
+        "reason": "趋势分 4/4，5日量比 0.8，20日突破 否。"
       },
       {
-        "code": "600547",
-        "symbol": "sh600547",
-        "name": "山东黄金",
-        "theme": "贵金属",
-        "role": "防守观察",
-        "price": 26.08,
-        "pct": 7.86,
-        "turnover": 4.32,
-        "amount_10000": 405813.0,
-        "score": 86.5,
-        "level": "核心候选",
+        "code": "688017",
+        "symbol": "sh688017",
+        "name": "绿的谐波",
+        "theme": "机器人/人形机器人",
+        "role": "弹性核心",
+        "price": 481.9,
+        "pct": -1.25,
+        "turnover": 8.59,
+        "amount_10000": 746878.0,
+        "score": 78.3,
+        "level": "观察池",
         "technical": {
-          "ma5": 24.02,
-          "ma10": 24.39,
-          "ma20": 25.96,
-          "ma60": 31.68,
-          "trend_score": 3,
-          "volume_ratio_5d": 2.31,
+          "ma5": 444.96,
+          "ma10": 410.86,
+          "ma20": 401.54,
+          "ma60": 310.21,
+          "trend_score": 4,
+          "volume_ratio_5d": 0.78,
           "breakout_20d": false,
-          "range_position_20d": 51.8
+          "range_position_20d": 92.4
         },
-        "reason": "趋势分 3/4，5日量比 2.31，20日突破 否。"
+        "reason": "趋势分 4/4，5日量比 0.78，20日突破 否。"
+      },
+      {
+        "code": "603728",
+        "symbol": "sh603728",
+        "name": "鸣志电器",
+        "theme": "机器人执行器",
+        "role": "弹性观察",
+        "price": 66.26,
+        "pct": -2.59,
+        "turnover": 3.25,
+        "amount_10000": 90303.0,
+        "score": 77.4,
+        "level": "观察池",
+        "technical": {
+          "ma5": 64.34,
+          "ma10": 61.09,
+          "ma20": 61.94,
+          "ma60": 61.92,
+          "trend_score": 4,
+          "volume_ratio_5d": 0.85,
+          "breakout_20d": false,
+          "range_position_20d": 79.2
+        },
+        "reason": "趋势分 4/4，5日量比 0.85，20日突破 否。"
       },
       {
         "code": "601899",
@@ -815,119 +719,71 @@
         "name": "紫金矿业",
         "theme": "贵金属/资源",
         "role": "防守中军",
-        "price": 27.82,
-        "pct": 5.78,
-        "turnover": 2.61,
-        "amount_10000": 1506998.0,
-        "score": 75.6,
+        "price": 28.41,
+        "pct": 2.12,
+        "turnover": 1.33,
+        "amount_10000": 786330.0,
+        "score": 63.3,
         "level": "观察池",
         "technical": {
-          "ma5": 26.03,
-          "ma10": 26.55,
-          "ma20": 27.68,
-          "ma60": 31.03,
+          "ma5": 26.56,
+          "ma10": 26.39,
+          "ma20": 27.64,
+          "ma60": 30.97,
           "trend_score": 3,
-          "volume_ratio_5d": 1.47,
+          "volume_ratio_5d": 0.68,
           "breakout_20d": false,
-          "range_position_20d": 51.9
+          "range_position_20d": 60.9
         },
-        "reason": "趋势分 3/4，5日量比 1.47，20日突破 否。"
+        "reason": "趋势分 3/4，5日量比 0.68，20日突破 否。"
       },
       {
-        "code": "002085",
-        "symbol": "sz002085",
-        "name": "万丰奥威",
-        "theme": "低空经济/汽车链",
-        "role": "轮动核心",
-        "price": 11.47,
-        "pct": 4.65,
-        "turnover": 2.31,
-        "amount_10000": 55618.0,
-        "score": 35.9,
-        "level": "暂不纳入",
+        "code": "600547",
+        "symbol": "sh600547",
+        "name": "山东黄金",
+        "theme": "贵金属",
+        "role": "防守观察",
+        "price": 25.93,
+        "pct": -0.58,
+        "turnover": 2.4,
+        "amount_10000": 230171.0,
+        "score": 63.3,
+        "level": "观察池",
         "technical": {
-          "ma5": 11.1,
-          "ma10": 11.59,
-          "ma20": 12.17,
-          "ma60": 13.05,
-          "trend_score": 1,
-          "volume_ratio_5d": 1.23,
+          "ma5": 24.5,
+          "ma10": 24.26,
+          "ma20": 25.85,
+          "ma60": 31.45,
+          "trend_score": 3,
+          "volume_ratio_5d": 1.0,
           "breakout_20d": false,
-          "range_position_20d": 21.5
+          "range_position_20d": 49.9
         },
-        "reason": "趋势分 1/4，5日量比 1.23，20日突破 否。"
+        "reason": "趋势分 3/4，5日量比 1.0，20日突破 否。"
       },
       {
-        "code": "002463",
-        "symbol": "sz002463",
-        "name": "沪电股份",
-        "theme": "AI硬件/PCB",
-        "role": "趋势观察",
-        "price": 135.35,
-        "pct": 3.71,
-        "turnover": 4.54,
-        "amount_10000": 1180453.0,
-        "score": 32.8,
-        "level": "暂不纳入",
+        "code": "002050",
+        "symbol": "sz002050",
+        "name": "三花智控",
+        "theme": "机器人/汽车零部件链",
+        "role": "中军/趋势核心",
+        "price": 47.0,
+        "pct": -4.06,
+        "turnover": 4.28,
+        "amount_10000": 747804.0,
+        "score": 58.4,
+        "level": "观察池",
         "technical": {
-          "ma5": 140.95,
-          "ma10": 143.41,
-          "ma20": 139.85,
-          "ma60": 117.95,
-          "trend_score": 1,
-          "volume_ratio_5d": 1.03,
+          "ma5": 45.79,
+          "ma10": 44.27,
+          "ma20": 45.0,
+          "ma60": 47.02,
+          "trend_score": 3,
+          "volume_ratio_5d": 0.93,
           "breakout_20d": false,
-          "range_position_20d": 36.5
+          "range_position_20d": 73.4
         },
-        "reason": "趋势分 1/4，5日量比 1.03，20日突破 否。"
-      },
-      {
-        "code": "300502",
-        "symbol": "sz300502",
-        "name": "新易盛",
-        "theme": "CPO/AI硬件",
-        "role": "修复观察",
-        "price": 526.0,
-        "pct": 3.34,
-        "turnover": 4.26,
-        "amount_10000": 2843299.0,
-        "score": 31.2,
-        "level": "暂不纳入",
-        "technical": {
-          "ma5": 554.9,
-          "ma10": 563.83,
-          "ma20": 553.09,
-          "ma60": 466.54,
-          "trend_score": 1,
-          "volume_ratio_5d": 0.92,
-          "breakout_20d": false,
-          "range_position_20d": 27.9
-        },
-        "reason": "趋势分 1/4，5日量比 0.92，20日突破 否。"
-      },
-      {
-        "code": "000099",
-        "symbol": "sz000099",
-        "name": "中信海直",
-        "theme": "低空经济",
-        "role": "轮动观察",
-        "price": 14.72,
-        "pct": 1.45,
-        "turnover": 1.28,
-        "amount_10000": 14639.0,
-        "score": 28.1,
-        "level": "暂不纳入",
-        "technical": {
-          "ma5": 14.58,
-          "ma10": 15.14,
-          "ma20": 15.78,
-          "ma60": 16.65,
-          "trend_score": 1,
-          "volume_ratio_5d": 0.84,
-          "breakout_20d": false,
-          "range_position_20d": 17.7
-        },
-        "reason": "趋势分 1/4，5日量比 0.84，20日突破 否。"
+        "reason": "趋势分 3/4，5日量比 0.93，20日突破 否。"
       },
       {
         "code": "300308",
@@ -935,23 +791,119 @@
         "name": "中际旭创",
         "theme": "CPO/AI硬件",
         "role": "修复观察",
-        "price": 1116.0,
-        "pct": -2.36,
-        "turnover": 2.96,
-        "amount_10000": 3770236.0,
+        "price": 1116.03,
+        "pct": 0,
+        "turnover": 2.16,
+        "amount_10000": 2631850.0,
         "score": 25.7,
         "level": "暂不纳入",
         "technical": {
-          "ma5": 1194.43,
-          "ma10": 1255.4,
-          "ma20": 1231.3,
-          "ma60": 1041.8,
+          "ma5": 1173.64,
+          "ma10": 1228.77,
+          "ma20": 1228.1,
+          "ma60": 1050.1,
           "trend_score": 1,
-          "volume_ratio_5d": 1.05,
+          "volume_ratio_5d": 0.77,
           "breakout_20d": false,
           "range_position_20d": 7.1
         },
-        "reason": "趋势分 1/4，5日量比 1.05，20日突破 否。"
+        "reason": "趋势分 1/4，5日量比 0.77，20日突破 否。"
+      },
+      {
+        "code": "002085",
+        "symbol": "sz002085",
+        "name": "万丰奥威",
+        "theme": "低空经济/汽车链",
+        "role": "轮动核心",
+        "price": 11.46,
+        "pct": -0.09,
+        "turnover": 1.35,
+        "amount_10000": 33038.0,
+        "score": 25.1,
+        "level": "暂不纳入",
+        "technical": {
+          "ma5": 11.2,
+          "ma10": 11.5,
+          "ma20": 12.17,
+          "ma60": 13.01,
+          "trend_score": 1,
+          "volume_ratio_5d": 0.72,
+          "breakout_20d": false,
+          "range_position_20d": 21.2
+        },
+        "reason": "趋势分 1/4，5日量比 0.72，20日突破 否。"
+      },
+      {
+        "code": "300502",
+        "symbol": "sz300502",
+        "name": "新易盛",
+        "theme": "CPO/AI硬件",
+        "role": "修复观察",
+        "price": 523.29,
+        "pct": -0.52,
+        "turnover": 2.38,
+        "amount_10000": 1531607.0,
+        "score": 22.7,
+        "level": "暂不纳入",
+        "technical": {
+          "ma5": 548.17,
+          "ma10": 558.16,
+          "ma20": 552.58,
+          "ma60": 469.81,
+          "trend_score": 1,
+          "volume_ratio_5d": 0.53,
+          "breakout_20d": false,
+          "range_position_20d": 25.8
+        },
+        "reason": "趋势分 1/4，5日量比 0.53，20日突破 否。"
+      },
+      {
+        "code": "002463",
+        "symbol": "sz002463",
+        "name": "沪电股份",
+        "theme": "AI硬件/PCB",
+        "role": "趋势观察",
+        "price": 129.96,
+        "pct": -3.98,
+        "turnover": 2.98,
+        "amount_10000": 740836.0,
+        "score": 19.9,
+        "level": "暂不纳入",
+        "technical": {
+          "ma5": 138.73,
+          "ma10": 141.88,
+          "ma20": 139.69,
+          "ma60": 118.85,
+          "trend_score": 1,
+          "volume_ratio_5d": 0.67,
+          "breakout_20d": false,
+          "range_position_20d": 21.5
+        },
+        "reason": "趋势分 1/4，5日量比 0.67，20日突破 否。"
+      },
+      {
+        "code": "000099",
+        "symbol": "sz000099",
+        "name": "中信海直",
+        "theme": "低空经济",
+        "role": "轮动观察",
+        "price": 14.57,
+        "pct": -1.02,
+        "turnover": 0.89,
+        "amount_10000": 10189.0,
+        "score": 5.4,
+        "level": "暂不纳入",
+        "technical": {
+          "ma5": 14.6,
+          "ma10": 15.03,
+          "ma20": 15.74,
+          "ma60": 16.62,
+          "trend_score": 0,
+          "volume_ratio_5d": 0.66,
+          "breakout_20d": false,
+          "range_position_20d": 13.6
+        },
+        "reason": "趋势分 0/4，5日量比 0.66，20日突破 否。"
       }
     ],
     "note": "核心候选最多 1-3 个；若信号不完整，允许今日无核心候选。"
@@ -968,38 +920,38 @@
     ],
     "items": [
       {
-        "name": "机器人/人形机器人",
-        "phase": "分歧",
-        "phase_index": 4,
-        "flow": 383.85,
-        "rule": "主线强，但只买分歧确认"
-      },
-      {
-        "name": "汽车零部件/新能源车/特斯拉链",
-        "phase": "加速",
-        "phase_index": 2,
-        "flow": 335.01,
-        "rule": "承接方向，优先看中军"
+        "name": "贵金属",
+        "phase": "修复",
+        "phase_index": 5,
+        "flow": 5.64,
+        "rule": "防守承接，不做进攻主线"
       },
       {
         "name": "低空经济/军工/商业航天",
         "phase": "发酵",
         "phase_index": 1,
-        "flow": 224.11,
+        "flow": -151.02,
         "rule": "轮动支线，小仓试错"
       },
       {
-        "name": "贵金属",
-        "phase": "修复",
-        "phase_index": 5,
-        "flow": 27.45,
-        "rule": "防守承接，不做进攻主线"
+        "name": "汽车零部件/新能源车/特斯拉链",
+        "phase": "发酵",
+        "phase_index": 1,
+        "flow": -290.15,
+        "rule": "承接方向，优先看中军"
+      },
+      {
+        "name": "机器人/人形机器人",
+        "phase": "发酵",
+        "phase_index": 1,
+        "flow": -345.35,
+        "rule": "主线强，但只买分歧确认"
       },
       {
         "name": "半导体/芯片/CPO",
         "phase": "退潮",
         "phase_index": 6,
-        "flow": -1034.39,
+        "flow": -1211.54,
         "rule": "资金流出区，只看修复确认"
       }
     ]
@@ -1011,9 +963,14 @@
       "body": "控制仓位，优先观察和防守，避免情绪化开新仓。"
     },
     {
-      "level": "watch",
-      "title": "机器人/人形机器人高潮后分歧",
-      "body": "只买分歧后的确认，不追一致高开。"
+      "level": "risk",
+      "title": "汽车零部件/新能源车/特斯拉链资金退潮",
+      "body": "资金仍在大幅流出，按系统只观察不加仓。"
+    },
+    {
+      "level": "risk",
+      "title": "机器人/人形机器人资金退潮",
+      "body": "资金仍在大幅流出，按系统只观察不加仓。"
     },
     {
       "level": "risk",
@@ -1023,198 +980,9 @@
   ],
   "themes": [
     {
-      "name": "机器人/人形机器人",
-      "role": "主线题材",
-      "flow_score_100m_yuan": 383.85,
-      "emotion_stage": "高潮后分歧",
-      "expectation": "强分歧后看前排回封，不追一致高开。",
-      "trade_plan": {
-        "bias": "主线强，但只买分歧确认",
-        "analysis": "资金强度最高，情绪处在高潮后的分歧观察位。这里最容易出现前排继续强、后排兑现的分化，不能用板块热度替代个股地位。",
-        "buy_points": [
-          "前排核心高开后换手承接，回踩分时均线不破，再放量转强。",
-          "炸板后快速回封，且板块内仍有 2-3 个强势核心互相支撑。",
-          "低吸只允许发生在上升趋势内，不能买后排冲高回落。"
-        ],
-        "sell_points": [
-          "前排核心开盘一致加速后放量炸板，回封失败。",
-          "板块后排大面积掉队，核心股跌破分时均线且无法收回。",
-          "持仓股从龙头/中军降级为跟风，按纪律减仓或退出。"
-        ],
-        "invalidation": "机器人核心不再领涨，执行器/减速器同步走弱，板块资金明显转负。",
-        "position": "可作为主线观察，但只给确认仓；高潮后不适合满仓追。"
-      },
-      "watch_points": [
-        {
-          "source": "concept",
-          "code": "BK1090",
-          "name": "机器人概念",
-          "flow": 143.74
-        },
-        {
-          "source": "concept",
-          "code": "BK1184",
-          "name": "人形机器人",
-          "flow": 113.78
-        },
-        {
-          "source": "concept",
-          "code": "BK1145",
-          "name": "机器人执行器",
-          "flow": 64.73
-        },
-        {
-          "source": "concept",
-          "code": "BK1100",
-          "name": "减速器",
-          "flow": 61.04
-        }
-      ],
-      "risk_points": [
-        {
-          "source": "concept",
-          "code": "BK1004",
-          "name": "工业母机",
-          "flow": 0.56
-        },
-        {
-          "source": "concept",
-          "code": "BK1100",
-          "name": "减速器",
-          "flow": 61.04
-        }
-      ]
-    },
-    {
-      "name": "汽车零部件/新能源车/特斯拉链",
-      "role": "承接主线",
-      "flow_score_100m_yuan": 335.01,
-      "emotion_stage": "承接加速",
-      "expectation": "若机器人分歧，观察汽车链中军能否逆势放量突破。",
-      "trade_plan": {
-        "bias": "承接方向，优先看中军",
-        "analysis": "汽车零部件、新能源车、特斯拉链与机器人硬件有交集，适合承接主线分歧资金。比纯题材后排更适合做趋势核心和中军。",
-        "buy_points": [
-          "机器人分歧时，汽车链核心逆势放量突破平台或前高。",
-          "板块指数强于大盘，个股站上分时均线后回踩不破。",
-          "优先选择汽车零部件 + 机器人零部件双属性的趋势票。"
-        ],
-        "sell_points": [
-          "承接失败，放量突破后立刻跌回平台。",
-          "机器人和汽车链同时退潮，说明资金不是切换而是整体撤退。",
-          "中军放量滞涨，后排先跌，按趋势破坏处理。"
-        ],
-        "invalidation": "汽车零部件不再维持行业流入前列，新能源车/特斯拉链同步转弱。",
-        "position": "比机器人后排更适合做计划仓，但仍需分批，不超过系统单票红线。"
-      },
-      "watch_points": [
-        {
-          "source": "concept",
-          "code": "BK0900",
-          "name": "新能源车",
-          "flow": 116.09
-        },
-        {
-          "source": "concept",
-          "code": "BK0644",
-          "name": "特斯拉概念",
-          "flow": 84.39
-        },
-        {
-          "source": "industry",
-          "code": "BK0481",
-          "name": "汽车零部件",
-          "flow": 68.93
-        },
-        {
-          "source": "concept",
-          "code": "BK0984",
-          "name": "华为汽车",
-          "flow": 52.27
-        }
-      ],
-      "risk_points": [
-        {
-          "source": "industry",
-          "code": "BK1262",
-          "name": "乘用车",
-          "flow": 13.33
-        },
-        {
-          "source": "concept",
-          "code": "BK0984",
-          "name": "华为汽车",
-          "flow": 52.27
-        }
-      ]
-    },
-    {
-      "name": "低空经济/军工/商业航天",
-      "role": "轮动支线",
-      "flow_score_100m_yuan": 224.11,
-      "emotion_stage": "轮动试探",
-      "expectation": "只做换手确认，不把缩量秒板当核心。",
-      "trade_plan": {
-        "bias": "轮动支线，小仓试错",
-        "analysis": "低空、军工、商业航天属于主线外溢后的轮动方向。能做，但需要确认资金切换，不应提前重仓埋伏。",
-        "buy_points": [
-          "主线分歧时，低空/军工板块主动进入涨幅前列。",
-          "出现换手板或趋势中军放量突破，而不是缩量秒板。",
-          "午前强、午后仍能维持承接，才说明不是一日游。"
-        ],
-        "sell_points": [
-          "轮动当天冲高回落，次日不能弱转强。",
-          "只有个别票表现，板块没有梯队。",
-          "大盘走弱时高位题材炸板，先保护本金。"
-        ],
-        "invalidation": "没有板块梯队，资金只拉单点，无法形成情绪扩散。",
-        "position": "观察或小仓，不按主线仓位处理。"
-      },
-      "watch_points": [
-        {
-          "source": "concept",
-          "code": "BK1166",
-          "name": "低空经济",
-          "flow": 80.74
-        },
-        {
-          "source": "concept",
-          "code": "BK0490",
-          "name": "军工",
-          "flow": 57.49
-        },
-        {
-          "source": "concept",
-          "code": "BK0808",
-          "name": "军民融合",
-          "flow": 55.88
-        },
-        {
-          "source": "industry",
-          "code": "BK1232",
-          "name": "航天装备Ⅱ",
-          "flow": 16.4
-        }
-      ],
-      "risk_points": [
-        {
-          "source": "industry",
-          "code": "BK1230",
-          "name": "航海装备Ⅱ",
-          "flow": 13.6
-        },
-        {
-          "source": "industry",
-          "code": "BK1232",
-          "name": "航天装备Ⅱ",
-          "flow": 16.4
-        }
-      ]
-    },
-    {
       "name": "贵金属",
       "role": "防守支线",
-      "flow_score_100m_yuan": 27.45,
+      "flow_score_100m_yuan": 5.64,
       "emotion_stage": "防守承接",
       "expectation": "指数走弱或题材炸板率升高时才提高权重。",
       "trade_plan": {
@@ -1238,7 +1006,7 @@
           "source": "industry",
           "code": "BK0732",
           "name": "贵金属",
-          "flow": 27.45
+          "flow": 5.64
         }
       ],
       "risk_points": [
@@ -1246,14 +1014,203 @@
           "source": "industry",
           "code": "BK0732",
           "name": "贵金属",
-          "flow": 27.45
+          "flow": 5.64
+        }
+      ]
+    },
+    {
+      "name": "低空经济/军工/商业航天",
+      "role": "轮动支线",
+      "flow_score_100m_yuan": -151.02,
+      "emotion_stage": "轮动试探",
+      "expectation": "只做换手确认，不把缩量秒板当核心。",
+      "trade_plan": {
+        "bias": "轮动支线，小仓试错",
+        "analysis": "低空、军工、商业航天属于主线外溢后的轮动方向。能做，但需要确认资金切换，不应提前重仓埋伏。",
+        "buy_points": [
+          "主线分歧时，低空/军工板块主动进入涨幅前列。",
+          "出现换手板或趋势中军放量突破，而不是缩量秒板。",
+          "午前强、午后仍能维持承接，才说明不是一日游。"
+        ],
+        "sell_points": [
+          "轮动当天冲高回落，次日不能弱转强。",
+          "只有个别票表现，板块没有梯队。",
+          "大盘走弱时高位题材炸板，先保护本金。"
+        ],
+        "invalidation": "没有板块梯队，资金只拉单点，无法形成情绪扩散。",
+        "position": "观察或小仓，不按主线仓位处理。"
+      },
+      "watch_points": [
+        {
+          "source": "industry",
+          "code": "BK1230",
+          "name": "航海装备Ⅱ",
+          "flow": 1.53
+        },
+        {
+          "source": "industry",
+          "code": "BK1232",
+          "name": "航天装备Ⅱ",
+          "flow": -3.56
+        },
+        {
+          "source": "concept",
+          "code": "BK0808",
+          "name": "军民融合",
+          "flow": -28.1
+        },
+        {
+          "source": "concept",
+          "code": "BK1166",
+          "name": "低空经济",
+          "flow": -51.8
+        }
+      ],
+      "risk_points": [
+        {
+          "source": "concept",
+          "code": "BK0490",
+          "name": "军工",
+          "flow": -69.09
+        },
+        {
+          "source": "concept",
+          "code": "BK1166",
+          "name": "低空经济",
+          "flow": -51.8
+        }
+      ]
+    },
+    {
+      "name": "汽车零部件/新能源车/特斯拉链",
+      "role": "承接主线",
+      "flow_score_100m_yuan": -290.15,
+      "emotion_stage": "承接观察",
+      "expectation": "只看有成交确认的趋势核心。",
+      "trade_plan": {
+        "bias": "承接方向，优先看中军",
+        "analysis": "汽车零部件、新能源车、特斯拉链与机器人硬件有交集，适合承接主线分歧资金。比纯题材后排更适合做趋势核心和中军。",
+        "buy_points": [
+          "机器人分歧时，汽车链核心逆势放量突破平台或前高。",
+          "板块指数强于大盘，个股站上分时均线后回踩不破。",
+          "优先选择汽车零部件 + 机器人零部件双属性的趋势票。"
+        ],
+        "sell_points": [
+          "承接失败，放量突破后立刻跌回平台。",
+          "机器人和汽车链同时退潮，说明资金不是切换而是整体撤退。",
+          "中军放量滞涨，后排先跌，按趋势破坏处理。"
+        ],
+        "invalidation": "汽车零部件不再维持行业流入前列，新能源车/特斯拉链同步转弱。",
+        "position": "比机器人后排更适合做计划仓，但仍需分批，不超过系统单票红线。"
+      },
+      "watch_points": [
+        {
+          "source": "industry",
+          "code": "BK1262",
+          "name": "乘用车",
+          "flow": -1.99
+        },
+        {
+          "source": "industry",
+          "code": "BK0481",
+          "name": "汽车零部件",
+          "flow": -7.98
+        },
+        {
+          "source": "concept",
+          "code": "BK0984",
+          "name": "华为汽车",
+          "flow": -25.31
+        },
+        {
+          "source": "concept",
+          "code": "BK0644",
+          "name": "特斯拉概念",
+          "flow": -97.4
+        }
+      ],
+      "risk_points": [
+        {
+          "source": "concept",
+          "code": "BK0900",
+          "name": "新能源车",
+          "flow": -157.47
+        },
+        {
+          "source": "concept",
+          "code": "BK0644",
+          "name": "特斯拉概念",
+          "flow": -97.4
+        }
+      ]
+    },
+    {
+      "name": "机器人/人形机器人",
+      "role": "主线题材",
+      "flow_score_100m_yuan": -345.35,
+      "emotion_stage": "发酵",
+      "expectation": "看板块是否补量扩散，优先核心零部件。",
+      "trade_plan": {
+        "bias": "主线强，但只买分歧确认",
+        "analysis": "资金强度最高，情绪处在高潮后的分歧观察位。这里最容易出现前排继续强、后排兑现的分化，不能用板块热度替代个股地位。",
+        "buy_points": [
+          "前排核心高开后换手承接，回踩分时均线不破，再放量转强。",
+          "炸板后快速回封，且板块内仍有 2-3 个强势核心互相支撑。",
+          "低吸只允许发生在上升趋势内，不能买后排冲高回落。"
+        ],
+        "sell_points": [
+          "前排核心开盘一致加速后放量炸板，回封失败。",
+          "板块后排大面积掉队，核心股跌破分时均线且无法收回。",
+          "持仓股从龙头/中军降级为跟风，按纪律减仓或退出。"
+        ],
+        "invalidation": "机器人核心不再领涨，执行器/减速器同步走弱，板块资金明显转负。",
+        "position": "可作为主线观察，但只给确认仓；高潮后不适合满仓追。"
+      },
+      "watch_points": [
+        {
+          "source": "concept",
+          "code": "BK1145",
+          "name": "机器人执行器",
+          "flow": -20.39
+        },
+        {
+          "source": "concept",
+          "code": "BK1100",
+          "name": "减速器",
+          "flow": -23.79
+        },
+        {
+          "source": "concept",
+          "code": "BK1004",
+          "name": "工业母机",
+          "flow": -38.52
+        },
+        {
+          "source": "concept",
+          "code": "BK1184",
+          "name": "人形机器人",
+          "flow": -75.02
+        }
+      ],
+      "risk_points": [
+        {
+          "source": "concept",
+          "code": "BK1090",
+          "name": "机器人概念",
+          "flow": -187.63
+        },
+        {
+          "source": "concept",
+          "code": "BK1184",
+          "name": "人形机器人",
+          "flow": -75.02
         }
       ]
     },
     {
       "name": "半导体/芯片/CPO",
       "role": "修复观察",
-      "flow_score_100m_yuan": -1034.39,
+      "flow_score_100m_yuan": -1211.54,
       "emotion_stage": "退潮/弱修复",
       "expectation": "资金未回流前只观察，不按新主线处理。",
       "trade_plan": {
@@ -1275,27 +1232,27 @@
       "watch_points": [
         {
           "source": "industry",
+          "code": "BK1036",
+          "name": "半导体",
+          "flow": -119.59
+        },
+        {
+          "source": "industry",
           "code": "BK0448",
           "name": "通信设备",
-          "flow": -27.32
+          "flow": -120.25
         },
         {
           "source": "concept",
           "code": "BK1128",
           "name": "CPO概念",
-          "flow": -47.96
-        },
-        {
-          "source": "concept",
-          "code": "BK1136",
-          "name": "光通信模块",
-          "flow": -52.76
+          "flow": -139.46
         },
         {
           "source": "concept",
           "code": "BK1137",
           "name": "存储芯片",
-          "flow": -169.67
+          "flow": -142.92
         }
       ],
       "risk_points": [
@@ -1303,13 +1260,13 @@
           "source": "concept",
           "code": "BK0917",
           "name": "半导体概念",
-          "flow": -358.48
+          "flow": -281.58
         },
         {
-          "source": "industry",
-          "code": "BK1036",
-          "name": "半导体",
-          "flow": -194.77
+          "source": "concept",
+          "code": "BK0891",
+          "name": "国产芯片",
+          "flow": -237.08
         }
       ]
     }
@@ -1317,145 +1274,4510 @@
   "industry_top10": [
     {
       "rank": 1,
-      "code": "BK0481",
-      "name": "汽车零部件",
-      "main_net_inflow_yuan": 6893382656,
-      "main_net_inflow_100m_yuan": 68.93
+      "code": "BK0465",
+      "name": "化学制药",
+      "main_net_inflow_yuan": 2474450688,
+      "main_net_inflow_100m_yuan": 24.74
     },
     {
       "rank": 2,
-      "code": "BK1037",
-      "name": "消费电子",
-      "main_net_inflow_yuan": 3991629824,
-      "main_net_inflow_100m_yuan": 39.92
+      "code": "BK1044",
+      "name": "生物制品",
+      "main_net_inflow_yuan": 901088320,
+      "main_net_inflow_100m_yuan": 9.01
     },
     {
       "rank": 3,
-      "code": "BK0459",
-      "name": "元件",
-      "main_net_inflow_yuan": 2823079168,
-      "main_net_inflow_100m_yuan": 28.23
+      "code": "BK0727",
+      "name": "医疗服务",
+      "main_net_inflow_yuan": 843238240,
+      "main_net_inflow_100m_yuan": 8.43
     },
     {
       "rank": 4,
-      "code": "BK1242",
-      "name": "家电零部件Ⅱ",
-      "main_net_inflow_yuan": 2766135552,
-      "main_net_inflow_100m_yuan": 27.66
+      "code": "BK1034",
+      "name": "其他电源设备Ⅱ",
+      "main_net_inflow_yuan": 831011632,
+      "main_net_inflow_100m_yuan": 8.31
     },
     {
       "rank": 5,
-      "code": "BK0732",
-      "name": "贵金属",
-      "main_net_inflow_yuan": 2744684624,
-      "main_net_inflow_100m_yuan": 27.45
+      "code": "BK1015",
+      "name": "能源金属",
+      "main_net_inflow_yuan": 780759664,
+      "main_net_inflow_100m_yuan": 7.81
     },
     {
       "rank": 6,
-      "code": "BK0545",
-      "name": "通用设备",
-      "main_net_inflow_yuan": 1813677824,
-      "main_net_inflow_100m_yuan": 18.14
+      "code": "BK1223",
+      "name": "其他电子Ⅱ",
+      "main_net_inflow_yuan": 733501408,
+      "main_net_inflow_100m_yuan": 7.34
     },
     {
       "rank": 7,
-      "code": "BK1287",
-      "name": "工业金属",
-      "main_net_inflow_yuan": 1766808576,
-      "main_net_inflow_100m_yuan": 17.67
+      "code": "BK0732",
+      "name": "贵金属",
+      "main_net_inflow_yuan": 563880192,
+      "main_net_inflow_100m_yuan": 5.64
     },
     {
       "rank": 8,
-      "code": "BK1030",
-      "name": "电机Ⅱ",
-      "main_net_inflow_yuan": 1697764416,
-      "main_net_inflow_100m_yuan": 16.98
+      "code": "BK1046",
+      "name": "游戏Ⅱ",
+      "main_net_inflow_yuan": 511068240,
+      "main_net_inflow_100m_yuan": 5.11
     },
     {
       "rank": 9,
-      "code": "BK0457",
-      "name": "电网设备",
-      "main_net_inflow_yuan": 1642433136,
-      "main_net_inflow_100m_yuan": 16.42
+      "code": "BK1259",
+      "name": "养殖业",
+      "main_net_inflow_yuan": 501373456,
+      "main_net_inflow_100m_yuan": 5.01
     },
     {
       "rank": 10,
-      "code": "BK1232",
-      "name": "航天装备Ⅱ",
-      "main_net_inflow_yuan": 1639994592,
-      "main_net_inflow_100m_yuan": 16.4
+      "code": "BK0731",
+      "name": "农化制品",
+      "main_net_inflow_yuan": 398469376,
+      "main_net_inflow_100m_yuan": 3.98
     }
   ],
   "concept_top10": [
     {
       "rank": 1,
-      "code": "BK1090",
-      "name": "机器人概念",
-      "main_net_inflow_yuan": 14374473728,
-      "main_net_inflow_100m_yuan": 143.74
+      "code": "BK1106",
+      "name": "创新药",
+      "main_net_inflow_yuan": 3434461440,
+      "main_net_inflow_100m_yuan": 34.34
     },
     {
       "rank": 2,
-      "code": "BK0900",
-      "name": "新能源车",
-      "main_net_inflow_yuan": 11608506368,
-      "main_net_inflow_100m_yuan": 116.09
+      "code": "BK1712",
+      "name": "医药医疗风格",
+      "main_net_inflow_yuan": 2319055360,
+      "main_net_inflow_100m_yuan": 23.19
     },
     {
       "rank": 3,
-      "code": "BK1184",
-      "name": "人形机器人",
-      "main_net_inflow_yuan": 11378139648,
-      "main_net_inflow_100m_yuan": 113.78
+      "code": "BK0870",
+      "name": "单抗概念",
+      "main_net_inflow_yuan": 1829520128,
+      "main_net_inflow_100m_yuan": 18.3
     },
     {
       "rank": 4,
-      "code": "BK0644",
-      "name": "特斯拉概念",
-      "main_net_inflow_yuan": 8438913792,
-      "main_net_inflow_100m_yuan": 84.39
+      "code": "BK1146",
+      "name": "减肥药",
+      "main_net_inflow_yuan": 1526577616,
+      "main_net_inflow_100m_yuan": 15.27
     },
     {
       "rank": 5,
-      "code": "BK1166",
-      "name": "低空经济",
-      "main_net_inflow_yuan": 8073560576,
-      "main_net_inflow_100m_yuan": 80.74
+      "code": "BK0689",
+      "name": "阿里概念",
+      "main_net_inflow_yuan": 1279929856,
+      "main_net_inflow_100m_yuan": 12.8
     },
     {
       "rank": 6,
-      "code": "BK1710",
-      "name": "先进制造风格",
-      "main_net_inflow_yuan": 6895293952,
-      "main_net_inflow_100m_yuan": 68.95
+      "code": "BK1023",
+      "name": "培育钻石",
+      "main_net_inflow_yuan": 1175974512,
+      "main_net_inflow_100m_yuan": 11.76
     },
     {
       "rank": 7,
-      "code": "BK1145",
-      "name": "机器人执行器",
-      "main_net_inflow_yuan": 6472684544,
-      "main_net_inflow_100m_yuan": 64.73
+      "code": "BK1657",
+      "name": "病原体防治",
+      "main_net_inflow_yuan": 1093524800,
+      "main_net_inflow_100m_yuan": 10.94
     },
     {
       "rank": 8,
-      "code": "BK0499",
-      "name": "AH股",
-      "main_net_inflow_yuan": 6418264064,
-      "main_net_inflow_100m_yuan": 64.18
+      "code": "BK0899",
+      "name": "CRO",
+      "main_net_inflow_yuan": 918772608,
+      "main_net_inflow_100m_yuan": 9.19
     },
     {
       "rank": 9,
-      "code": "BK0500",
-      "name": "HS300_",
-      "main_net_inflow_yuan": 6106988544,
-      "main_net_inflow_100m_yuan": 61.07
+      "code": "BK1641",
+      "name": "红利股",
+      "main_net_inflow_yuan": 914083584,
+      "main_net_inflow_100m_yuan": 9.14
     },
     {
       "rank": 10,
+      "code": "BK0615",
+      "name": "中药概念",
+      "main_net_inflow_yuan": 848745536,
+      "main_net_inflow_100m_yuan": 8.49
+    }
+  ],
+  "industry_all": [
+    {
+      "rank": 1,
+      "code": "BK0465",
+      "name": "化学制药",
+      "main_net_inflow_yuan": 2474450688,
+      "main_net_inflow_100m_yuan": 24.74
+    },
+    {
+      "rank": 2,
+      "code": "BK1044",
+      "name": "生物制品",
+      "main_net_inflow_yuan": 901088320,
+      "main_net_inflow_100m_yuan": 9.01
+    },
+    {
+      "rank": 3,
+      "code": "BK0727",
+      "name": "医疗服务",
+      "main_net_inflow_yuan": 843238240,
+      "main_net_inflow_100m_yuan": 8.43
+    },
+    {
+      "rank": 4,
+      "code": "BK1034",
+      "name": "其他电源设备Ⅱ",
+      "main_net_inflow_yuan": 831011632,
+      "main_net_inflow_100m_yuan": 8.31
+    },
+    {
+      "rank": 5,
+      "code": "BK1015",
+      "name": "能源金属",
+      "main_net_inflow_yuan": 780759664,
+      "main_net_inflow_100m_yuan": 7.81
+    },
+    {
+      "rank": 6,
+      "code": "BK1223",
+      "name": "其他电子Ⅱ",
+      "main_net_inflow_yuan": 733501408,
+      "main_net_inflow_100m_yuan": 7.34
+    },
+    {
+      "rank": 7,
+      "code": "BK0732",
+      "name": "贵金属",
+      "main_net_inflow_yuan": 563880192,
+      "main_net_inflow_100m_yuan": 5.64
+    },
+    {
+      "rank": 8,
+      "code": "BK1046",
+      "name": "游戏Ⅱ",
+      "main_net_inflow_yuan": 511068240,
+      "main_net_inflow_100m_yuan": 5.11
+    },
+    {
+      "rank": 9,
+      "code": "BK1259",
+      "name": "养殖业",
+      "main_net_inflow_yuan": 501373456,
+      "main_net_inflow_100m_yuan": 5.01
+    },
+    {
+      "rank": 10,
+      "code": "BK0731",
+      "name": "农化制品",
+      "main_net_inflow_yuan": 398469376,
+      "main_net_inflow_100m_yuan": 3.98
+    },
+    {
+      "rank": 11,
+      "code": "BK1287",
+      "name": "工业金属",
+      "main_net_inflow_yuan": 328913664,
+      "main_net_inflow_100m_yuan": 3.29
+    },
+    {
+      "rank": 12,
+      "code": "BK0475",
+      "name": "银行Ⅱ",
+      "main_net_inflow_yuan": 322202768,
+      "main_net_inflow_100m_yuan": 3.22
+    },
+    {
+      "rank": 13,
+      "code": "BK1277",
+      "name": "白酒Ⅱ",
+      "main_net_inflow_yuan": 308469392,
+      "main_net_inflow_100m_yuan": 3.08
+    },
+    {
+      "rank": 14,
+      "code": "BK1250",
+      "name": "煤炭开采",
+      "main_net_inflow_yuan": 300419648,
+      "main_net_inflow_100m_yuan": 3.0
+    },
+    {
+      "rank": 15,
+      "code": "BK0474",
+      "name": "保险Ⅱ",
+      "main_net_inflow_yuan": 294002128,
+      "main_net_inflow_100m_yuan": 2.94
+    },
+    {
+      "rank": 16,
+      "code": "BK0450",
+      "name": "航运港口",
+      "main_net_inflow_yuan": 242116992,
+      "main_net_inflow_100m_yuan": 2.42
+    },
+    {
+      "rank": 17,
+      "code": "BK1241",
+      "name": "黑色家电",
+      "main_net_inflow_yuan": 233313552,
+      "main_net_inflow_100m_yuan": 2.33
+    },
+    {
+      "rank": 18,
+      "code": "BK1274",
+      "name": "炼化及贸易",
+      "main_net_inflow_yuan": 212782160,
+      "main_net_inflow_100m_yuan": 2.13
+    },
+    {
+      "rank": 19,
+      "code": "BK1239",
+      "name": "白色家电",
+      "main_net_inflow_yuan": 183567968,
+      "main_net_inflow_100m_yuan": 1.84
+    },
+    {
+      "rank": 20,
+      "code": "BK1282",
+      "name": "饮料乳品",
+      "main_net_inflow_yuan": 181972384,
+      "main_net_inflow_100m_yuan": 1.82
+    },
+    {
+      "rank": 21,
+      "code": "BK0420",
+      "name": "航空机场",
+      "main_net_inflow_yuan": 158386592,
+      "main_net_inflow_100m_yuan": 1.58
+    },
+    {
+      "rank": 22,
+      "code": "BK1230",
+      "name": "航海装备Ⅱ",
+      "main_net_inflow_yuan": 152739728,
+      "main_net_inflow_100m_yuan": 1.53
+    },
+    {
+      "rank": 23,
+      "code": "BK0440",
+      "name": "家居用品",
+      "main_net_inflow_yuan": 52922320,
+      "main_net_inflow_100m_yuan": 0.53
+    },
+    {
+      "rank": 24,
+      "code": "BK1275",
+      "name": "油服工程",
+      "main_net_inflow_yuan": 52242199,
+      "main_net_inflow_100m_yuan": 0.52
+    },
+    {
+      "rank": 25,
+      "code": "BK1042",
+      "name": "医药商业",
+      "main_net_inflow_yuan": 52233307,
+      "main_net_inflow_100m_yuan": 0.52
+    },
+    {
+      "rank": 26,
+      "code": "BK1254",
+      "name": "动物保健Ⅱ",
+      "main_net_inflow_yuan": 44871677,
+      "main_net_inflow_100m_yuan": 0.45
+    },
+    {
+      "rank": 27,
+      "code": "BK1028",
+      "name": "燃气Ⅱ",
+      "main_net_inflow_yuan": 34092454,
+      "main_net_inflow_100m_yuan": 0.34
+    },
+    {
+      "rank": 28,
+      "code": "BK1253",
+      "name": "医疗美容",
+      "main_net_inflow_yuan": 20406999,
+      "main_net_inflow_100m_yuan": 0.2
+    },
+    {
+      "rank": 29,
+      "code": "BK1258",
+      "name": "饲料",
+      "main_net_inflow_yuan": 18321729,
+      "main_net_inflow_100m_yuan": 0.18
+    },
+    {
+      "rank": 30,
+      "code": "BK1281",
+      "name": "休闲食品",
+      "main_net_inflow_yuan": 14716776,
+      "main_net_inflow_100m_yuan": 0.15
+    },
+    {
+      "rank": 31,
+      "code": "BK1270",
+      "name": "专业连锁Ⅱ",
+      "main_net_inflow_yuan": 14611891,
+      "main_net_inflow_100m_yuan": 0.15
+    },
+    {
+      "rank": 32,
+      "code": "BK1280",
+      "name": "食品加工",
+      "main_net_inflow_yuan": 11310154,
+      "main_net_inflow_100m_yuan": 0.11
+    },
+    {
+      "rank": 33,
+      "code": "BK0740",
+      "name": "教育",
+      "main_net_inflow_yuan": 9671523,
+      "main_net_inflow_100m_yuan": 0.1
+    },
+    {
+      "rank": 34,
+      "code": "BK1240",
+      "name": "厨卫电器",
+      "main_net_inflow_yuan": 8478148,
+      "main_net_inflow_100m_yuan": 0.08
+    },
+    {
+      "rank": 35,
+      "code": "BK1279",
+      "name": "非白酒",
+      "main_net_inflow_yuan": 6205980,
+      "main_net_inflow_100m_yuan": 0.06
+    },
+    {
+      "rank": 36,
+      "code": "BK1045",
+      "name": "房地产服务",
+      "main_net_inflow_yuan": 3826475,
+      "main_net_inflow_100m_yuan": 0.04
+    },
+    {
+      "rank": 37,
+      "code": "BK1243",
+      "name": "其他家电Ⅱ",
+      "main_net_inflow_yuan": 305069,
+      "main_net_inflow_100m_yuan": 0.0
+    },
+    {
+      "rank": 38,
+      "code": "BK1257",
+      "name": "农业综合Ⅱ",
+      "main_net_inflow_yuan": -490225,
+      "main_net_inflow_100m_yuan": -0.0
+    },
+    {
+      "rank": 39,
+      "code": "BK1260",
+      "name": "渔业",
+      "main_net_inflow_yuan": -1033165,
+      "main_net_inflow_100m_yuan": -0.01
+    },
+    {
+      "rank": 40,
+      "code": "BK1221",
+      "name": "数字媒体",
+      "main_net_inflow_yuan": -2012992,
+      "main_net_inflow_100m_yuan": -0.02
+    },
+    {
+      "rank": 41,
+      "code": "BK0424",
+      "name": "水泥",
+      "main_net_inflow_yuan": -5317477,
+      "main_net_inflow_100m_yuan": -0.05
+    },
+    {
+      "rank": 42,
+      "code": "BK1267",
+      "name": "造纸",
+      "main_net_inflow_yuan": -6593040,
+      "main_net_inflow_100m_yuan": -0.07
+    },
+    {
+      "rank": 43,
+      "code": "BK1249",
+      "name": "焦炭Ⅱ",
+      "main_net_inflow_yuan": -9727213,
+      "main_net_inflow_100m_yuan": -0.1
+    },
+    {
+      "rank": 44,
+      "code": "BK1271",
+      "name": "酒店餐饮",
+      "main_net_inflow_yuan": -11081567,
+      "main_net_inflow_100m_yuan": -0.11
+    },
+    {
+      "rank": 45,
+      "code": "BK1227",
+      "name": "特钢Ⅱ",
+      "main_net_inflow_yuan": -12066747,
+      "main_net_inflow_100m_yuan": -0.12
+    },
+    {
+      "rank": 46,
+      "code": "BK1251",
+      "name": "个护用品",
+      "main_net_inflow_yuan": -12299397,
+      "main_net_inflow_100m_yuan": -0.12
+    },
+    {
+      "rank": 47,
+      "code": "BK0476",
+      "name": "装修建材",
+      "main_net_inflow_yuan": -13908232,
+      "main_net_inflow_100m_yuan": -0.14
+    },
+    {
+      "rank": 48,
+      "code": "BK1276",
+      "name": "油气开采Ⅱ",
+      "main_net_inflow_yuan": -15111976,
+      "main_net_inflow_100m_yuan": -0.15
+    },
+    {
+      "rank": 49,
+      "code": "BK1222",
+      "name": "影视院线",
+      "main_net_inflow_yuan": -16298918,
+      "main_net_inflow_100m_yuan": -0.16
+    },
+    {
+      "rank": 50,
+      "code": "BK1263",
+      "name": "摩托车及其他",
+      "main_net_inflow_yuan": -16716140,
+      "main_net_inflow_100m_yuan": -0.17
+    },
+    {
+      "rank": 51,
+      "code": "BK0421",
+      "name": "铁路公路",
+      "main_net_inflow_yuan": -17033018,
+      "main_net_inflow_100m_yuan": -0.17
+    },
+    {
+      "rank": 52,
+      "code": "BK0738",
+      "name": "多元金融",
+      "main_net_inflow_yuan": -18953041,
+      "main_net_inflow_100m_yuan": -0.19
+    },
+    {
+      "rank": 53,
+      "code": "BK1272",
+      "name": "旅游及景区",
+      "main_net_inflow_yuan": -20317702,
+      "main_net_inflow_100m_yuan": -0.2
+    },
+    {
+      "rank": 54,
+      "code": "BK1273",
+      "name": "体育Ⅱ",
+      "main_net_inflow_yuan": -25392236,
+      "main_net_inflow_100m_yuan": -0.25
+    },
+    {
+      "rank": 55,
+      "code": "BK1269",
+      "name": "旅游零售Ⅱ",
+      "main_net_inflow_yuan": -26573508,
+      "main_net_inflow_100m_yuan": -0.27
+    },
+    {
+      "rank": 56,
+      "code": "BK1040",
+      "name": "中药Ⅱ",
+      "main_net_inflow_yuan": -31199776,
+      "main_net_inflow_100m_yuan": -0.31
+    },
+    {
+      "rank": 57,
+      "code": "BK1244",
+      "name": "小家电",
+      "main_net_inflow_yuan": -33865366,
+      "main_net_inflow_100m_yuan": -0.34
+    },
+    {
+      "rank": 58,
+      "code": "BK1016",
+      "name": "汽车服务",
+      "main_net_inflow_yuan": -37711695,
+      "main_net_inflow_100m_yuan": -0.38
+    },
+    {
+      "rank": 59,
+      "code": "BK1256",
+      "name": "农产品加工",
+      "main_net_inflow_yuan": -42894405,
+      "main_net_inflow_100m_yuan": -0.43
+    },
+    {
+      "rank": 60,
+      "code": "BK1218",
+      "name": "出版",
+      "main_net_inflow_yuan": -46377715,
+      "main_net_inflow_100m_yuan": -0.46
+    },
+    {
+      "rank": 61,
+      "code": "BK1219",
+      "name": "电视广播Ⅱ",
+      "main_net_inflow_yuan": -50681991,
+      "main_net_inflow_100m_yuan": -0.51
+    },
+    {
+      "rank": 62,
+      "code": "BK1261",
+      "name": "种植业",
+      "main_net_inflow_yuan": -54015134,
+      "main_net_inflow_100m_yuan": -0.54
+    },
+    {
+      "rank": 63,
+      "code": "BK1246",
+      "name": "房屋建设Ⅱ",
+      "main_net_inflow_yuan": -60127008,
+      "main_net_inflow_100m_yuan": -0.6
+    },
+    {
+      "rank": 64,
+      "code": "BK1252",
+      "name": "化妆品",
+      "main_net_inflow_yuan": -66827492,
+      "main_net_inflow_100m_yuan": -0.67
+    },
+    {
+      "rank": 65,
+      "code": "BK0734",
+      "name": "饰品",
+      "main_net_inflow_yuan": -69301375,
+      "main_net_inflow_100m_yuan": -0.69
+    },
+    {
+      "rank": 66,
+      "code": "BK1245",
+      "name": "照明设备Ⅱ",
+      "main_net_inflow_yuan": -69784014,
+      "main_net_inflow_100m_yuan": -0.7
+    },
+    {
+      "rank": 67,
+      "code": "BK1224",
+      "name": "纺织制造",
+      "main_net_inflow_yuan": -72936783,
+      "main_net_inflow_100m_yuan": -0.73
+    },
+    {
+      "rank": 68,
+      "code": "BK1255",
+      "name": "林业Ⅱ",
+      "main_net_inflow_yuan": -73097218,
+      "main_net_inflow_100m_yuan": -0.73
+    },
+    {
+      "rank": 69,
+      "code": "BK1225",
+      "name": "服装家纺",
+      "main_net_inflow_yuan": -73268592,
+      "main_net_inflow_100m_yuan": -0.73
+    },
+    {
+      "rank": 70,
+      "code": "BK0725",
+      "name": "装修装饰Ⅱ",
+      "main_net_inflow_yuan": -74245640,
+      "main_net_inflow_100m_yuan": -0.74
+    },
+    {
+      "rank": 71,
+      "code": "BK1278",
+      "name": "调味发酵品Ⅱ",
+      "main_net_inflow_yuan": -96971901,
+      "main_net_inflow_100m_yuan": -0.97
+    },
+    {
+      "rank": 72,
+      "code": "BK0739",
+      "name": "工程机械",
+      "main_net_inflow_yuan": -100872912,
+      "main_net_inflow_100m_yuan": -1.01
+    },
+    {
+      "rank": 73,
+      "code": "BK0539",
+      "name": "综合Ⅱ",
+      "main_net_inflow_yuan": -103224864,
+      "main_net_inflow_100m_yuan": -1.03
+    },
+    {
+      "rank": 74,
+      "code": "BK0482",
+      "name": "一般零售",
+      "main_net_inflow_yuan": -103860032,
+      "main_net_inflow_100m_yuan": -1.04
+    },
+    {
+      "rank": 75,
+      "code": "BK1228",
+      "name": "冶钢原料",
+      "main_net_inflow_yuan": -106153638,
+      "main_net_inflow_100m_yuan": -1.06
+    },
+    {
+      "rank": 76,
+      "code": "BK1266",
+      "name": "文娱用品",
+      "main_net_inflow_yuan": -108136378,
+      "main_net_inflow_100m_yuan": -1.08
+    },
+    {
+      "rank": 77,
+      "code": "BK0422",
+      "name": "物流",
+      "main_net_inflow_yuan": -112981232,
+      "main_net_inflow_100m_yuan": -1.13
+    },
+    {
+      "rank": 78,
+      "code": "BK1268",
+      "name": "互联网电商",
+      "main_net_inflow_yuan": -121696357,
+      "main_net_inflow_100m_yuan": -1.22
+    },
+    {
+      "rank": 79,
+      "code": "BK1264",
+      "name": "商用车",
+      "main_net_inflow_yuan": -125825508,
+      "main_net_inflow_100m_yuan": -1.26
+    },
+    {
+      "rank": 80,
+      "code": "BK1229",
+      "name": "地面兵装Ⅱ",
+      "main_net_inflow_yuan": -128248506,
+      "main_net_inflow_100m_yuan": -1.28
+    },
+    {
+      "rank": 81,
+      "code": "BK0484",
+      "name": "贸易Ⅱ",
+      "main_net_inflow_yuan": -142380158,
+      "main_net_inflow_100m_yuan": -1.42
+    },
+    {
+      "rank": 82,
+      "code": "BK1043",
+      "name": "专业服务",
+      "main_net_inflow_yuan": -143990674,
+      "main_net_inflow_100m_yuan": -1.44
+    },
+    {
+      "rank": 83,
+      "code": "BK0451",
+      "name": "房地产开发",
+      "main_net_inflow_yuan": -173119296,
+      "main_net_inflow_100m_yuan": -1.73
+    },
+    {
+      "rank": 84,
+      "code": "BK1226",
+      "name": "普钢",
+      "main_net_inflow_yuan": -188115312,
+      "main_net_inflow_100m_yuan": -1.88
+    },
+    {
+      "rank": 85,
+      "code": "BK1262",
+      "name": "乘用车",
+      "main_net_inflow_yuan": -198700800,
+      "main_net_inflow_100m_yuan": -1.99
+    },
+    {
+      "rank": 86,
+      "code": "BK1234",
+      "name": "环保设备Ⅱ",
+      "main_net_inflow_yuan": -198860864,
+      "main_net_inflow_100m_yuan": -1.99
+    },
+    {
+      "rank": 87,
+      "code": "BK1247",
+      "name": "基础建设",
+      "main_net_inflow_yuan": -223639408,
+      "main_net_inflow_100m_yuan": -2.24
+    },
+    {
+      "rank": 88,
+      "code": "BK1265",
+      "name": "包装印刷",
+      "main_net_inflow_yuan": -236495360,
+      "main_net_inflow_100m_yuan": -2.36
+    },
+    {
+      "rank": 89,
+      "code": "BK1019",
+      "name": "化学原料",
+      "main_net_inflow_yuan": -259300400,
+      "main_net_inflow_100m_yuan": -2.59
+    },
+    {
+      "rank": 90,
+      "code": "BK1236",
+      "name": "轨交设备Ⅱ",
+      "main_net_inflow_yuan": -260104688,
+      "main_net_inflow_100m_yuan": -2.6
+    },
+    {
+      "rank": 91,
+      "code": "BK1235",
+      "name": "环境治理",
+      "main_net_inflow_yuan": -348344656,
+      "main_net_inflow_100m_yuan": -3.48
+    },
+    {
+      "rank": 92,
+      "code": "BK0471",
+      "name": "化学纤维",
+      "main_net_inflow_yuan": -353283408,
+      "main_net_inflow_100m_yuan": -3.53
+    },
+    {
+      "rank": 93,
+      "code": "BK1232",
+      "name": "航天装备Ⅱ",
+      "main_net_inflow_yuan": -356162512,
+      "main_net_inflow_100m_yuan": -3.56
+    },
+    {
+      "rank": 94,
+      "code": "BK1020",
+      "name": "非金属材料Ⅱ",
+      "main_net_inflow_yuan": -428750624,
+      "main_net_inflow_100m_yuan": -4.29
+    },
+    {
+      "rank": 95,
+      "code": "BK1041",
+      "name": "医疗器械",
+      "main_net_inflow_yuan": -475576448,
+      "main_net_inflow_100m_yuan": -4.76
+    },
+    {
+      "rank": 96,
+      "code": "BK1248",
+      "name": "专业工程",
+      "main_net_inflow_yuan": -506610320,
+      "main_net_inflow_100m_yuan": -5.07
+    },
+    {
+      "rank": 97,
+      "code": "BK1018",
+      "name": "橡胶",
+      "main_net_inflow_yuan": -520994848,
+      "main_net_inflow_100m_yuan": -5.21
+    },
+    {
+      "rank": 98,
+      "code": "BK0910",
+      "name": "专用设备",
+      "main_net_inflow_yuan": -563913472,
+      "main_net_inflow_100m_yuan": -5.64
+    },
+    {
+      "rank": 99,
+      "code": "BK0473",
+      "name": "证券Ⅱ",
+      "main_net_inflow_yuan": -608314624,
+      "main_net_inflow_100m_yuan": -6.08
+    },
+    {
+      "rank": 100,
+      "code": "BK1030",
+      "name": "电机Ⅱ",
+      "main_net_inflow_yuan": -620554256,
+      "main_net_inflow_100m_yuan": -6.21
+    },
+    {
+      "rank": 101,
+      "code": "BK1231",
+      "name": "航空装备Ⅱ",
+      "main_net_inflow_yuan": -631129600,
+      "main_net_inflow_100m_yuan": -6.31
+    },
+    {
+      "rank": 102,
+      "code": "BK1233",
+      "name": "军工电子Ⅱ",
+      "main_net_inflow_yuan": -632261376,
+      "main_net_inflow_100m_yuan": -6.32
+    },
+    {
+      "rank": 103,
+      "code": "BK1220",
+      "name": "广告营销",
+      "main_net_inflow_yuan": -677837664,
+      "main_net_inflow_100m_yuan": -6.78
+    },
+    {
+      "rank": 104,
+      "code": "BK0545",
+      "name": "通用设备",
+      "main_net_inflow_yuan": -695389696,
+      "main_net_inflow_100m_yuan": -6.95
+    },
+    {
+      "rank": 105,
+      "code": "BK0736",
+      "name": "通信服务",
+      "main_net_inflow_yuan": -700199904,
+      "main_net_inflow_100m_yuan": -7.0
+    },
+    {
+      "rank": 106,
+      "code": "BK1032",
+      "name": "风电设备",
+      "main_net_inflow_yuan": -705789872,
+      "main_net_inflow_100m_yuan": -7.06
+    },
+    {
+      "rank": 107,
+      "code": "BK0735",
+      "name": "计算机设备",
+      "main_net_inflow_yuan": -739741408,
+      "main_net_inflow_100m_yuan": -7.4
+    },
+    {
+      "rank": 108,
+      "code": "BK0481",
+      "name": "汽车零部件",
+      "main_net_inflow_yuan": -797809152,
+      "main_net_inflow_100m_yuan": -7.98
+    },
+    {
+      "rank": 109,
+      "code": "BK0737",
+      "name": "软件开发",
+      "main_net_inflow_yuan": -951308496,
+      "main_net_inflow_100m_yuan": -9.51
+    },
+    {
+      "rank": 110,
+      "code": "BK0454",
+      "name": "塑料",
+      "main_net_inflow_yuan": -1050258656,
+      "main_net_inflow_100m_yuan": -10.5
+    },
+    {
+      "rank": 111,
+      "code": "BK1242",
+      "name": "家电零部件Ⅱ",
+      "main_net_inflow_yuan": -1191387744,
+      "main_net_inflow_100m_yuan": -11.91
+    },
+    {
+      "rank": 112,
+      "code": "BK1031",
+      "name": "光伏设备",
+      "main_net_inflow_yuan": -1262947488,
+      "main_net_inflow_100m_yuan": -12.63
+    },
+    {
+      "rank": 113,
+      "code": "BK0726",
+      "name": "工程咨询服务Ⅱ",
+      "main_net_inflow_yuan": -1340110224,
+      "main_net_inflow_100m_yuan": -13.4
+    },
+    {
+      "rank": 114,
+      "code": "BK1288",
+      "name": "金属新材料",
+      "main_net_inflow_yuan": -1425467904,
+      "main_net_inflow_100m_yuan": -14.25
+    },
+    {
+      "rank": 115,
+      "code": "BK0538",
+      "name": "化学制品",
+      "main_net_inflow_yuan": -1513034752,
+      "main_net_inflow_100m_yuan": -15.13
+    },
+    {
+      "rank": 116,
+      "code": "BK1238",
+      "name": "IT服务Ⅱ",
+      "main_net_inflow_yuan": -1718151344,
+      "main_net_inflow_100m_yuan": -17.18
+    },
+    {
+      "rank": 117,
+      "code": "BK0428",
+      "name": "电力",
+      "main_net_inflow_yuan": -1812237776,
+      "main_net_inflow_100m_yuan": -18.12
+    },
+    {
+      "rank": 118,
+      "code": "BK0457",
+      "name": "电网设备",
+      "main_net_inflow_yuan": -2344288720,
+      "main_net_inflow_100m_yuan": -23.44
+    },
+    {
+      "rank": 119,
+      "code": "BK1033",
+      "name": "电池",
+      "main_net_inflow_yuan": -2429517056,
+      "main_net_inflow_100m_yuan": -24.3
+    },
+    {
+      "rank": 120,
+      "code": "BK1237",
+      "name": "自动化设备",
+      "main_net_inflow_yuan": -2502687744,
+      "main_net_inflow_100m_yuan": -25.03
+    },
+    {
+      "rank": 121,
+      "code": "BK0546",
+      "name": "玻璃玻纤",
+      "main_net_inflow_yuan": -3522216192,
+      "main_net_inflow_100m_yuan": -35.22
+    },
+    {
+      "rank": 122,
+      "code": "BK1039",
+      "name": "电子化学品Ⅱ",
+      "main_net_inflow_yuan": -3700373504,
+      "main_net_inflow_100m_yuan": -37.0
+    },
+    {
+      "rank": 123,
+      "code": "BK1037",
+      "name": "消费电子",
+      "main_net_inflow_yuan": -3811838464,
+      "main_net_inflow_100m_yuan": -38.12
+    },
+    {
+      "rank": 124,
+      "code": "BK1027",
+      "name": "小金属",
+      "main_net_inflow_yuan": -4935097856,
+      "main_net_inflow_100m_yuan": -49.35
+    },
+    {
+      "rank": 125,
+      "code": "BK1038",
+      "name": "光学光电子",
+      "main_net_inflow_yuan": -6507202816,
+      "main_net_inflow_100m_yuan": -65.07
+    },
+    {
+      "rank": 126,
+      "code": "BK0459",
+      "name": "元件",
+      "main_net_inflow_yuan": -7523734016,
+      "main_net_inflow_100m_yuan": -75.24
+    },
+    {
+      "rank": 127,
+      "code": "BK1036",
+      "name": "半导体",
+      "main_net_inflow_yuan": -11958882304,
+      "main_net_inflow_100m_yuan": -119.59
+    },
+    {
+      "rank": 128,
+      "code": "BK0448",
+      "name": "通信设备",
+      "main_net_inflow_yuan": -12024502016,
+      "main_net_inflow_100m_yuan": -120.25
+    }
+  ],
+  "concept_all": [
+    {
+      "rank": 1,
+      "code": "BK1106",
+      "name": "创新药",
+      "main_net_inflow_yuan": 3434461440,
+      "main_net_inflow_100m_yuan": 34.34
+    },
+    {
+      "rank": 2,
+      "code": "BK1712",
+      "name": "医药医疗风格",
+      "main_net_inflow_yuan": 2319055360,
+      "main_net_inflow_100m_yuan": 23.19
+    },
+    {
+      "rank": 3,
+      "code": "BK0870",
+      "name": "单抗概念",
+      "main_net_inflow_yuan": 1829520128,
+      "main_net_inflow_100m_yuan": 18.3
+    },
+    {
+      "rank": 4,
+      "code": "BK1146",
+      "name": "减肥药",
+      "main_net_inflow_yuan": 1526577616,
+      "main_net_inflow_100m_yuan": 15.27
+    },
+    {
+      "rank": 5,
+      "code": "BK0689",
+      "name": "阿里概念",
+      "main_net_inflow_yuan": 1279929856,
+      "main_net_inflow_100m_yuan": 12.8
+    },
+    {
+      "rank": 6,
+      "code": "BK1023",
+      "name": "培育钻石",
+      "main_net_inflow_yuan": 1175974512,
+      "main_net_inflow_100m_yuan": 11.76
+    },
+    {
+      "rank": 7,
+      "code": "BK1657",
+      "name": "病原体防治",
+      "main_net_inflow_yuan": 1093524800,
+      "main_net_inflow_100m_yuan": 10.94
+    },
+    {
+      "rank": 8,
+      "code": "BK0899",
+      "name": "CRO",
+      "main_net_inflow_yuan": 918772608,
+      "main_net_inflow_100m_yuan": 9.19
+    },
+    {
+      "rank": 9,
+      "code": "BK1641",
+      "name": "红利股",
+      "main_net_inflow_yuan": 914083584,
+      "main_net_inflow_100m_yuan": 9.14
+    },
+    {
+      "rank": 10,
+      "code": "BK0615",
+      "name": "中药概念",
+      "main_net_inflow_yuan": 848745536,
+      "main_net_inflow_100m_yuan": 8.49
+    },
+    {
+      "rank": 11,
+      "code": "BK0906",
+      "name": "流感",
+      "main_net_inflow_yuan": 717614336,
+      "main_net_inflow_100m_yuan": 7.18
+    },
+    {
+      "rank": 12,
+      "code": "BK0698",
+      "name": "免疫治疗",
+      "main_net_inflow_yuan": 699835600,
+      "main_net_inflow_100m_yuan": 7.0
+    },
+    {
+      "rank": 13,
+      "code": "BK1640",
+      "name": "价值股",
+      "main_net_inflow_yuan": 618949056,
+      "main_net_inflow_100m_yuan": 6.19
+    },
+    {
+      "rank": 14,
+      "code": "BK0811",
+      "name": "超级品牌",
+      "main_net_inflow_yuan": 577653280,
+      "main_net_inflow_100m_yuan": 5.78
+    },
+    {
+      "rank": 15,
+      "code": "BK0939",
+      "name": "辅助生殖",
+      "main_net_inflow_yuan": 553231776,
+      "main_net_inflow_100m_yuan": 5.53
+    },
+    {
+      "rank": 16,
+      "code": "BK1170",
+      "name": "AI制药（医疗）",
+      "main_net_inflow_yuan": 522443552,
+      "main_net_inflow_100m_yuan": 5.22
+    },
+    {
+      "rank": 17,
+      "code": "BK1716",
+      "name": "反转股",
+      "main_net_inflow_yuan": 508720496,
+      "main_net_inflow_100m_yuan": 5.09
+    },
+    {
+      "rank": 18,
+      "code": "BK0882",
+      "name": "猪肉概念",
+      "main_net_inflow_yuan": 504328608,
+      "main_net_inflow_100m_yuan": 5.04
+    },
+    {
+      "rank": 19,
+      "code": "BK1653",
+      "name": "味蕾经济",
+      "main_net_inflow_yuan": 480450640,
+      "main_net_inflow_100m_yuan": 4.8
+    },
+    {
+      "rank": 20,
+      "code": "BK1658",
+      "name": "创新医疗服务",
+      "main_net_inflow_yuan": 458073952,
+      "main_net_inflow_100m_yuan": 4.58
+    },
+    {
+      "rank": 21,
+      "code": "BK0548",
+      "name": "生物疫苗",
+      "main_net_inflow_yuan": 443904624,
+      "main_net_inflow_100m_yuan": 4.44
+    },
+    {
+      "rank": 22,
+      "code": "BK0675",
+      "name": "病毒防治",
+      "main_net_inflow_yuan": 440096016,
+      "main_net_inflow_100m_yuan": 4.4
+    },
+    {
+      "rank": 23,
+      "code": "BK1063",
+      "name": "重组蛋白",
+      "main_net_inflow_yuan": 434932336,
+      "main_net_inflow_100m_yuan": 4.35
+    },
+    {
+      "rank": 24,
+      "code": "BK1078",
+      "name": "肝炎概念",
+      "main_net_inflow_yuan": 412130560,
+      "main_net_inflow_100m_yuan": 4.12
+    },
+    {
+      "rank": 25,
+      "code": "BK0676",
+      "name": "独家药品",
+      "main_net_inflow_yuan": 409709792,
+      "main_net_inflow_100m_yuan": 4.1
+    },
+    {
+      "rank": 26,
+      "code": "BK0872",
+      "name": "青蒿素",
+      "main_net_inflow_yuan": 379698896,
+      "main_net_inflow_100m_yuan": 3.8
+    },
+    {
+      "rank": 27,
+      "code": "BK0729",
+      "name": "船舶制造",
+      "main_net_inflow_yuan": 340565312,
+      "main_net_inflow_100m_yuan": 3.41
+    },
+    {
+      "rank": 28,
+      "code": "BK0834",
+      "name": "乡村振兴",
+      "main_net_inflow_yuan": 320197888,
+      "main_net_inflow_100m_yuan": 3.2
+    },
+    {
+      "rank": 29,
+      "code": "BK0477",
+      "name": "酿酒概念",
+      "main_net_inflow_yuan": 314593072,
+      "main_net_inflow_100m_yuan": 3.15
+    },
+    {
+      "rank": 30,
+      "code": "BK0986",
+      "name": "CAR-T细胞疗法",
+      "main_net_inflow_yuan": 313358960,
+      "main_net_inflow_100m_yuan": 3.13
+    },
+    {
+      "rank": 31,
+      "code": "BK0603",
+      "name": "页岩气",
+      "main_net_inflow_yuan": 281166480,
+      "main_net_inflow_100m_yuan": 2.81
+    },
+    {
+      "rank": 32,
+      "code": "BK0892",
+      "name": "乳业",
+      "main_net_inflow_yuan": 274627968,
+      "main_net_inflow_100m_yuan": 2.75
+    },
+    {
+      "rank": 33,
+      "code": "BK1056",
+      "name": "幽门螺杆菌概念",
+      "main_net_inflow_yuan": 269530288,
+      "main_net_inflow_100m_yuan": 2.7
+    },
+    {
+      "rank": 34,
+      "code": "BK0895",
+      "name": "维生素",
+      "main_net_inflow_yuan": 269480432,
+      "main_net_inflow_100m_yuan": 2.69
+    },
+    {
+      "rank": 35,
+      "code": "BK0805",
+      "name": "钛白粉概念",
+      "main_net_inflow_yuan": 265624416,
+      "main_net_inflow_100m_yuan": 2.66
+    },
+    {
+      "rank": 36,
+      "code": "BK1199",
+      "name": "2025三季报预减",
+      "main_net_inflow_yuan": 261151296,
+      "main_net_inflow_100m_yuan": 2.61
+    },
+    {
+      "rank": 37,
+      "code": "BK1173",
+      "name": "锂矿概念",
+      "main_net_inflow_yuan": 261090560,
+      "main_net_inflow_100m_yuan": 2.61
+    },
+    {
+      "rank": 38,
+      "code": "BK0957",
+      "name": "拼多多概念",
+      "main_net_inflow_yuan": 236856064,
+      "main_net_inflow_100m_yuan": 2.37
+    },
+    {
+      "rank": 39,
+      "code": "BK1197",
+      "name": "反内卷概念",
+      "main_net_inflow_yuan": 223067136,
+      "main_net_inflow_100m_yuan": 2.23
+    },
+    {
+      "rank": 40,
+      "code": "BK0887",
+      "name": "鸡肉概念",
+      "main_net_inflow_yuan": 219198805,
+      "main_net_inflow_100m_yuan": 2.19
+    },
+    {
+      "rank": 41,
+      "code": "BK0993",
+      "name": "宠物经济",
+      "main_net_inflow_yuan": 208271232,
+      "main_net_inflow_100m_yuan": 2.08
+    },
+    {
+      "rank": 42,
+      "code": "BK0896",
+      "name": "白酒",
+      "main_net_inflow_yuan": 206722048,
+      "main_net_inflow_100m_yuan": 2.07
+    },
+    {
+      "rank": 43,
+      "code": "BK0894",
+      "name": "阿兹海默",
+      "main_net_inflow_yuan": 203598976,
+      "main_net_inflow_100m_yuan": 2.04
+    },
+    {
+      "rank": 44,
+      "code": "BK0664",
+      "name": "婴童概念",
+      "main_net_inflow_yuan": 200814320,
+      "main_net_inflow_100m_yuan": 2.01
+    },
+    {
+      "rank": 45,
+      "code": "BK1072",
+      "name": "中俄贸易概念",
+      "main_net_inflow_yuan": 198720560,
+      "main_net_inflow_100m_yuan": 1.99
+    },
+    {
+      "rank": 46,
+      "code": "BK1656",
+      "name": "特色药",
+      "main_net_inflow_yuan": 197259136,
+      "main_net_inflow_100m_yuan": 1.97
+    },
+    {
+      "rank": 47,
+      "code": "BK0606",
+      "name": "油气设服",
+      "main_net_inflow_yuan": 178798736,
+      "main_net_inflow_100m_yuan": 1.79
+    },
+    {
+      "rank": 48,
+      "code": "BK1659",
+      "name": "精准诊断",
+      "main_net_inflow_yuan": 158371632,
+      "main_net_inflow_100m_yuan": 1.58
+    },
+    {
+      "rank": 49,
+      "code": "BK1636",
+      "name": "红利破净股",
+      "main_net_inflow_yuan": 157752688,
+      "main_net_inflow_100m_yuan": 1.58
+    },
+    {
+      "rank": 50,
+      "code": "BK0868",
+      "name": "GDR",
+      "main_net_inflow_yuan": 146443872,
+      "main_net_inflow_100m_yuan": 1.46
+    },
+    {
+      "rank": 51,
+      "code": "BK1095",
+      "name": "钒电池",
+      "main_net_inflow_yuan": 135118128,
+      "main_net_inflow_100m_yuan": 1.35
+    },
+    {
+      "rank": 52,
+      "code": "BK1107",
+      "name": "科创板做市商",
+      "main_net_inflow_yuan": 133375152,
+      "main_net_inflow_100m_yuan": 1.33
+    },
+    {
+      "rank": 53,
+      "code": "BK0816",
+      "name": "昨日连板",
+      "main_net_inflow_yuan": 132962464,
+      "main_net_inflow_100m_yuan": 1.33
+    },
+    {
+      "rank": 54,
+      "code": "BK0944",
+      "name": "肝素概念",
+      "main_net_inflow_yuan": 108458515,
+      "main_net_inflow_100m_yuan": 1.08
+    },
+    {
+      "rank": 55,
+      "code": "BK1068",
+      "name": "净水概念",
+      "main_net_inflow_yuan": 107864880,
+      "main_net_inflow_100m_yuan": 1.08
+    },
+    {
+      "rank": 56,
+      "code": "BK1014",
+      "name": "发电机概念",
+      "main_net_inflow_yuan": 100581966,
+      "main_net_inflow_100m_yuan": 1.01
+    },
+    {
+      "rank": 57,
+      "code": "BK0520",
+      "name": "社保重仓",
+      "main_net_inflow_yuan": 98431008,
+      "main_net_inflow_100m_yuan": 0.98
+    },
+    {
+      "rank": 58,
+      "code": "BK0946",
+      "name": "EDA概念",
+      "main_net_inflow_yuan": 93887840,
+      "main_net_inflow_100m_yuan": 0.94
+    },
+    {
+      "rank": 59,
+      "code": "BK1714",
+      "name": "金融地产风格",
+      "main_net_inflow_yuan": 75535616,
+      "main_net_inflow_100m_yuan": 0.76
+    },
+    {
+      "rank": 60,
+      "code": "BK1103",
+      "name": "熔盐储能",
+      "main_net_inflow_yuan": 60379712,
+      "main_net_inflow_100m_yuan": 0.6
+    },
+    {
+      "rank": 61,
+      "code": "BK0509",
+      "name": "网络游戏",
+      "main_net_inflow_yuan": 53364672,
+      "main_net_inflow_100m_yuan": 0.53
+    },
+    {
+      "rank": 62,
+      "code": "BK0622",
+      "name": "地热能",
+      "main_net_inflow_yuan": 42954832,
+      "main_net_inflow_100m_yuan": 0.43
+    },
+    {
+      "rank": 63,
+      "code": "BK1051",
+      "name": "昨日连板_含一字",
+      "main_net_inflow_yuan": 42212112,
+      "main_net_inflow_100m_yuan": 0.42
+    },
+    {
+      "rank": 64,
+      "code": "BK1174",
+      "name": "合成生物",
+      "main_net_inflow_yuan": 40273968,
+      "main_net_inflow_100m_yuan": 0.4
+    },
+    {
+      "rank": 65,
+      "code": "BK0669",
+      "name": "生态农业",
+      "main_net_inflow_yuan": 37932768,
+      "main_net_inflow_100m_yuan": 0.38
+    },
+    {
+      "rank": 66,
+      "code": "BK1652",
+      "name": "新消费",
+      "main_net_inflow_yuan": 36605488,
+      "main_net_inflow_100m_yuan": 0.37
+    },
+    {
+      "rank": 67,
+      "code": "BK0907",
+      "name": "转基因",
+      "main_net_inflow_yuan": 34744979,
+      "main_net_inflow_100m_yuan": 0.35
+    },
+    {
+      "rank": 68,
+      "code": "BK0955",
+      "name": "C2M概念",
+      "main_net_inflow_yuan": 23924272,
+      "main_net_inflow_100m_yuan": 0.24
+    },
+    {
+      "rank": 69,
+      "code": "BK0492",
+      "name": "煤化工概念",
+      "main_net_inflow_yuan": 19205600,
+      "main_net_inflow_100m_yuan": 0.19
+    },
+    {
+      "rank": 70,
+      "code": "BK1086",
+      "name": "粮食概念",
+      "main_net_inflow_yuan": 13149551,
+      "main_net_inflow_100m_yuan": 0.13
+    },
+    {
+      "rank": 71,
+      "code": "BK1082",
+      "name": "噪声防治",
+      "main_net_inflow_yuan": 12428415,
+      "main_net_inflow_100m_yuan": 0.12
+    },
+    {
+      "rank": 72,
+      "code": "BK0685",
+      "name": "举牌",
+      "main_net_inflow_yuan": 11191042,
+      "main_net_inflow_100m_yuan": 0.11
+    },
+    {
+      "rank": 73,
+      "code": "BK1147",
+      "name": "SPD概念",
+      "main_net_inflow_yuan": 6440984,
+      "main_net_inflow_100m_yuan": 0.06
+    },
+    {
+      "rank": 74,
+      "code": "BK0965",
+      "name": "社区团购",
+      "main_net_inflow_yuan": 4476336,
+      "main_net_inflow_100m_yuan": 0.04
+    },
+    {
+      "rank": 75,
+      "code": "BK1025",
+      "name": "预制菜概念",
+      "main_net_inflow_yuan": 2977408,
+      "main_net_inflow_100m_yuan": 0.03
+    },
+    {
+      "rank": 76,
+      "code": "BK0822",
+      "name": "租售同权",
+      "main_net_inflow_yuan": -4885,
+      "main_net_inflow_100m_yuan": -0.0
+    },
+    {
+      "rank": 77,
+      "code": "BK1099",
+      "name": "轮毂电机",
+      "main_net_inflow_yuan": -336406,
+      "main_net_inflow_100m_yuan": -0.0
+    },
+    {
+      "rank": 78,
+      "code": "BK1644",
+      "name": "微盘精选",
+      "main_net_inflow_yuan": -6670545,
+      "main_net_inflow_100m_yuan": -0.07
+    },
+    {
+      "rank": 79,
+      "code": "BK0818",
+      "name": "可燃冰",
+      "main_net_inflow_yuan": -8287553,
+      "main_net_inflow_100m_yuan": -0.08
+    },
+    {
+      "rank": 80,
+      "code": "BK0636",
+      "name": "B股",
+      "main_net_inflow_yuan": -8326780,
+      "main_net_inflow_100m_yuan": -0.08
+    },
+    {
+      "rank": 81,
+      "code": "BK1073",
+      "name": "啤酒概念",
+      "main_net_inflow_yuan": -13358314,
+      "main_net_inflow_100m_yuan": -0.13
+    },
+    {
+      "rank": 82,
+      "code": "BK0656",
+      "name": "智能电视",
+      "main_net_inflow_yuan": -13564864,
+      "main_net_inflow_100m_yuan": -0.14
+    },
+    {
+      "rank": 83,
+      "code": "BK0547",
+      "name": "黄金概念",
+      "main_net_inflow_yuan": -13856000,
+      "main_net_inflow_100m_yuan": -0.14
+    },
+    {
+      "rank": 84,
+      "code": "BK0943",
+      "name": "汽车拆解",
+      "main_net_inflow_yuan": -16544528,
+      "main_net_inflow_100m_yuan": -0.17
+    },
+    {
+      "rank": 85,
+      "code": "BK1074",
+      "name": "托育服务",
+      "main_net_inflow_yuan": -16592362,
+      "main_net_inflow_100m_yuan": -0.17
+    },
+    {
+      "rank": 86,
+      "code": "BK0693",
+      "name": "基因测序",
+      "main_net_inflow_yuan": -17102624,
+      "main_net_inflow_100m_yuan": -0.17
+    },
+    {
+      "rank": 87,
+      "code": "BK1109",
+      "name": "供销社概念",
+      "main_net_inflow_yuan": -19470428,
+      "main_net_inflow_100m_yuan": -0.19
+    },
+    {
+      "rank": 88,
+      "code": "BK1666",
+      "name": "大盘价值",
+      "main_net_inflow_yuan": -20056576,
+      "main_net_inflow_100m_yuan": -0.2
+    },
+    {
+      "rank": 89,
+      "code": "BK1645",
+      "name": "昨日打二板以上表现",
+      "main_net_inflow_yuan": -22027756,
+      "main_net_inflow_100m_yuan": -0.22
+    },
+    {
+      "rank": 90,
+      "code": "BK0974",
+      "name": "化妆品概念",
+      "main_net_inflow_yuan": -23363856,
+      "main_net_inflow_100m_yuan": -0.23
+    },
+    {
+      "rank": 91,
+      "code": "BK1093",
+      "name": "汽车一体化压铸",
+      "main_net_inflow_yuan": -25106064,
+      "main_net_inflow_100m_yuan": -0.25
+    },
+    {
+      "rank": 92,
+      "code": "BK0927",
+      "name": "免税概念",
+      "main_net_inflow_yuan": -27572064,
+      "main_net_inflow_100m_yuan": -0.28
+    },
+    {
+      "rank": 93,
+      "code": "BK1179",
+      "name": "房屋检测",
+      "main_net_inflow_yuan": -28813738,
+      "main_net_inflow_100m_yuan": -0.29
+    },
+    {
+      "rank": 94,
+      "code": "BK1635",
+      "name": "长期破净",
+      "main_net_inflow_yuan": -31425712,
+      "main_net_inflow_100m_yuan": -0.31
+    },
+    {
+      "rank": 95,
+      "code": "BK0936",
+      "name": "长寿药",
+      "main_net_inflow_yuan": -34299168,
+      "main_net_inflow_100m_yuan": -0.34
+    },
+    {
+      "rank": 96,
+      "code": "BK0996",
+      "name": "毛发医疗",
+      "main_net_inflow_yuan": -41003187,
+      "main_net_inflow_100m_yuan": -0.41
+    },
+    {
+      "rank": 97,
+      "code": "BK0979",
+      "name": "低碳冶金",
+      "main_net_inflow_yuan": -43383968,
+      "main_net_inflow_100m_yuan": -0.43
+    },
+    {
+      "rank": 98,
+      "code": "BK0992",
+      "name": "REITs概念",
+      "main_net_inflow_yuan": -45994288,
+      "main_net_inflow_100m_yuan": -0.46
+    },
+    {
+      "rank": 99,
+      "code": "BK1017",
+      "name": "资源开采概念",
+      "main_net_inflow_yuan": -46209776,
+      "main_net_inflow_100m_yuan": -0.46
+    },
+    {
+      "rank": 100,
+      "code": "BK0950",
+      "name": "草甘膦",
+      "main_net_inflow_yuan": -50288560,
+      "main_net_inflow_100m_yuan": -0.5
+    },
+    {
+      "rank": 101,
+      "code": "BK0485",
+      "name": "旅游酒店",
+      "main_net_inflow_yuan": -50372845,
+      "main_net_inflow_100m_yuan": -0.5
+    },
+    {
+      "rank": 102,
+      "code": "BK0632",
+      "name": "土地流转",
+      "main_net_inflow_yuan": -51548640,
+      "main_net_inflow_100m_yuan": -0.52
+    },
+    {
+      "rank": 103,
+      "code": "BK0470",
+      "name": "造纸印刷",
+      "main_net_inflow_yuan": -52624384,
+      "main_net_inflow_100m_yuan": -0.53
+    },
+    {
+      "rank": 104,
+      "code": "BK1158",
+      "name": "微盘股",
+      "main_net_inflow_yuan": -54244832,
+      "main_net_inflow_100m_yuan": -0.54
+    },
+    {
+      "rank": 105,
+      "code": "BK0888",
+      "name": "农业种植",
+      "main_net_inflow_yuan": -55525008,
+      "main_net_inflow_100m_yuan": -0.56
+    },
+    {
+      "rank": 106,
+      "code": "BK0856",
+      "name": "工业大麻",
+      "main_net_inflow_yuan": -59030928,
+      "main_net_inflow_100m_yuan": -0.59
+    },
+    {
+      "rank": 107,
+      "code": "BK0967",
+      "name": "水产概念",
+      "main_net_inflow_yuan": -64824078,
+      "main_net_inflow_100m_yuan": -0.65
+    },
+    {
+      "rank": 108,
+      "code": "BK0671",
+      "name": "彩票概念",
+      "main_net_inflow_yuan": -72066790,
+      "main_net_inflow_100m_yuan": -0.72
+    },
+    {
+      "rank": 109,
+      "code": "BK0933",
+      "name": "退税商店",
+      "main_net_inflow_yuan": -74219673,
+      "main_net_inflow_100m_yuan": -0.74
+    },
+    {
+      "rank": 110,
+      "code": "BK1682",
+      "name": "2026一季报扭亏",
+      "main_net_inflow_yuan": -76267008,
+      "main_net_inflow_100m_yuan": -0.76
+    },
+    {
+      "rank": 111,
+      "code": "BK0951",
+      "name": "刀片电池",
+      "main_net_inflow_yuan": -76332496,
+      "main_net_inflow_100m_yuan": -0.76
+    },
+    {
+      "rank": 112,
+      "code": "BK1185",
+      "name": "冰雪经济",
+      "main_net_inflow_yuan": -76368512,
+      "main_net_inflow_100m_yuan": -0.76
+    },
+    {
+      "rank": 113,
+      "code": "BK1079",
+      "name": "户外露营",
+      "main_net_inflow_yuan": -78829282,
+      "main_net_inflow_100m_yuan": -0.79
+    },
+    {
+      "rank": 114,
+      "code": "BK0954",
+      "name": "盲盒经济",
+      "main_net_inflow_yuan": -83405072,
+      "main_net_inflow_100m_yuan": -0.83
+    },
+    {
+      "rank": 115,
+      "code": "BK0839",
+      "name": "知识产权",
+      "main_net_inflow_yuan": -84921696,
+      "main_net_inflow_100m_yuan": -0.85
+    },
+    {
+      "rank": 116,
+      "code": "BK0985",
+      "name": "换电概念",
+      "main_net_inflow_yuan": -97000464,
+      "main_net_inflow_100m_yuan": -0.97
+    },
+    {
+      "rank": 117,
+      "code": "BK1026",
+      "name": "调味品概念",
+      "main_net_inflow_yuan": -115384432,
+      "main_net_inflow_100m_yuan": -1.15
+    },
+    {
+      "rank": 118,
+      "code": "BK1671",
+      "name": "超跌股",
+      "main_net_inflow_yuan": -124995152,
+      "main_net_inflow_100m_yuan": -1.25
+    },
+    {
+      "rank": 119,
+      "code": "BK0534",
+      "name": "成渝特区",
+      "main_net_inflow_yuan": -128769168,
+      "main_net_inflow_100m_yuan": -1.29
+    },
+    {
+      "rank": 120,
+      "code": "BK1654",
+      "name": "文娱消费",
+      "main_net_inflow_yuan": -129833744,
+      "main_net_inflow_100m_yuan": -1.3
+    },
+    {
+      "rank": 121,
+      "code": "BK1133",
+      "name": "ERP概念",
+      "main_net_inflow_yuan": -130360576,
+      "main_net_inflow_100m_yuan": -1.3
+    },
+    {
+      "rank": 122,
+      "code": "BK0672",
+      "name": "沪企改革",
+      "main_net_inflow_yuan": -132382960,
+      "main_net_inflow_100m_yuan": -1.32
+    },
+    {
+      "rank": 123,
+      "code": "BK0982",
+      "name": "电子车牌",
+      "main_net_inflow_yuan": -137098573,
+      "main_net_inflow_100m_yuan": -1.37
+    },
+    {
+      "rank": 124,
+      "code": "BK1119",
+      "name": "PLC概念",
+      "main_net_inflow_yuan": -137513664,
+      "main_net_inflow_100m_yuan": -1.38
+    },
+    {
+      "rank": 125,
+      "code": "BK1655",
+      "name": "零售概念",
+      "main_net_inflow_yuan": -138622448,
+      "main_net_inflow_100m_yuan": -1.39
+    },
+    {
+      "rank": 126,
+      "code": "BK0724",
+      "name": "海绵城市",
+      "main_net_inflow_yuan": -145000221,
+      "main_net_inflow_100m_yuan": -1.45
+    },
+    {
+      "rank": 127,
+      "code": "BK1011",
+      "name": "环氧丙烷",
+      "main_net_inflow_yuan": -150752000,
+      "main_net_inflow_100m_yuan": -1.51
+    },
+    {
+      "rank": 128,
+      "code": "BK0614",
+      "name": "食品安全",
+      "main_net_inflow_yuan": -151433280,
+      "main_net_inflow_100m_yuan": -1.51
+    },
+    {
+      "rank": 129,
+      "code": "BK0803",
+      "name": "股权转让",
+      "main_net_inflow_yuan": -152110824,
+      "main_net_inflow_100m_yuan": -1.52
+    },
+    {
+      "rank": 130,
+      "code": "BK0692",
+      "name": "旅游概念",
+      "main_net_inflow_yuan": -157086464,
+      "main_net_inflow_100m_yuan": -1.57
+    },
+    {
+      "rank": 131,
+      "code": "BK1116",
+      "name": "抗菌面料",
+      "main_net_inflow_yuan": -157767888,
+      "main_net_inflow_100m_yuan": -1.58
+    },
+    {
+      "rank": 132,
+      "code": "BK0924",
+      "name": "地摊经济",
+      "main_net_inflow_yuan": -158006256,
+      "main_net_inflow_100m_yuan": -1.58
+    },
+    {
+      "rank": 133,
+      "code": "BK0684",
+      "name": "京津冀",
+      "main_net_inflow_yuan": -160061152,
+      "main_net_inflow_100m_yuan": -1.6
+    },
+    {
+      "rank": 134,
+      "code": "BK0730",
+      "name": "农药兽药",
+      "main_net_inflow_yuan": -161876096,
+      "main_net_inflow_100m_yuan": -1.62
+    },
+    {
+      "rank": 135,
+      "code": "BK1058",
+      "name": "地下管网",
+      "main_net_inflow_yuan": -171979520,
+      "main_net_inflow_100m_yuan": -1.72
+    },
+    {
+      "rank": 136,
+      "code": "BK1054",
+      "name": "DRG/DIP",
+      "main_net_inflow_yuan": -173327495,
+      "main_net_inflow_100m_yuan": -1.73
+    },
+    {
+      "rank": 137,
+      "code": "BK1649",
+      "name": "油气资源",
+      "main_net_inflow_yuan": -181608784,
+      "main_net_inflow_100m_yuan": -1.82
+    },
+    {
+      "rank": 138,
+      "code": "BK1010",
+      "name": "磷化工",
+      "main_net_inflow_yuan": -182409216,
+      "main_net_inflow_100m_yuan": -1.82
+    },
+    {
+      "rank": 139,
+      "code": "BK1077",
+      "name": "统一大市场",
+      "main_net_inflow_yuan": -193571296,
+      "main_net_inflow_100m_yuan": -1.94
+    },
+    {
+      "rank": 140,
+      "code": "BK0938",
+      "name": "代糖概念",
+      "main_net_inflow_yuan": -196900112,
+      "main_net_inflow_100m_yuan": -1.97
+    },
+    {
+      "rank": 141,
+      "code": "BK0708",
+      "name": "体育产业",
+      "main_net_inflow_yuan": -199726512,
+      "main_net_inflow_100m_yuan": -2.0
+    },
+    {
+      "rank": 142,
+      "code": "BK0733",
+      "name": "包装材料",
+      "main_net_inflow_yuan": -200251824,
+      "main_net_inflow_100m_yuan": -2.0
+    },
+    {
+      "rank": 143,
+      "code": "BK1006",
+      "name": "碳基材料",
+      "main_net_inflow_yuan": -202104080,
+      "main_net_inflow_100m_yuan": -2.02
+    },
+    {
+      "rank": 144,
+      "code": "BK1132",
+      "name": "MLOps概念",
+      "main_net_inflow_yuan": -204720674,
+      "main_net_inflow_100m_yuan": -2.05
+    },
+    {
+      "rank": 145,
+      "code": "BK1070",
+      "name": "土壤修复",
+      "main_net_inflow_yuan": -206206850,
+      "main_net_inflow_100m_yuan": -2.06
+    },
+    {
+      "rank": 146,
+      "code": "BK0866",
+      "name": "人造肉",
+      "main_net_inflow_yuan": -208285088,
+      "main_net_inflow_100m_yuan": -2.08
+    },
+    {
+      "rank": 147,
+      "code": "BK1189",
+      "name": "腾讯云",
+      "main_net_inflow_yuan": -210340048,
+      "main_net_inflow_100m_yuan": -2.1
+    },
+    {
+      "rank": 148,
+      "code": "BK0914",
+      "name": "医废处理",
+      "main_net_inflow_yuan": -213271584,
+      "main_net_inflow_100m_yuan": -2.13
+    },
+    {
+      "rank": 149,
+      "code": "BK1628",
+      "name": "2025三季报扭亏",
+      "main_net_inflow_yuan": -220480608,
+      "main_net_inflow_100m_yuan": -2.2
+    },
+    {
+      "rank": 150,
+      "code": "BK0566",
+      "name": "滨海新区",
+      "main_net_inflow_yuan": -223983216,
+      "main_net_inflow_100m_yuan": -2.24
+    },
+    {
+      "rank": 151,
+      "code": "BK0524",
+      "name": "参股期货",
+      "main_net_inflow_yuan": -230645248,
+      "main_net_inflow_100m_yuan": -2.31
+    },
+    {
+      "rank": 152,
+      "code": "BK0625",
+      "name": "通用航空",
+      "main_net_inflow_yuan": -231798576,
+      "main_net_inflow_100m_yuan": -2.32
+    },
+    {
+      "rank": 153,
+      "code": "BK0806",
+      "name": "精准医疗",
+      "main_net_inflow_yuan": -233102688,
+      "main_net_inflow_100m_yuan": -2.33
+    },
+    {
+      "rank": 154,
+      "code": "BK1672",
+      "name": "破发股",
+      "main_net_inflow_yuan": -235154704,
+      "main_net_inflow_100m_yuan": -2.35
+    },
+    {
+      "rank": 155,
+      "code": "BK1069",
+      "name": "智慧灯杆",
+      "main_net_inflow_yuan": -246329120,
+      "main_net_inflow_100m_yuan": -2.46
+    },
+    {
+      "rank": 156,
+      "code": "BK1013",
+      "name": "华为欧拉",
+      "main_net_inflow_yuan": -250466512,
+      "main_net_inflow_100m_yuan": -2.5
+    },
+    {
+      "rank": 157,
+      "code": "BK1151",
+      "name": "短剧互动游戏",
+      "main_net_inflow_yuan": -259797120,
+      "main_net_inflow_100m_yuan": -2.6
+    },
+    {
+      "rank": 158,
+      "code": "BK0429",
+      "name": "交运设备",
+      "main_net_inflow_yuan": -267034560,
+      "main_net_inflow_100m_yuan": -2.67
+    },
+    {
+      "rank": 159,
+      "code": "BK1066",
+      "name": "民爆概念",
+      "main_net_inflow_yuan": -267094976,
+      "main_net_inflow_100m_yuan": -2.67
+    },
+    {
+      "rank": 160,
+      "code": "BK0991",
+      "name": "工程机械概念",
+      "main_net_inflow_yuan": -267547216,
+      "main_net_inflow_100m_yuan": -2.68
+    },
+    {
+      "rank": 161,
+      "code": "BK1075",
+      "name": "电子身份证",
+      "main_net_inflow_yuan": -269286944,
+      "main_net_inflow_100m_yuan": -2.69
+    },
+    {
+      "rank": 162,
+      "code": "BK0937",
+      "name": "蚂蚁概念",
+      "main_net_inflow_yuan": -275381072,
+      "main_net_inflow_100m_yuan": -2.75
+    },
+    {
+      "rank": 163,
+      "code": "BK0875",
+      "name": "ETC",
+      "main_net_inflow_yuan": -280456576,
+      "main_net_inflow_100m_yuan": -2.8
+    },
+    {
+      "rank": 164,
+      "code": "BK1098",
+      "name": "生物质能发电",
+      "main_net_inflow_yuan": -281108368,
+      "main_net_inflow_100m_yuan": -2.81
+    },
+    {
+      "rank": 165,
+      "code": "BK0990",
+      "name": "快递概念",
+      "main_net_inflow_yuan": -281851616,
+      "main_net_inflow_100m_yuan": -2.82
+    },
+    {
+      "rank": 166,
+      "code": "BK1001",
+      "name": "内贸流通",
+      "main_net_inflow_yuan": -282231152,
+      "main_net_inflow_100m_yuan": -2.82
+    },
+    {
+      "rank": 167,
+      "code": "BK1129",
+      "name": "数字水印",
+      "main_net_inflow_yuan": -283265223,
+      "main_net_inflow_100m_yuan": -2.83
+    },
+    {
+      "rank": 168,
+      "code": "BK0706",
+      "name": "人脑工程",
+      "main_net_inflow_yuan": -283474032,
+      "main_net_inflow_100m_yuan": -2.83
+    },
+    {
+      "rank": 169,
+      "code": "BK0847",
+      "name": "影视概念",
+      "main_net_inflow_yuan": -284151632,
+      "main_net_inflow_100m_yuan": -2.84
+    },
+    {
+      "rank": 170,
+      "code": "BK0837",
+      "name": "互联医疗",
+      "main_net_inflow_yuan": -289302560,
+      "main_net_inflow_100m_yuan": -2.89
+    },
+    {
+      "rank": 171,
+      "code": "BK1087",
+      "name": "超超临界发电",
+      "main_net_inflow_yuan": -294154864,
+      "main_net_inflow_100m_yuan": -2.94
+    },
+    {
+      "rank": 172,
+      "code": "BK1131",
+      "name": "同步磁阻电机",
+      "main_net_inflow_yuan": -295507328,
+      "main_net_inflow_100m_yuan": -2.96
+    },
+    {
+      "rank": 173,
+      "code": "BK0838",
+      "name": "东北振兴",
+      "main_net_inflow_yuan": -303037328,
+      "main_net_inflow_100m_yuan": -3.03
+    },
+    {
+      "rank": 174,
+      "code": "BK1172",
+      "name": "AI语料",
+      "main_net_inflow_yuan": -305250240,
+      "main_net_inflow_100m_yuan": -3.05
+    },
+    {
+      "rank": 175,
+      "code": "BK1022",
+      "name": "职业教育",
+      "main_net_inflow_yuan": -312040672,
+      "main_net_inflow_100m_yuan": -3.12
+    },
+    {
+      "rank": 176,
+      "code": "BK0959",
+      "name": "数字阅读",
+      "main_net_inflow_yuan": -319755049,
+      "main_net_inflow_100m_yuan": -3.2
+    },
+    {
+      "rank": 177,
+      "code": "BK1630",
+      "name": "昨日首板",
+      "main_net_inflow_yuan": -320530176,
+      "main_net_inflow_100m_yuan": -3.21
+    },
+    {
+      "rank": 178,
+      "code": "BK1092",
+      "name": "麒麟电池",
+      "main_net_inflow_yuan": -322855040,
+      "main_net_inflow_100m_yuan": -3.23
+    },
+    {
+      "rank": 179,
+      "code": "BK1681",
+      "name": "2026一季报预减",
+      "main_net_inflow_yuan": -332144016,
+      "main_net_inflow_100m_yuan": -3.32
+    },
+    {
+      "rank": 180,
+      "code": "BK1029",
+      "name": "汽车整车",
+      "main_net_inflow_yuan": -333672000,
+      "main_net_inflow_100m_yuan": -3.34
+    },
+    {
+      "rank": 181,
+      "code": "BK0807",
+      "name": "共享经济",
+      "main_net_inflow_yuan": -339603984,
+      "main_net_inflow_100m_yuan": -3.4
+    },
+    {
+      "rank": 182,
+      "code": "BK1049",
+      "name": "EDR概念",
+      "main_net_inflow_yuan": -355723360,
+      "main_net_inflow_100m_yuan": -3.56
+    },
+    {
+      "rank": 183,
+      "code": "BK1711",
+      "name": "消费风格",
+      "main_net_inflow_yuan": -358699008,
+      "main_net_inflow_100m_yuan": -3.59
+    },
+    {
+      "rank": 184,
+      "code": "BK0643",
+      "name": "上海自贸",
+      "main_net_inflow_yuan": -359028656,
+      "main_net_inflow_100m_yuan": -3.59
+    },
+    {
+      "rank": 185,
+      "code": "BK0994",
+      "name": "空间站概念",
+      "main_net_inflow_yuan": -367866576,
+      "main_net_inflow_100m_yuan": -3.68
+    },
+    {
+      "rank": 186,
+      "code": "BK0945",
+      "name": "装配建筑",
+      "main_net_inflow_yuan": -368609360,
+      "main_net_inflow_100m_yuan": -3.69
+    },
+    {
+      "rank": 187,
+      "code": "BK0718",
+      "name": "证金持股",
+      "main_net_inflow_yuan": -377458944,
+      "main_net_inflow_100m_yuan": -3.77
+    },
+    {
+      "rank": 188,
+      "code": "BK1102",
+      "name": "空气能热泵",
+      "main_net_inflow_yuan": -382378416,
+      "main_net_inflow_100m_yuan": -3.82
+    },
+    {
+      "rank": 189,
+      "code": "BK1670",
+      "name": "中盘价值",
+      "main_net_inflow_yuan": -400391680,
+      "main_net_inflow_100m_yuan": -4.0
+    },
+    {
+      "rank": 190,
+      "code": "BK1076",
+      "name": "建筑节能",
+      "main_net_inflow_yuan": -404409984,
+      "main_net_inflow_100m_yuan": -4.04
+    },
+    {
+      "rank": 191,
+      "code": "BK0841",
+      "name": "体外诊断概念",
+      "main_net_inflow_yuan": -408346864,
+      "main_net_inflow_100m_yuan": -4.08
+    },
+    {
+      "rank": 192,
+      "code": "BK1112",
+      "name": "破净股",
+      "main_net_inflow_yuan": -411844096,
+      "main_net_inflow_100m_yuan": -4.12
+    },
+    {
+      "rank": 193,
+      "code": "BK0885",
+      "name": "VPN",
+      "main_net_inflow_yuan": -426755984,
+      "main_net_inflow_100m_yuan": -4.27
+    },
+    {
+      "rank": 194,
+      "code": "BK0958",
+      "name": "虚拟电厂",
+      "main_net_inflow_yuan": -428322672,
+      "main_net_inflow_100m_yuan": -4.28
+    },
+    {
+      "rank": 195,
+      "code": "BK1192",
+      "name": "雅下水电概念",
+      "main_net_inflow_yuan": -443333696,
+      "main_net_inflow_100m_yuan": -4.43
+    },
+    {
+      "rank": 196,
+      "code": "BK0898",
+      "name": "胎压监测",
+      "main_net_inflow_yuan": -449285136,
+      "main_net_inflow_100m_yuan": -4.49
+    },
+    {
+      "rank": 197,
+      "code": "BK0677",
+      "name": "粤港自贸",
+      "main_net_inflow_yuan": -450341728,
+      "main_net_inflow_100m_yuan": -4.5
+    },
+    {
+      "rank": 198,
+      "code": "BK1130",
+      "name": "时空大数据",
+      "main_net_inflow_yuan": -456688352,
+      "main_net_inflow_100m_yuan": -4.57
+    },
+    {
+      "rank": 199,
+      "code": "BK1118",
+      "name": "数据确权",
+      "main_net_inflow_yuan": -474162112,
+      "main_net_inflow_100m_yuan": -4.74
+    },
+    {
+      "rank": 200,
+      "code": "BK0855",
+      "name": "纳米银",
+      "main_net_inflow_yuan": -479225728,
+      "main_net_inflow_100m_yuan": -4.79
+    },
+    {
+      "rank": 201,
+      "code": "BK1143",
+      "name": "空间计算",
+      "main_net_inflow_yuan": -480904176,
+      "main_net_inflow_100m_yuan": -4.81
+    },
+    {
+      "rank": 202,
+      "code": "BK1007",
+      "name": "植物照明",
+      "main_net_inflow_yuan": -484514832,
+      "main_net_inflow_100m_yuan": -4.85
+    },
+    {
+      "rank": 203,
+      "code": "BK1186",
+      "name": "首发经济",
+      "main_net_inflow_yuan": -486883344,
+      "main_net_inflow_100m_yuan": -4.87
+    },
+    {
+      "rank": 204,
+      "code": "BK0980",
+      "name": "化债(AMC)概念",
+      "main_net_inflow_yuan": -489168672,
+      "main_net_inflow_100m_yuan": -4.89
+    },
+    {
+      "rank": 205,
+      "code": "BK0925",
+      "name": "北交所概念",
+      "main_net_inflow_yuan": -503140768,
+      "main_net_inflow_100m_yuan": -5.03
+    },
+    {
+      "rank": 206,
+      "code": "BK1071",
+      "name": "跨境支付",
+      "main_net_inflow_yuan": -516324080,
+      "main_net_inflow_100m_yuan": -5.16
+    },
+    {
+      "rank": 207,
+      "code": "BK1125",
+      "name": "电子后视镜",
+      "main_net_inflow_yuan": -526644992,
+      "main_net_inflow_100m_yuan": -5.27
+    },
+    {
+      "rank": 208,
+      "code": "BK0983",
+      "name": "核污染防治",
+      "main_net_inflow_yuan": -532972864,
+      "main_net_inflow_100m_yuan": -5.33
+    },
+    {
+      "rank": 209,
+      "code": "BK1080",
+      "name": "新型城镇化",
+      "main_net_inflow_yuan": -536356176,
+      "main_net_inflow_100m_yuan": -5.36
+    },
+    {
+      "rank": 210,
+      "code": "BK1050",
+      "name": "昨日涨停_含一字",
+      "main_net_inflow_yuan": -537396480,
+      "main_net_inflow_100m_yuan": -5.37
+    },
+    {
+      "rank": 211,
+      "code": "BK0815",
+      "name": "昨日涨停",
+      "main_net_inflow_yuan": -546227712,
+      "main_net_inflow_100m_yuan": -5.46
+    },
+    {
+      "rank": 212,
+      "code": "BK0512",
+      "name": "化工原料",
+      "main_net_inflow_yuan": -550354688,
+      "main_net_inflow_100m_yuan": -5.5
+    },
+    {
+      "rank": 213,
+      "code": "BK0873",
+      "name": "垃圾分类",
+      "main_net_inflow_yuan": -554421232,
+      "main_net_inflow_100m_yuan": -5.54
+    },
+    {
+      "rank": 214,
+      "code": "BK0843",
+      "name": "天然气",
+      "main_net_inflow_yuan": -567962624,
+      "main_net_inflow_100m_yuan": -5.68
+    },
+    {
+      "rank": 215,
+      "code": "BK0995",
+      "name": "华为昇腾",
+      "main_net_inflow_yuan": -596323184,
+      "main_net_inflow_100m_yuan": -5.96
+    },
+    {
+      "rank": 216,
+      "code": "BK1183",
+      "name": "谷子经济",
+      "main_net_inflow_yuan": -600730704,
+      "main_net_inflow_100m_yuan": -6.01
+    },
+    {
+      "rank": 217,
+      "code": "BK0972",
+      "name": "快手概念",
+      "main_net_inflow_yuan": -629937744,
+      "main_net_inflow_100m_yuan": -6.3
+    },
+    {
+      "rank": 218,
+      "code": "BK1053",
+      "name": "低价股",
+      "main_net_inflow_yuan": -637821360,
+      "main_net_inflow_100m_yuan": -6.38
+    },
+    {
+      "rank": 219,
+      "code": "BK0697",
+      "name": "IPO受益",
+      "main_net_inflow_yuan": -652296560,
+      "main_net_inflow_100m_yuan": -6.52
+    },
+    {
+      "rank": 220,
+      "code": "BK1121",
+      "name": "第四代半导体",
+      "main_net_inflow_yuan": -661849136,
+      "main_net_inflow_100m_yuan": -6.62
+    },
+    {
+      "rank": 221,
+      "code": "BK1110",
+      "name": "Web3.0",
+      "main_net_inflow_yuan": -666696576,
+      "main_net_inflow_100m_yuan": -6.67
+    },
+    {
+      "rank": 222,
+      "code": "BK0961",
+      "name": "有机硅概念",
+      "main_net_inflow_yuan": -705162832,
+      "main_net_inflow_100m_yuan": -7.05
+    },
+    {
+      "rank": 223,
+      "code": "BK0653",
+      "name": "养老概念",
+      "main_net_inflow_yuan": -709043792,
+      "main_net_inflow_100m_yuan": -7.09
+    },
+    {
+      "rank": 224,
+      "code": "BK0711",
+      "name": "券商概念",
+      "main_net_inflow_yuan": -740782592,
+      "main_net_inflow_100m_yuan": -7.41
+    },
+    {
+      "rank": 225,
+      "code": "BK1187",
+      "name": "小红书概念",
+      "main_net_inflow_yuan": -743175904,
+      "main_net_inflow_100m_yuan": -7.43
+    },
+    {
+      "rank": 226,
+      "code": "BK0480",
+      "name": "航天航空",
+      "main_net_inflow_yuan": -756988880,
+      "main_net_inflow_100m_yuan": -7.57
+    },
+    {
+      "rank": 227,
+      "code": "BK1008",
+      "name": "国资云概念",
+      "main_net_inflow_yuan": -781779424,
+      "main_net_inflow_100m_yuan": -7.82
+    },
+    {
+      "rank": 228,
+      "code": "BK0897",
+      "name": "IPv6",
+      "main_net_inflow_yuan": -798306992,
+      "main_net_inflow_100m_yuan": -7.98
+    },
+    {
+      "rank": 229,
+      "code": "BK0909",
+      "name": "降解塑料",
+      "main_net_inflow_yuan": -798965760,
+      "main_net_inflow_100m_yuan": -7.99
+    },
+    {
+      "rank": 230,
+      "code": "BK1190",
+      "name": "虚拟机器人",
+      "main_net_inflow_yuan": -845479984,
+      "main_net_inflow_100m_yuan": -8.45
+    },
+    {
+      "rank": 231,
+      "code": "BK0715",
+      "name": "航母概念",
+      "main_net_inflow_yuan": -851771552,
+      "main_net_inflow_100m_yuan": -8.52
+    },
+    {
+      "rank": 232,
+      "code": "BK0511",
+      "name": "ST股",
+      "main_net_inflow_yuan": -865750416,
+      "main_net_inflow_100m_yuan": -8.66
+    },
+    {
+      "rank": 233,
+      "code": "BK1176",
+      "name": "财税数字化",
+      "main_net_inflow_yuan": -868656272,
+      "main_net_inflow_100m_yuan": -8.69
+    },
+    {
+      "rank": 234,
+      "code": "BK1169",
+      "name": "Kimi概念",
+      "main_net_inflow_yuan": -870964192,
+      "main_net_inflow_100m_yuan": -8.71
+    },
+    {
+      "rank": 235,
+      "code": "BK1674",
+      "name": "近期新高",
+      "main_net_inflow_yuan": -875327488,
+      "main_net_inflow_100m_yuan": -8.75
+    },
+    {
+      "rank": 236,
+      "code": "BK0592",
+      "name": "铁路基建",
+      "main_net_inflow_yuan": -905612800,
+      "main_net_inflow_100m_yuan": -9.06
+    },
+    {
+      "rank": 237,
+      "code": "BK1097",
+      "name": "TOPCon电池",
+      "main_net_inflow_yuan": -907768544,
+      "main_net_inflow_100m_yuan": -9.08
+    },
+    {
+      "rank": 238,
+      "code": "BK1675",
+      "name": "历史新高",
+      "main_net_inflow_yuan": -910426624,
+      "main_net_inflow_100m_yuan": -9.1
+    },
+    {
+      "rank": 239,
+      "code": "BK0699",
+      "name": "全息技术",
+      "main_net_inflow_yuan": -921816960,
+      "main_net_inflow_100m_yuan": -9.22
+    },
+    {
+      "rank": 240,
+      "code": "BK0886",
+      "name": "智慧政务",
+      "main_net_inflow_yuan": -940606464,
+      "main_net_inflow_100m_yuan": -9.41
+    },
+    {
+      "rank": 241,
+      "code": "BK0813",
+      "name": "雄安新区",
+      "main_net_inflow_yuan": -959500240,
+      "main_net_inflow_100m_yuan": -9.6
+    },
+    {
+      "rank": 242,
+      "code": "BK0629",
+      "name": "北斗导航",
+      "main_net_inflow_yuan": -987613776,
+      "main_net_inflow_100m_yuan": -9.88
+    },
+    {
+      "rank": 243,
+      "code": "BK1678",
+      "name": "2025年报预减",
+      "main_net_inflow_yuan": -999989248,
+      "main_net_inflow_100m_yuan": -10.0
+    },
+    {
+      "rank": 244,
+      "code": "BK0604",
+      "name": "参股保险",
+      "main_net_inflow_yuan": -1017506784,
+      "main_net_inflow_100m_yuan": -10.18
+    },
+    {
+      "rank": 245,
+      "code": "BK1676",
+      "name": "百日新高",
+      "main_net_inflow_yuan": -1022739456,
+      "main_net_inflow_100m_yuan": -10.23
+    },
+    {
+      "rank": 246,
+      "code": "BK1139",
+      "name": "中特估",
+      "main_net_inflow_yuan": -1055719936,
+      "main_net_inflow_100m_yuan": -10.56
+    },
+    {
+      "rank": 247,
+      "code": "BK0721",
+      "name": "PPP模式",
+      "main_net_inflow_yuan": -1055895312,
+      "main_net_inflow_100m_yuan": -10.56
+    },
+    {
+      "rank": 248,
+      "code": "BK1153",
+      "name": "多模态AI",
+      "main_net_inflow_yuan": -1057764496,
+      "main_net_inflow_100m_yuan": -10.58
+    },
+    {
+      "rank": 249,
+      "code": "BK1182",
+      "name": "智谱AI概念",
+      "main_net_inflow_yuan": -1061710816,
+      "main_net_inflow_100m_yuan": -10.62
+    },
+    {
+      "rank": 250,
+      "code": "BK1115",
+      "name": "跨境电商",
+      "main_net_inflow_yuan": -1063301328,
+      "main_net_inflow_100m_yuan": -10.63
+    },
+    {
+      "rank": 251,
+      "code": "BK1144",
+      "name": "高压快充",
+      "main_net_inflow_yuan": -1088369248,
+      "main_net_inflow_100m_yuan": -10.88
+    },
+    {
+      "rank": 252,
+      "code": "BK1642",
+      "name": "微利股",
+      "main_net_inflow_yuan": -1096824432,
+      "main_net_inflow_100m_yuan": -10.97
+    },
+    {
+      "rank": 253,
+      "code": "BK1171",
+      "name": "碳纤维",
+      "main_net_inflow_yuan": -1098429264,
+      "main_net_inflow_100m_yuan": -10.98
+    },
+    {
+      "rank": 254,
+      "code": "BK1089",
+      "name": "汽车热管理",
+      "main_net_inflow_yuan": -1101227776,
+      "main_net_inflow_100m_yuan": -11.01
+    },
+    {
+      "rank": 255,
+      "code": "BK0915",
+      "name": "WiFi",
+      "main_net_inflow_yuan": -1105103056,
+      "main_net_inflow_100m_yuan": -11.05
+    },
+    {
+      "rank": 256,
+      "code": "BK0883",
+      "name": "数字货币",
+      "main_net_inflow_yuan": -1122634096,
+      "main_net_inflow_100m_yuan": -11.23
+    },
+    {
+      "rank": 257,
+      "code": "BK0597",
+      "name": "水利建设",
+      "main_net_inflow_yuan": -1134989488,
+      "main_net_inflow_100m_yuan": -11.35
+    },
+    {
+      "rank": 258,
+      "code": "BK0600",
+      "name": "参股新三板",
+      "main_net_inflow_yuan": -1172882704,
+      "main_net_inflow_100m_yuan": -11.73
+    },
+    {
+      "rank": 259,
+      "code": "BK0932",
+      "name": "尾气治理",
+      "main_net_inflow_yuan": -1178969008,
+      "main_net_inflow_100m_yuan": -11.79
+    },
+    {
+      "rank": 260,
+      "code": "BK1638",
+      "name": "最近多板",
+      "main_net_inflow_yuan": -1252404480,
+      "main_net_inflow_100m_yuan": -12.52
+    },
+    {
+      "rank": 261,
+      "code": "BK0852",
+      "name": "冷链物流",
+      "main_net_inflow_yuan": -1305745920,
+      "main_net_inflow_100m_yuan": -13.06
+    },
+    {
+      "rank": 262,
+      "code": "BK0970",
+      "name": "生物识别",
+      "main_net_inflow_yuan": -1320626176,
+      "main_net_inflow_100m_yuan": -13.21
+    },
+    {
+      "rank": 263,
+      "code": "BK1148",
+      "name": "BC电池",
+      "main_net_inflow_yuan": -1343777488,
+      "main_net_inflow_100m_yuan": -13.44
+    },
+    {
+      "rank": 264,
+      "code": "BK0923",
+      "name": "抖音概念(字节概念)",
+      "main_net_inflow_yuan": -1356741632,
+      "main_net_inflow_100m_yuan": -13.57
+    },
+    {
+      "rank": 265,
+      "code": "BK0667",
+      "name": "安防概念",
+      "main_net_inflow_yuan": -1370939088,
+      "main_net_inflow_100m_yuan": -13.71
+    },
+    {
+      "rank": 266,
+      "code": "BK0940",
+      "name": "网红经济",
+      "main_net_inflow_yuan": -1371204496,
+      "main_net_inflow_100m_yuan": -13.71
+    },
+    {
+      "rank": 267,
+      "code": "BK0901",
+      "name": "3D摄像头",
+      "main_net_inflow_yuan": -1379462144,
+      "main_net_inflow_100m_yuan": -13.79
+    },
+    {
+      "rank": 268,
+      "code": "BK0861",
+      "name": "数字孪生",
+      "main_net_inflow_yuan": -1388009120,
+      "main_net_inflow_100m_yuan": -13.88
+    },
+    {
+      "rank": 269,
+      "code": "BK1064",
+      "name": "东数西算",
+      "main_net_inflow_yuan": -1398374912,
+      "main_net_inflow_100m_yuan": -13.98
+    },
+    {
+      "rank": 270,
+      "code": "BK1157",
+      "name": "飞行汽车(eVTOL)",
+      "main_net_inflow_yuan": -1407193008,
+      "main_net_inflow_100m_yuan": -14.07
+    },
+    {
+      "rank": 271,
+      "code": "BK0988",
+      "name": "钠离子电池",
+      "main_net_inflow_yuan": -1427679232,
+      "main_net_inflow_100m_yuan": -14.28
+    },
+    {
+      "rank": 272,
+      "code": "BK1055",
+      "name": "虚拟数字人",
+      "main_net_inflow_yuan": -1456236192,
+      "main_net_inflow_100m_yuan": -14.56
+    },
+    {
+      "rank": 273,
+      "code": "BK1127",
+      "name": "AI芯片",
+      "main_net_inflow_yuan": -1464065536,
+      "main_net_inflow_100m_yuan": -14.64
+    },
+    {
+      "rank": 274,
+      "code": "BK1111",
+      "name": "AIGC概念",
+      "main_net_inflow_yuan": -1468164096,
+      "main_net_inflow_100m_yuan": -14.68
+    },
+    {
+      "rank": 275,
+      "code": "BK0881",
+      "name": "3D玻璃",
+      "main_net_inflow_yuan": -1473780080,
+      "main_net_inflow_100m_yuan": -14.74
+    },
+    {
+      "rank": 276,
+      "code": "BK1012",
+      "name": "PVDF概念",
+      "main_net_inflow_yuan": -1518798224,
+      "main_net_inflow_100m_yuan": -15.19
+    },
+    {
+      "rank": 277,
+      "code": "BK0662",
+      "name": "在线教育",
+      "main_net_inflow_yuan": -1520768528,
+      "main_net_inflow_100m_yuan": -15.21
+    },
+    {
+      "rank": 278,
+      "code": "BK1108",
+      "name": "科创板做市股",
+      "main_net_inflow_yuan": -1528554496,
+      "main_net_inflow_100m_yuan": -15.29
+    },
+    {
+      "rank": 279,
+      "code": "BK0514",
+      "name": "参股券商",
+      "main_net_inflow_yuan": -1530533120,
+      "main_net_inflow_100m_yuan": -15.31
+    },
+    {
+      "rank": 280,
+      "code": "BK0953",
+      "name": "鸿蒙概念",
+      "main_net_inflow_yuan": -1552627200,
+      "main_net_inflow_100m_yuan": -15.53
+    },
+    {
+      "rank": 281,
+      "code": "BK0908",
+      "name": "HJT电池",
+      "main_net_inflow_yuan": -1561036704,
+      "main_net_inflow_100m_yuan": -15.61
+    },
+    {
+      "rank": 282,
+      "code": "BK0975",
+      "name": "磁悬浮概念",
+      "main_net_inflow_yuan": -1583035824,
+      "main_net_inflow_100m_yuan": -15.83
+    },
+    {
+      "rank": 283,
+      "code": "BK0665",
+      "name": "电商概念",
+      "main_net_inflow_yuan": -1608050688,
+      "main_net_inflow_100m_yuan": -16.08
+    },
+    {
+      "rank": 284,
+      "code": "BK1047",
+      "name": "数据安全",
+      "main_net_inflow_yuan": -1610395648,
+      "main_net_inflow_100m_yuan": -16.1
+    },
+    {
+      "rank": 285,
+      "code": "BK0949",
+      "name": "氦气概念",
+      "main_net_inflow_yuan": -1649894848,
+      "main_net_inflow_100m_yuan": -16.5
+    },
+    {
+      "rank": 286,
+      "code": "BK1162",
+      "name": "AI手机",
+      "main_net_inflow_yuan": -1663798016,
+      "main_net_inflow_100m_yuan": -16.64
+    },
+    {
+      "rank": 287,
+      "code": "BK1003",
+      "name": "抽水蓄能",
+      "main_net_inflow_yuan": -1709452288,
+      "main_net_inflow_100m_yuan": -17.09
+    },
+    {
+      "rank": 288,
+      "code": "BK0425",
+      "name": "工程建设",
+      "main_net_inflow_yuan": -1714612848,
+      "main_net_inflow_100m_yuan": -17.15
+    },
+    {
+      "rank": 289,
+      "code": "BK1052",
+      "name": "动力电池回收",
+      "main_net_inflow_yuan": -1726232576,
+      "main_net_inflow_100m_yuan": -17.26
+    },
+    {
+      "rank": 290,
+      "code": "BK0889",
+      "name": "医美概念",
+      "main_net_inflow_yuan": -1733404672,
+      "main_net_inflow_100m_yuan": -17.33
+    },
+    {
+      "rank": 291,
+      "code": "BK0801",
+      "name": "增强现实",
+      "main_net_inflow_yuan": -1740023984,
+      "main_net_inflow_100m_yuan": -17.4
+    },
+    {
+      "rank": 292,
+      "code": "BK1164",
+      "name": "AIPC",
+      "main_net_inflow_yuan": -1741764608,
+      "main_net_inflow_100m_yuan": -17.42
+    },
+    {
+      "rank": 293,
+      "code": "BK1113",
+      "name": "复合集流体",
+      "main_net_inflow_yuan": -1777161168,
+      "main_net_inflow_100m_yuan": -17.77
+    },
+    {
+      "rank": 294,
+      "code": "BK1181",
+      "name": "并购重组概念",
+      "main_net_inflow_yuan": -1784176640,
+      "main_net_inflow_100m_yuan": -17.84
+    },
+    {
+      "rank": 295,
+      "code": "BK0556",
+      "name": "移动支付",
+      "main_net_inflow_yuan": -1791834928,
+      "main_net_inflow_100m_yuan": -17.92
+    },
+    {
+      "rank": 296,
+      "code": "BK0853",
+      "name": "电子竞技",
+      "main_net_inflow_yuan": -1795621888,
+      "main_net_inflow_100m_yuan": -17.96
+    },
+    {
+      "rank": 297,
+      "code": "BK0812",
+      "name": "贬值受益",
+      "main_net_inflow_yuan": -1810979840,
+      "main_net_inflow_100m_yuan": -18.11
+    },
+    {
+      "rank": 298,
+      "code": "BK0637",
+      "name": "互联网金融",
+      "main_net_inflow_yuan": -1840479232,
+      "main_net_inflow_100m_yuan": -18.4
+    },
+    {
+      "rank": 299,
+      "code": "BK1126",
+      "name": "ChatGPT概念",
+      "main_net_inflow_yuan": -1845088000,
+      "main_net_inflow_100m_yuan": -18.45
+    },
+    {
+      "rank": 300,
+      "code": "BK1061",
+      "name": "数字经济",
+      "main_net_inflow_yuan": -1885146624,
+      "main_net_inflow_100m_yuan": -18.85
+    },
+    {
+      "rank": 301,
+      "code": "BK0501",
+      "name": "次新股",
+      "main_net_inflow_yuan": -2000863744,
+      "main_net_inflow_100m_yuan": -20.01
+    },
+    {
+      "rank": 302,
+      "code": "BK1048",
+      "name": "IGBT概念",
+      "main_net_inflow_yuan": -2026237184,
+      "main_net_inflow_100m_yuan": -20.26
+    },
+    {
+      "rank": 303,
+      "code": "BK1145",
+      "name": "机器人执行器",
+      "main_net_inflow_yuan": -2038618368,
+      "main_net_inflow_100m_yuan": -20.39
+    },
+    {
+      "rank": 304,
+      "code": "BK1749",
+      "name": "2026中报预增",
+      "main_net_inflow_yuan": -2083892224,
+      "main_net_inflow_100m_yuan": -20.84
+    },
+    {
+      "rank": 305,
+      "code": "BK0865",
+      "name": "电子烟",
+      "main_net_inflow_yuan": -2086232064,
+      "main_net_inflow_100m_yuan": -20.86
+    },
+    {
+      "rank": 306,
+      "code": "BK1124",
+      "name": "毫米波概念",
+      "main_net_inflow_yuan": -2105271040,
+      "main_net_inflow_100m_yuan": -21.05
+    },
+    {
+      "rank": 307,
+      "code": "BK1193",
+      "name": "海南自贸",
+      "main_net_inflow_yuan": -2110485376,
+      "main_net_inflow_100m_yuan": -21.1
+    },
+    {
+      "rank": 308,
+      "code": "BK0926",
+      "name": "湖北自贸",
+      "main_net_inflow_yuan": -2115350272,
+      "main_net_inflow_100m_yuan": -21.15
+    },
+    {
+      "rank": 309,
+      "code": "BK0700",
+      "name": "充电桩",
+      "main_net_inflow_yuan": -2138570240,
+      "main_net_inflow_100m_yuan": -21.39
+    },
+    {
+      "rank": 310,
+      "code": "BK1180",
+      "name": "华为海思",
+      "main_net_inflow_yuan": -2140739072,
+      "main_net_inflow_100m_yuan": -21.41
+    },
+    {
+      "rank": 311,
+      "code": "BK1668",
+      "name": "小盘价值",
+      "main_net_inflow_yuan": -2142915072,
+      "main_net_inflow_100m_yuan": -21.43
+    },
+    {
+      "rank": 312,
+      "code": "BK0505",
+      "name": "中字头",
+      "main_net_inflow_yuan": -2159090432,
+      "main_net_inflow_100m_yuan": -21.59
+    },
+    {
+      "rank": 313,
+      "code": "BK0447",
+      "name": "互联网服务",
+      "main_net_inflow_yuan": -2196757760,
+      "main_net_inflow_100m_yuan": -21.97
+    },
+    {
+      "rank": 314,
+      "code": "BK0809",
+      "name": "AI智能体",
+      "main_net_inflow_yuan": -2239288832,
+      "main_net_inflow_100m_yuan": -22.39
+    },
+    {
+      "rank": 315,
+      "code": "BK1629",
+      "name": "AI应用",
+      "main_net_inflow_yuan": -2253671424,
+      "main_net_inflow_100m_yuan": -22.54
+    },
+    {
+      "rank": 316,
+      "code": "BK0814",
+      "name": "大飞机",
+      "main_net_inflow_yuan": -2255294720,
+      "main_net_inflow_100m_yuan": -22.55
+    },
+    {
+      "rank": 317,
+      "code": "BK0825",
+      "name": "新零售",
+      "main_net_inflow_yuan": -2258451712,
+      "main_net_inflow_100m_yuan": -22.58
+    },
+    {
+      "rank": 318,
+      "code": "BK0916",
+      "name": "氮化镓",
+      "main_net_inflow_yuan": -2298556928,
+      "main_net_inflow_100m_yuan": -22.99
+    },
+    {
+      "rank": 319,
+      "code": "BK0498",
+      "name": "AB股",
+      "main_net_inflow_yuan": -2360994304,
+      "main_net_inflow_100m_yuan": -23.61
+    },
+    {
+      "rank": 320,
+      "code": "BK0999",
+      "name": "茅指数",
+      "main_net_inflow_yuan": -2369669376,
+      "main_net_inflow_100m_yuan": -23.7
+    },
+    {
+      "rank": 321,
       "code": "BK1100",
       "name": "减速器",
-      "main_net_inflow_yuan": 6104184576,
-      "main_net_inflow_100m_yuan": 61.04
+      "main_net_inflow_yuan": -2379189248,
+      "main_net_inflow_100m_yuan": -23.79
+    },
+    {
+      "rank": 322,
+      "code": "BK0977",
+      "name": "碳化硅",
+      "main_net_inflow_yuan": -2380796672,
+      "main_net_inflow_100m_yuan": -23.81
+    },
+    {
+      "rank": 323,
+      "code": "BK1135",
+      "name": "数据要素",
+      "main_net_inflow_yuan": -2385721088,
+      "main_net_inflow_100m_yuan": -23.86
+    },
+    {
+      "rank": 324,
+      "code": "BK0528",
+      "name": "转债标的",
+      "main_net_inflow_yuan": -2451112960,
+      "main_net_inflow_100m_yuan": -24.51
+    },
+    {
+      "rank": 325,
+      "code": "BK1168",
+      "name": "铜缆高速连接",
+      "main_net_inflow_yuan": -2480981248,
+      "main_net_inflow_100m_yuan": -24.81
+    },
+    {
+      "rank": 326,
+      "code": "BK0998",
+      "name": "机器视觉",
+      "main_net_inflow_yuan": -2526955264,
+      "main_net_inflow_100m_yuan": -25.27
+    },
+    {
+      "rank": 327,
+      "code": "BK0984",
+      "name": "华为汽车",
+      "main_net_inflow_yuan": -2531126016,
+      "main_net_inflow_100m_yuan": -25.31
+    },
+    {
+      "rank": 328,
+      "code": "BK1155",
+      "name": "小米汽车",
+      "main_net_inflow_yuan": -2539505408,
+      "main_net_inflow_100m_yuan": -25.4
+    },
+    {
+      "rank": 329,
+      "code": "BK0960",
+      "name": "无线充电",
+      "main_net_inflow_yuan": -2561168128,
+      "main_net_inflow_100m_yuan": -25.61
+    },
+    {
+      "rank": 330,
+      "code": "BK0674",
+      "name": "蓝宝石",
+      "main_net_inflow_yuan": -2567351808,
+      "main_net_inflow_100m_yuan": -25.67
+    },
+    {
+      "rank": 331,
+      "code": "BK1009",
+      "name": "元宇宙概念",
+      "main_net_inflow_yuan": -2610163456,
+      "main_net_inflow_100m_yuan": -26.1
+    },
+    {
+      "rank": 332,
+      "code": "BK0703",
+      "name": "超级电容",
+      "main_net_inflow_yuan": -2634741248,
+      "main_net_inflow_100m_yuan": -26.35
+    },
+    {
+      "rank": 333,
+      "code": "BK1142",
+      "name": "裸眼3D",
+      "main_net_inflow_yuan": -2663820032,
+      "main_net_inflow_100m_yuan": -26.64
+    },
+    {
+      "rank": 334,
+      "code": "BK0679",
+      "name": "超导概念",
+      "main_net_inflow_yuan": -2664835584,
+      "main_net_inflow_100m_yuan": -26.65
+    },
+    {
+      "rank": 335,
+      "code": "BK1002",
+      "name": "激光雷达",
+      "main_net_inflow_yuan": -2684574976,
+      "main_net_inflow_100m_yuan": -26.85
+    },
+    {
+      "rank": 336,
+      "code": "BK0966",
+      "name": "碳交易",
+      "main_net_inflow_yuan": -2721711104,
+      "main_net_inflow_100m_yuan": -27.22
+    },
+    {
+      "rank": 337,
+      "code": "BK1177",
+      "name": "荣耀概念",
+      "main_net_inflow_yuan": -2766813184,
+      "main_net_inflow_100m_yuan": -27.67
+    },
+    {
+      "rank": 338,
+      "code": "BK1000",
+      "name": "宁组合",
+      "main_net_inflow_yuan": -2779377664,
+      "main_net_inflow_100m_yuan": -27.79
+    },
+    {
+      "rank": 339,
+      "code": "BK0623",
+      "name": "海洋经济",
+      "main_net_inflow_yuan": -2781457664,
+      "main_net_inflow_100m_yuan": -27.81
+    },
+    {
+      "rank": 340,
+      "code": "BK0682",
+      "name": "燃料电池概念",
+      "main_net_inflow_yuan": -2805579264,
+      "main_net_inflow_100m_yuan": -28.06
+    },
+    {
+      "rank": 341,
+      "code": "BK0808",
+      "name": "军民融合",
+      "main_net_inflow_yuan": -2810350848,
+      "main_net_inflow_100m_yuan": -28.1
+    },
+    {
+      "rank": 342,
+      "code": "BK0617",
+      "name": "石墨烯",
+      "main_net_inflow_yuan": -2883799296,
+      "main_net_inflow_100m_yuan": -28.84
+    },
+    {
+      "rank": 343,
+      "code": "BK1198",
+      "name": "2025三季报预增",
+      "main_net_inflow_yuan": -2889144576,
+      "main_net_inflow_100m_yuan": -28.89
+    },
+    {
+      "rank": 344,
+      "code": "BK0880",
+      "name": "UWB概念",
+      "main_net_inflow_yuan": -2899399424,
+      "main_net_inflow_100m_yuan": -28.99
+    },
+    {
+      "rank": 345,
+      "code": "BK0989",
+      "name": "储能概念",
+      "main_net_inflow_yuan": -2985205760,
+      "main_net_inflow_100m_yuan": -29.85
+    },
+    {
+      "rank": 346,
+      "code": "BK0696",
+      "name": "国产软件",
+      "main_net_inflow_yuan": -2986383360,
+      "main_net_inflow_100m_yuan": -29.86
+    },
+    {
+      "rank": 347,
+      "code": "BK0519",
+      "name": "稀缺资源",
+      "main_net_inflow_yuan": -2999187456,
+      "main_net_inflow_100m_yuan": -29.99
+    },
+    {
+      "rank": 348,
+      "code": "BK0845",
+      "name": "百度概念",
+      "main_net_inflow_yuan": -3004617728,
+      "main_net_inflow_100m_yuan": -30.05
+    },
+    {
+      "rank": 349,
+      "code": "BK1094",
+      "name": "钙钛矿电池",
+      "main_net_inflow_yuan": -3026035200,
+      "main_net_inflow_100m_yuan": -30.26
+    },
+    {
+      "rank": 350,
+      "code": "BK1673",
+      "name": "破增发价股",
+      "main_net_inflow_yuan": -3034603520,
+      "main_net_inflow_100m_yuan": -30.35
+    },
+    {
+      "rank": 351,
+      "code": "BK1101",
+      "name": "先进封装",
+      "main_net_inflow_yuan": -3056779776,
+      "main_net_inflow_100m_yuan": -30.57
+    },
+    {
+      "rank": 352,
+      "code": "BK0577",
+      "name": "核能核电",
+      "main_net_inflow_yuan": -3106775040,
+      "main_net_inflow_100m_yuan": -31.07
+    },
+    {
+      "rank": 353,
+      "code": "BK0981",
+      "name": "工业气体",
+      "main_net_inflow_yuan": -3107863808,
+      "main_net_inflow_100m_yuan": -31.08
+    },
+    {
+      "rank": 354,
+      "code": "BK0525",
+      "name": "参股银行",
+      "main_net_inflow_yuan": -3137071872,
+      "main_net_inflow_100m_yuan": -31.37
+    },
+    {
+      "rank": 355,
+      "code": "BK1057",
+      "name": "电子纸概念",
+      "main_net_inflow_yuan": -3139746304,
+      "main_net_inflow_100m_yuan": -31.4
+    },
+    {
+      "rank": 356,
+      "code": "BK0581",
+      "name": "智能电网",
+      "main_net_inflow_yuan": -3248691968,
+      "main_net_inflow_100m_yuan": -32.49
+    },
+    {
+      "rank": 357,
+      "code": "BK0976",
+      "name": "被动元件概念",
+      "main_net_inflow_yuan": -3248784896,
+      "main_net_inflow_100m_yuan": -32.49
+    },
+    {
+      "rank": 358,
+      "code": "BK1150",
+      "name": "新型工业化",
+      "main_net_inflow_yuan": -3367524096,
+      "main_net_inflow_100m_yuan": -33.68
+    },
+    {
+      "rank": 359,
+      "code": "BK1188",
+      "name": "DeepSeek概念",
+      "main_net_inflow_yuan": -3373676288,
+      "main_net_inflow_100m_yuan": -33.74
+    },
+    {
+      "rank": 360,
+      "code": "BK0680",
+      "name": "智能家居",
+      "main_net_inflow_yuan": -3391857664,
+      "main_net_inflow_100m_yuan": -33.92
+    },
+    {
+      "rank": 361,
+      "code": "BK0890",
+      "name": "MLCC",
+      "main_net_inflow_yuan": -3508077824,
+      "main_net_inflow_100m_yuan": -35.08
+    },
+    {
+      "rank": 362,
+      "code": "BK1156",
+      "name": "PEEK材料概念",
+      "main_net_inflow_yuan": -3518250240,
+      "main_net_inflow_100m_yuan": -35.18
+    },
+    {
+      "rank": 363,
+      "code": "BK1104",
+      "name": "信创",
+      "main_net_inflow_yuan": -3645236224,
+      "main_net_inflow_100m_yuan": -36.45
+    },
+    {
+      "rank": 364,
+      "code": "BK0567",
+      "name": "股权激励",
+      "main_net_inflow_yuan": -3670134784,
+      "main_net_inflow_100m_yuan": -36.7
+    },
+    {
+      "rank": 365,
+      "code": "BK0947",
+      "name": "屏下摄像",
+      "main_net_inflow_yuan": -3692140544,
+      "main_net_inflow_100m_yuan": -36.92
+    },
+    {
+      "rank": 366,
+      "code": "BK0860",
+      "name": "边缘计算",
+      "main_net_inflow_yuan": -3724724224,
+      "main_net_inflow_100m_yuan": -37.25
+    },
+    {
+      "rank": 367,
+      "code": "BK1651",
+      "name": "显示技术",
+      "main_net_inflow_yuan": -3737710336,
+      "main_net_inflow_100m_yuan": -37.38
+    },
+    {
+      "rank": 368,
+      "code": "BK0611",
+      "name": "上证50_",
+      "main_net_inflow_yuan": -3762199040,
+      "main_net_inflow_100m_yuan": -37.62
+    },
+    {
+      "rank": 369,
+      "code": "BK0835",
+      "name": "独角兽",
+      "main_net_inflow_yuan": -3831326976,
+      "main_net_inflow_100m_yuan": -38.31
+    },
+    {
+      "rank": 370,
+      "code": "BK1004",
+      "name": "工业母机",
+      "main_net_inflow_yuan": -3852119296,
+      "main_net_inflow_100m_yuan": -38.52
+    },
+    {
+      "rank": 371,
+      "code": "BK0864",
+      "name": "氢能源",
+      "main_net_inflow_yuan": -3960925952,
+      "main_net_inflow_100m_yuan": -39.61
+    },
+    {
+      "rank": 372,
+      "code": "BK0964",
+      "name": "6G概念",
+      "main_net_inflow_yuan": -4017052416,
+      "main_net_inflow_100m_yuan": -40.17
+    },
+    {
+      "rank": 373,
+      "code": "BK1152",
+      "name": "高带宽内存",
+      "main_net_inflow_yuan": -4029264896,
+      "main_net_inflow_100m_yuan": -40.29
+    },
+    {
+      "rank": 374,
+      "code": "BK0920",
+      "name": "车联网(车路云)",
+      "main_net_inflow_yuan": -4031254528,
+      "main_net_inflow_100m_yuan": -40.31
+    },
+    {
+      "rank": 375,
+      "code": "BK0578",
+      "name": "稀土永磁",
+      "main_net_inflow_yuan": -4036836608,
+      "main_net_inflow_100m_yuan": -40.37
+    },
+    {
+      "rank": 376,
+      "code": "BK0610",
+      "name": "央视50_",
+      "main_net_inflow_yuan": -4038870016,
+      "main_net_inflow_100m_yuan": -40.39
+    },
+    {
+      "rank": 377,
+      "code": "BK1161",
+      "name": "英伟达概念",
+      "main_net_inflow_yuan": -4049990912,
+      "main_net_inflow_100m_yuan": -40.5
+    },
+    {
+      "rank": 378,
+      "code": "BK0601",
+      "name": "海工装备",
+      "main_net_inflow_yuan": -4054963200,
+      "main_net_inflow_100m_yuan": -40.55
+    },
+    {
+      "rank": 379,
+      "code": "BK0830",
+      "name": "区块链",
+      "main_net_inflow_yuan": -4060036864,
+      "main_net_inflow_100m_yuan": -40.6
+    },
+    {
+      "rank": 380,
+      "code": "BK1024",
+      "name": "绿色电力",
+      "main_net_inflow_yuan": -4138306304,
+      "main_net_inflow_100m_yuan": -41.38
+    },
+    {
+      "rank": 381,
+      "code": "BK0668",
+      "name": "医疗器械概念",
+      "main_net_inflow_yuan": -4143276032,
+      "main_net_inflow_100m_yuan": -41.43
+    },
+    {
+      "rank": 382,
+      "code": "BK0619",
+      "name": "3D打印",
+      "main_net_inflow_yuan": -4246563328,
+      "main_net_inflow_100m_yuan": -42.47
+    },
+    {
+      "rank": 383,
+      "code": "BK0494",
+      "name": "节能环保",
+      "main_net_inflow_yuan": -4298181120,
+      "main_net_inflow_100m_yuan": -42.98
+    },
+    {
+      "rank": 384,
+      "code": "BK0948",
+      "name": "MicroLED",
+      "main_net_inflow_yuan": -4314722304,
+      "main_net_inflow_100m_yuan": -43.15
+    },
+    {
+      "rank": 385,
+      "code": "BK0690",
+      "name": "氟化工概念",
+      "main_net_inflow_yuan": -4415609856,
+      "main_net_inflow_100m_yuan": -44.16
+    },
+    {
+      "rank": 386,
+      "code": "BK1662",
+      "name": "权重股",
+      "main_net_inflow_yuan": -4553984768,
+      "main_net_inflow_100m_yuan": -45.54
+    },
+    {
+      "rank": 387,
+      "code": "BK0921",
+      "name": "卫星互联网",
+      "main_net_inflow_yuan": -4662027520,
+      "main_net_inflow_100m_yuan": -46.62
+    },
+    {
+      "rank": 388,
+      "code": "BK0823",
+      "name": "养老金",
+      "main_net_inflow_yuan": -4740146944,
+      "main_net_inflow_100m_yuan": -47.4
+    },
+    {
+      "rank": 389,
+      "code": "BK0710",
+      "name": "量子科技",
+      "main_net_inflow_yuan": -4788488704,
+      "main_net_inflow_100m_yuan": -47.88
+    },
+    {
+      "rank": 390,
+      "code": "BK1679",
+      "name": "2025年报扭亏",
+      "main_net_inflow_yuan": -4861412352,
+      "main_net_inflow_100m_yuan": -48.61
+    },
+    {
+      "rank": 391,
+      "code": "BK1710",
+      "name": "先进制造风格",
+      "main_net_inflow_yuan": -4915586816,
+      "main_net_inflow_100m_yuan": -49.16
+    },
+    {
+      "rank": 392,
+      "code": "BK0579",
+      "name": "云计算",
+      "main_net_inflow_yuan": -4957363968,
+      "main_net_inflow_100m_yuan": -49.57
+    },
+    {
+      "rank": 393,
+      "code": "BK0902",
+      "name": "MiniLED",
+      "main_net_inflow_yuan": -4976542208,
+      "main_net_inflow_100m_yuan": -49.77
+    },
+    {
+      "rank": 394,
+      "code": "BK0918",
+      "name": "特高压",
+      "main_net_inflow_yuan": -4991239936,
+      "main_net_inflow_100m_yuan": -49.91
+    },
+    {
+      "rank": 395,
+      "code": "BK0590",
+      "name": "西部大开发",
+      "main_net_inflow_yuan": -5061566208,
+      "main_net_inflow_100m_yuan": -50.62
+    },
+    {
+      "rank": 396,
+      "code": "BK1141",
+      "name": "混合现实",
+      "main_net_inflow_yuan": -5068464384,
+      "main_net_inflow_100m_yuan": -50.68
+    },
+    {
+      "rank": 397,
+      "code": "BK0493",
+      "name": "新能源",
+      "main_net_inflow_yuan": -5115338240,
+      "main_net_inflow_100m_yuan": -51.15
+    },
+    {
+      "rank": 398,
+      "code": "BK0969",
+      "name": "汽车芯片",
+      "main_net_inflow_yuan": -5135474944,
+      "main_net_inflow_100m_yuan": -51.35
+    },
+    {
+      "rank": 399,
+      "code": "BK0655",
+      "name": "网络安全",
+      "main_net_inflow_yuan": -5143650048,
+      "main_net_inflow_100m_yuan": -51.44
+    },
+    {
+      "rank": 400,
+      "code": "BK1175",
+      "name": "玻璃基板",
+      "main_net_inflow_yuan": -5146244608,
+      "main_net_inflow_100m_yuan": -51.46
+    },
+    {
+      "rank": 401,
+      "code": "BK1166",
+      "name": "低空经济",
+      "main_net_inflow_yuan": -5179661312,
+      "main_net_inflow_100m_yuan": -51.8
+    },
+    {
+      "rank": 402,
+      "code": "BK0549",
+      "name": "深圳特区",
+      "main_net_inflow_yuan": -5192084992,
+      "main_net_inflow_100m_yuan": -51.92
+    },
+    {
+      "rank": 403,
+      "code": "BK1163",
+      "name": "可控核聚变",
+      "main_net_inflow_yuan": -5245766912,
+      "main_net_inflow_100m_yuan": -52.46
+    },
+    {
+      "rank": 404,
+      "code": "BK0704",
+      "name": "无人机",
+      "main_net_inflow_yuan": -5265299968,
+      "main_net_inflow_100m_yuan": -52.65
+    },
+    {
+      "rank": 405,
+      "code": "BK1632",
+      "name": "昨日高换手",
+      "main_net_inflow_yuan": -5428743936,
+      "main_net_inflow_100m_yuan": -54.29
+    },
+    {
+      "rank": 406,
+      "code": "BK1631",
+      "name": "昨日炸板",
+      "main_net_inflow_yuan": -5490626304,
+      "main_net_inflow_100m_yuan": -54.91
+    },
+    {
+      "rank": 407,
+      "code": "BK0952",
+      "name": "第三代半导体",
+      "main_net_inflow_yuan": -5595405312,
+      "main_net_inflow_100m_yuan": -55.95
+    },
+    {
+      "rank": 408,
+      "code": "BK0817",
+      "name": "昨日触板",
+      "main_net_inflow_yuan": -5763985920,
+      "main_net_inflow_100m_yuan": -57.64
+    },
+    {
+      "rank": 409,
+      "code": "BK0580",
+      "name": "LED概念",
+      "main_net_inflow_yuan": -5867217920,
+      "main_net_inflow_100m_yuan": -58.67
+    },
+    {
+      "rank": 410,
+      "code": "BK0506",
+      "name": "创投",
+      "main_net_inflow_yuan": -5873384704,
+      "main_net_inflow_100m_yuan": -58.73
+    },
+    {
+      "rank": 411,
+      "code": "BK0922",
+      "name": "数据中心",
+      "main_net_inflow_yuan": -5902689792,
+      "main_net_inflow_100m_yuan": -59.03
+    },
+    {
+      "rank": 412,
+      "code": "BK1160",
+      "name": "柔性屏(折叠屏)",
+      "main_net_inflow_yuan": -6085783552,
+      "main_net_inflow_100m_yuan": -60.86
+    },
+    {
+      "rank": 413,
+      "code": "BK0884",
+      "name": "光刻机(胶)",
+      "main_net_inflow_yuan": -6195883264,
+      "main_net_inflow_100m_yuan": -61.96
+    },
+    {
+      "rank": 414,
+      "code": "BK1088",
+      "name": "F5G概念",
+      "main_net_inflow_yuan": -6205554944,
+      "main_net_inflow_100m_yuan": -62.06
+    },
+    {
+      "rank": 415,
+      "code": "BK1647",
+      "name": "电网概念",
+      "main_net_inflow_yuan": -6373693184,
+      "main_net_inflow_100m_yuan": -63.74
+    },
+    {
+      "rank": 416,
+      "code": "BK0628",
+      "name": "智慧城市",
+      "main_net_inflow_yuan": -6402501632,
+      "main_net_inflow_100m_yuan": -64.03
+    },
+    {
+      "rank": 417,
+      "code": "BK0968",
+      "name": "固态电池",
+      "main_net_inflow_yuan": -6490797056,
+      "main_net_inflow_100m_yuan": -64.91
+    },
+    {
+      "rank": 418,
+      "code": "BK0695",
+      "name": "小金属概念",
+      "main_net_inflow_yuan": -6531512576,
+      "main_net_inflow_100m_yuan": -65.32
+    },
+    {
+      "rank": 419,
+      "code": "BK1138",
+      "name": "液冷概念",
+      "main_net_inflow_yuan": -6673052160,
+      "main_net_inflow_100m_yuan": -66.73
+    },
+    {
+      "rank": 420,
+      "code": "BK0832",
+      "name": "工业互联",
+      "main_net_inflow_yuan": -6813685760,
+      "main_net_inflow_100m_yuan": -68.14
+    },
+    {
+      "rank": 421,
+      "code": "BK0490",
+      "name": "军工",
+      "main_net_inflow_yuan": -6908910080,
+      "main_net_inflow_100m_yuan": -69.09
+    },
+    {
+      "rank": 422,
+      "code": "BK0802",
+      "name": "无人驾驶",
+      "main_net_inflow_yuan": -6964730112,
+      "main_net_inflow_100m_yuan": -69.65
+    },
+    {
+      "rank": 423,
+      "code": "BK1680",
+      "name": "2026一季报预增",
+      "main_net_inflow_yuan": -7214864896,
+      "main_net_inflow_100m_yuan": -72.15
+    },
+    {
+      "rank": 424,
+      "code": "BK0499",
+      "name": "AH股",
+      "main_net_inflow_yuan": -7335588352,
+      "main_net_inflow_100m_yuan": -73.36
+    },
+    {
+      "rank": 425,
+      "code": "BK1178",
+      "name": "AI眼镜",
+      "main_net_inflow_yuan": -7424329728,
+      "main_net_inflow_100m_yuan": -74.24
+    },
+    {
+      "rank": 426,
+      "code": "BK1184",
+      "name": "人形机器人",
+      "main_net_inflow_yuan": -7501815808,
+      "main_net_inflow_100m_yuan": -75.02
+    },
+    {
+      "rank": 427,
+      "code": "BK0935",
+      "name": "中芯概念",
+      "main_net_inflow_yuan": -7758902784,
+      "main_net_inflow_100m_yuan": -77.59
+    },
+    {
+      "rank": 428,
+      "code": "BK0905",
+      "name": "传感器",
+      "main_net_inflow_yuan": -7831122176,
+      "main_net_inflow_100m_yuan": -78.31
+    },
+    {
+      "rank": 429,
+      "code": "BK0722",
+      "name": "虚拟现实",
+      "main_net_inflow_yuan": -7834802688,
+      "main_net_inflow_100m_yuan": -78.35
+    },
+    {
+      "rank": 430,
+      "code": "BK0712",
+      "name": "一带一路",
+      "main_net_inflow_yuan": -7838970880,
+      "main_net_inflow_100m_yuan": -78.39
+    },
+    {
+      "rank": 431,
+      "code": "BK0705",
+      "name": "上证380",
+      "main_net_inflow_yuan": -8642711040,
+      "main_net_inflow_100m_yuan": -86.43
+    },
+    {
+      "rank": 432,
+      "code": "BK0963",
+      "name": "商业航天",
+      "main_net_inflow_yuan": -8823004416,
+      "main_net_inflow_100m_yuan": -88.23
+    },
+    {
+      "rank": 433,
+      "code": "BK0535",
+      "name": "QFII重仓",
+      "main_net_inflow_yuan": -8946224640,
+      "main_net_inflow_100m_yuan": -89.46
+    },
+    {
+      "rank": 434,
+      "code": "BK0612",
+      "name": "上证180_",
+      "main_net_inflow_yuan": -8984829952,
+      "main_net_inflow_100m_yuan": -89.85
+    },
+    {
+      "rank": 435,
+      "code": "BK0893",
+      "name": "无线耳机",
+      "main_net_inflow_yuan": -9072003840,
+      "main_net_inflow_100m_yuan": -90.72
+    },
+    {
+      "rank": 436,
+      "code": "BK1661",
+      "name": "行业龙头",
+      "main_net_inflow_yuan": -9162385920,
+      "main_net_inflow_100m_yuan": -91.62
+    },
+    {
+      "rank": 437,
+      "code": "BK0859",
+      "name": "超清视频",
+      "main_net_inflow_yuan": -9396667648,
+      "main_net_inflow_100m_yuan": -93.97
+    },
+    {
+      "rank": 438,
+      "code": "BK0833",
+      "name": "小米概念",
+      "main_net_inflow_yuan": -9434060800,
+      "main_net_inflow_100m_yuan": -94.34
+    },
+    {
+      "rank": 439,
+      "code": "BK0634",
+      "name": "大数据",
+      "main_net_inflow_yuan": -9612675840,
+      "main_net_inflow_100m_yuan": -96.13
+    },
+    {
+      "rank": 440,
+      "code": "BK0644",
+      "name": "特斯拉概念",
+      "main_net_inflow_yuan": -9739725056,
+      "main_net_inflow_100m_yuan": -97.4
+    },
+    {
+      "rank": 441,
+      "code": "BK0595",
+      "name": "风能",
+      "main_net_inflow_yuan": -10110464768,
+      "main_net_inflow_100m_yuan": -101.1
+    },
+    {
+      "rank": 442,
+      "code": "BK0666",
+      "name": "苹果概念",
+      "main_net_inflow_yuan": -10180393984,
+      "main_net_inflow_100m_yuan": -101.8
+    },
+    {
+      "rank": 443,
+      "code": "BK1669",
+      "name": "中盘成长",
+      "main_net_inflow_yuan": -10197342208,
+      "main_net_inflow_100m_yuan": -101.97
+    },
+    {
+      "rank": 444,
+      "code": "BK0552",
+      "name": "机构重仓",
+      "main_net_inflow_yuan": -10295535872,
+      "main_net_inflow_100m_yuan": -102.96
+    },
+    {
+      "rank": 445,
+      "code": "BK0588",
+      "name": "光伏概念",
+      "main_net_inflow_yuan": -10444990976,
+      "main_net_inflow_100m_yuan": -104.45
+    },
+    {
+      "rank": 446,
+      "code": "BK0594",
+      "name": "长江三角",
+      "main_net_inflow_yuan": -10562175232,
+      "main_net_inflow_100m_yuan": -105.62
+    },
+    {
+      "rank": 447,
+      "code": "BK1134",
+      "name": "算力概念",
+      "main_net_inflow_yuan": -10649194496,
+      "main_net_inflow_100m_yuan": -106.49
+    },
+    {
+      "rank": 448,
+      "code": "BK1667",
+      "name": "小盘成长",
+      "main_net_inflow_yuan": -10699510016,
+      "main_net_inflow_100m_yuan": -107.0
+    },
+    {
+      "rank": 449,
+      "code": "BK1639",
+      "name": "周期股",
+      "main_net_inflow_yuan": -10819154176,
+      "main_net_inflow_100m_yuan": -108.19
+    },
+    {
+      "rank": 450,
+      "code": "BK0641",
+      "name": "智能穿戴",
+      "main_net_inflow_yuan": -11825399296,
+      "main_net_inflow_100m_yuan": -118.25
+    },
+    {
+      "rank": 451,
+      "code": "BK0574",
+      "name": "锂电池概念",
+      "main_net_inflow_yuan": -12259057664,
+      "main_net_inflow_100m_yuan": -122.59
+    },
+    {
+      "rank": 452,
+      "code": "BK0638",
+      "name": "创业成份",
+      "main_net_inflow_yuan": -12710010880,
+      "main_net_inflow_100m_yuan": -127.1
+    },
+    {
+      "rank": 453,
+      "code": "BK1646",
+      "name": "消费电子概念",
+      "main_net_inflow_yuan": -13158396672,
+      "main_net_inflow_100m_yuan": -131.58
+    },
+    {
+      "rank": 454,
+      "code": "BK1005",
+      "name": "专精特新",
+      "main_net_inflow_yuan": -13724737536,
+      "main_net_inflow_100m_yuan": -137.25
+    },
+    {
+      "rank": 455,
+      "code": "BK0701",
+      "name": "中证500",
+      "main_net_inflow_yuan": -13847486464,
+      "main_net_inflow_100m_yuan": -138.47
+    },
+    {
+      "rank": 456,
+      "code": "BK1717",
+      "name": "题材股",
+      "main_net_inflow_yuan": -13863988480,
+      "main_net_inflow_100m_yuan": -138.64
+    },
+    {
+      "rank": 457,
+      "code": "BK1128",
+      "name": "CPO概念",
+      "main_net_inflow_yuan": -13945678592,
+      "main_net_inflow_100m_yuan": -139.46
+    },
+    {
+      "rank": 458,
+      "code": "BK1660",
+      "name": "光纤概念",
+      "main_net_inflow_yuan": -14199891200,
+      "main_net_inflow_100m_yuan": -142.0
+    },
+    {
+      "rank": 459,
+      "code": "BK1137",
+      "name": "存储芯片",
+      "main_net_inflow_yuan": -14291861504,
+      "main_net_inflow_100m_yuan": -142.92
+    },
+    {
+      "rank": 460,
+      "code": "BK0536",
+      "name": "基金重仓",
+      "main_net_inflow_yuan": -14481592320,
+      "main_net_inflow_100m_yuan": -144.82
+    },
+    {
+      "rank": 461,
+      "code": "BK1715",
+      "name": "趋势股",
+      "main_net_inflow_yuan": -14656478208,
+      "main_net_inflow_100m_yuan": -146.56
+    },
+    {
+      "rank": 462,
+      "code": "BK0840",
+      "name": "OLED",
+      "main_net_inflow_yuan": -14996245248,
+      "main_net_inflow_100m_yuan": -149.96
+    },
+    {
+      "rank": 463,
+      "code": "BK0800",
+      "name": "人工智能",
+      "main_net_inflow_yuan": -15024145920,
+      "main_net_inflow_100m_yuan": -150.24
+    },
+    {
+      "rank": 464,
+      "code": "BK1648",
+      "name": "电池技术",
+      "main_net_inflow_yuan": -15393734912,
+      "main_net_inflow_100m_yuan": -153.94
+    },
+    {
+      "rank": 465,
+      "code": "BK0900",
+      "name": "新能源车",
+      "main_net_inflow_yuan": -15746764544,
+      "main_net_inflow_100m_yuan": -157.47
+    },
+    {
+      "rank": 466,
+      "code": "BK0743",
+      "name": "深证100R",
+      "main_net_inflow_yuan": -16429163520,
+      "main_net_inflow_100m_yuan": -164.29
+    },
+    {
+      "rank": 467,
+      "code": "BK0877",
+      "name": "PCB",
+      "main_net_inflow_yuan": -16556080640,
+      "main_net_inflow_100m_yuan": -165.56
+    },
+    {
+      "rank": 468,
+      "code": "BK0523",
+      "name": "新材料",
+      "main_net_inflow_yuan": -16701185280,
+      "main_net_inflow_100m_yuan": -167.01
+    },
+    {
+      "rank": 469,
+      "code": "BK1664",
+      "name": "中盘股",
+      "main_net_inflow_yuan": -16742850560,
+      "main_net_inflow_100m_yuan": -167.43
+    },
+    {
+      "rank": 470,
+      "code": "BK1136",
+      "name": "光通信模块",
+      "main_net_inflow_yuan": -17066241536,
+      "main_net_inflow_100m_yuan": -170.66
+    },
+    {
+      "rank": 471,
+      "code": "BK1665",
+      "name": "大盘成长",
+      "main_net_inflow_yuan": -17141518336,
+      "main_net_inflow_100m_yuan": -171.42
+    },
+    {
+      "rank": 472,
+      "code": "BK0554",
+      "name": "物联网",
+      "main_net_inflow_yuan": -17756054272,
+      "main_net_inflow_100m_yuan": -177.56
+    },
+    {
+      "rank": 473,
+      "code": "BK1677",
+      "name": "2025年报预增",
+      "main_net_inflow_yuan": -18178985984,
+      "main_net_inflow_100m_yuan": -181.79
+    },
+    {
+      "rank": 474,
+      "code": "BK1090",
+      "name": "机器人概念",
+      "main_net_inflow_yuan": -18763142144,
+      "main_net_inflow_100m_yuan": -187.63
+    },
+    {
+      "rank": 475,
+      "code": "BK1643",
+      "name": "小盘股",
+      "main_net_inflow_yuan": -18770274304,
+      "main_net_inflow_100m_yuan": -187.7
+    },
+    {
+      "rank": 476,
+      "code": "BK0742",
+      "name": "创业板综",
+      "main_net_inflow_yuan": -22033293312,
+      "main_net_inflow_100m_yuan": -220.33
+    },
+    {
+      "rank": 477,
+      "code": "BK0683",
+      "name": "央国企改革",
+      "main_net_inflow_yuan": -22083522560,
+      "main_net_inflow_100m_yuan": -220.84
+    },
+    {
+      "rank": 478,
+      "code": "BK0891",
+      "name": "国产芯片",
+      "main_net_inflow_yuan": -23707779072,
+      "main_net_inflow_100m_yuan": -237.08
+    },
+    {
+      "rank": 479,
+      "code": "BK1637",
+      "name": "东方财富热股",
+      "main_net_inflow_yuan": -25707257856,
+      "main_net_inflow_100m_yuan": -257.07
+    },
+    {
+      "rank": 480,
+      "code": "BK0500",
+      "name": "HS300_",
+      "main_net_inflow_yuan": -25778782208,
+      "main_net_inflow_100m_yuan": -257.79
+    },
+    {
+      "rank": 481,
+      "code": "BK1059",
+      "name": "百元股",
+      "main_net_inflow_yuan": -25795215360,
+      "main_net_inflow_100m_yuan": -257.95
+    },
+    {
+      "rank": 482,
+      "code": "BK0854",
+      "name": "华为概念",
+      "main_net_inflow_yuan": -27269468160,
+      "main_net_inflow_100m_yuan": -272.69
+    },
+    {
+      "rank": 483,
+      "code": "BK0917",
+      "name": "半导体概念",
+      "main_net_inflow_yuan": -28158197760,
+      "main_net_inflow_100m_yuan": -281.58
+    },
+    {
+      "rank": 484,
+      "code": "BK0714",
+      "name": "5G概念",
+      "main_net_inflow_yuan": -28310003712,
+      "main_net_inflow_100m_yuan": -283.1
+    },
+    {
+      "rank": 485,
+      "code": "BK0568",
+      "name": "深成500",
+      "main_net_inflow_yuan": -29062422528,
+      "main_net_inflow_100m_yuan": -290.62
+    },
+    {
+      "rank": 486,
+      "code": "BK1650",
+      "name": "通信技术",
+      "main_net_inflow_yuan": -29136736256,
+      "main_net_inflow_100m_yuan": -291.37
+    },
+    {
+      "rank": 487,
+      "code": "BK1663",
+      "name": "大盘股",
+      "main_net_inflow_yuan": -29287247872,
+      "main_net_inflow_100m_yuan": -292.87
+    },
+    {
+      "rank": 488,
+      "code": "BK0879",
+      "name": "标准普尔",
+      "main_net_inflow_yuan": -31338029056,
+      "main_net_inflow_100m_yuan": -313.38
+    },
+    {
+      "rank": 489,
+      "code": "BK0707",
+      "name": "沪股通",
+      "main_net_inflow_yuan": -31573778432,
+      "main_net_inflow_100m_yuan": -315.74
+    },
+    {
+      "rank": 490,
+      "code": "BK1713",
+      "name": "科技风格",
+      "main_net_inflow_yuan": -31804264448,
+      "main_net_inflow_100m_yuan": -318.04
+    },
+    {
+      "rank": 491,
+      "code": "BK0821",
+      "name": "MSCI中国",
+      "main_net_inflow_yuan": -37479329792,
+      "main_net_inflow_100m_yuan": -374.79
+    },
+    {
+      "rank": 492,
+      "code": "BK0804",
+      "name": "深股通",
+      "main_net_inflow_yuan": -40223154176,
+      "main_net_inflow_100m_yuan": -402.23
+    },
+    {
+      "rank": 493,
+      "code": "BK1633",
+      "name": "昨日高振幅",
+      "main_net_inflow_yuan": -43656265728,
+      "main_net_inflow_100m_yuan": -436.56
+    },
+    {
+      "rank": 494,
+      "code": "BK0867",
+      "name": "富时罗素",
+      "main_net_inflow_yuan": -48805871616,
+      "main_net_inflow_100m_yuan": -488.06
+    },
+    {
+      "rank": 495,
+      "code": "BK0596",
+      "name": "融资融券",
+      "main_net_inflow_yuan": -71474049024,
+      "main_net_inflow_100m_yuan": -714.74
     }
   ],
   "verification": {
@@ -1465,8 +5787,8 @@
     "concept_scope": "m:90+t:3",
     "industry_count": 128,
     "concept_count": 495,
-    "industry_top": "汽车零部件 68.93亿",
-    "concept_top": "机器人概念 143.74亿",
+    "industry_top": "化学制药 24.74亿",
+    "concept_top": "创新药 34.34亿",
     "classification_note": "东方财富 BK 板块/概念口径，不等同于 Wind 或申万行业口径。"
   },
   "disclaimer": "公开研究页面仅用于复盘和交易计划，不构成投资建议或收益承诺。"
