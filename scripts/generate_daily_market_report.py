@@ -58,6 +58,121 @@ CANDIDATE_UNIVERSE = [
     {"code": "002916", "symbol": "sz002916", "name": "深南电路", "theme": "AI硬件/PCB", "role": "趋势观察"},
 ]
 
+SECTOR_STOCK_FALLBACKS = {
+    "创新药": [
+        ("600276", "恒瑞医药"), ("603259", "药明康德"), ("688235", "百济神州-U"), ("688180", "君实生物-U"),
+        ("688331", "荣昌生物"), ("688062", "迈威生物-U"), ("002294", "信立泰"), ("002653", "海思科"),
+    ],
+    "化学制药": [
+        ("600276", "恒瑞医药"), ("600196", "复星医药"), ("002422", "科伦药业"), ("600079", "人福医药"),
+        ("002262", "恩华药业"), ("000963", "华东医药"), ("000513", "丽珠集团"), ("002020", "京新药业"),
+    ],
+    "阿里概念": [
+        ("600570", "恒生电子"), ("002373", "千方科技"), ("603881", "数据港"), ("002153", "石基信息"),
+        ("603918", "金桥信息"), ("600797", "浙大网新"), ("300688", "创业黑马"), ("002065", "东华软件"),
+    ],
+    "单抗概念": [
+        ("600276", "恒瑞医药"), ("688235", "百济神州-U"), ("688180", "君实生物-U"), ("688331", "荣昌生物"),
+        ("688062", "迈威生物-U"), ("688520", "神州细胞-U"), ("600196", "复星医药"), ("002294", "信立泰"),
+    ],
+    "计算机设备": [
+        ("002415", "海康威视"), ("002236", "大华股份"), ("603019", "中科曙光"), ("000977", "浪潮信息"),
+        ("000938", "紫光股份"), ("000997", "新大陆"), ("002180", "纳思达"), ("000066", "中国长城"),
+    ],
+    "减肥药": [
+        ("300255", "常山药业"), ("300199", "翰宇药业"), ("688166", "博瑞医药"), ("688076", "诺泰生物"),
+        ("603087", "甘李药业"), ("000963", "华东医药"), ("002038", "双鹭药业"), ("002653", "海思科"),
+    ],
+    "培育钻石": [
+        ("600172", "黄河旋风"), ("301071", "力量钻石"), ("000519", "中兵红箭"), ("688028", "沃尔德"),
+        ("002046", "国机精工"), ("300179", "四方达"), ("300554", "三超新材"), ("300700", "岱勒新材"),
+    ],
+    "生物制品": [
+        ("300122", "智飞生物"), ("300142", "沃森生物"), ("000661", "长春高新"), ("300601", "康泰生物"),
+        ("603392", "万泰生物"), ("688520", "神州细胞-U"), ("300009", "安科生物"), ("002007", "华兰生物"),
+    ],
+    "数字经济": [
+        ("002368", "太极股份"), ("300212", "易华录"), ("300075", "数字政通"), ("000977", "浪潮信息"),
+        ("603019", "中科曙光"), ("600536", "中国软件"), ("600588", "用友网络"), ("000997", "新大陆"),
+    ],
+    "养殖业": [
+        ("002714", "牧原股份"), ("300498", "温氏股份"), ("000876", "新希望"), ("002100", "天康生物"),
+        ("603477", "巨星农牧"), ("002567", "唐人神"), ("002299", "圣农发展"), ("002458", "益生股份"),
+    ],
+    "IPv6": [
+        ("000938", "紫光股份"), ("000063", "中兴通讯"), ("002396", "星网锐捷"), ("300353", "东土科技"),
+        ("600498", "烽火通信"), ("300017", "网宿科技"), ("002281", "光迅科技"), ("300308", "中际旭创"),
+    ],
+    "能源金属": [
+        ("002460", "赣锋锂业"), ("002466", "天齐锂业"), ("603799", "华友钴业"), ("300618", "寒锐钴业"),
+        ("002240", "盛新锂能"), ("002192", "融捷股份"), ("002756", "永兴材料"), ("300073", "当升科技"),
+    ],
+    "猪肉概念": [
+        ("002714", "牧原股份"), ("300498", "温氏股份"), ("000876", "新希望"), ("002100", "天康生物"),
+        ("603477", "巨星农牧"), ("002567", "唐人神"), ("000048", "京基智农"), ("001201", "东瑞股份"),
+    ],
+    "反内卷概念": [
+        ("601012", "隆基绿能"), ("600438", "通威股份"), ("002129", "TCL中环"), ("002459", "晶澳科技"),
+        ("300750", "宁德时代"), ("002466", "天齐锂业"), ("600585", "海螺水泥"), ("600019", "宝钢股份"),
+    ],
+    "味蕾经济": [
+        ("002507", "涪陵榨菜"), ("603288", "海天味业"), ("603027", "千禾味业"), ("603345", "安井食品"),
+        ("603517", "绝味食品"), ("002557", "洽洽食品"), ("002847", "盐津铺子"), ("002991", "甘源食品"),
+    ],
+    "病原体防治": [
+        ("002603", "以岭药业"), ("002030", "达安基因"), ("002007", "华兰生物"), ("300482", "万孚生物"),
+        ("688068", "热景生物"), ("688399", "硕世生物"), ("002317", "众生药业"), ("300204", "舒泰神"),
+    ],
+    "中药概念": [
+        ("600436", "片仔癀"), ("000538", "云南白药"), ("600085", "同仁堂"), ("002603", "以岭药业"),
+        ("600535", "天士力"), ("600566", "济川药业"), ("600422", "昆药集团"), ("000999", "华润三九"),
+    ],
+    "免疫治疗": [
+        ("688180", "君实生物-U"), ("688331", "荣昌生物"), ("688520", "神州细胞-U"), ("300122", "智飞生物"),
+        ("600196", "复星医药"), ("600276", "恒瑞医药"), ("688062", "迈威生物-U"), ("300009", "安科生物"),
+    ],
+    "互联医疗": [
+        ("300253", "卫宁健康"), ("300451", "创业慧康"), ("002777", "久远银海"), ("300078", "思创医惠"),
+        ("002065", "东华软件"), ("600588", "用友网络"), ("300168", "万达信息"), ("300096", "易联众"),
+    ],
+    "东数西算": [
+        ("603881", "数据港"), ("300738", "奥飞数据"), ("300383", "光环新网"), ("600845", "宝信软件"),
+        ("002335", "科华数据"), ("300249", "依米康"), ("603019", "中科曙光"), ("000977", "浪潮信息"),
+    ],
+    "辅助生殖": [
+        ("000710", "贝瑞基因"), ("603990", "麦迪科技"), ("000661", "长春高新"), ("300244", "迪安诊断"),
+        ("603882", "金域医学"), ("300009", "安科生物"), ("300642", "透景生命"), ("300639", "凯普生物"),
+    ],
+    "CRO": [
+        ("603259", "药明康德"), ("300759", "康龙化成"), ("300347", "泰格医药"), ("603127", "昭衍新药"),
+        ("688202", "美迪西"), ("002821", "凯莱英"), ("300363", "博腾股份"), ("300725", "药石科技"),
+    ],
+    "AI制药（医疗）": [
+        ("301230", "泓博医药"), ("688222", "成都先导"), ("300725", "药石科技"), ("688131", "皓元医药"),
+        ("688202", "美迪西"), ("300149", "睿智医药"), ("603259", "药明康德"), ("300759", "康龙化成"),
+    ],
+    "医疗服务": [
+        ("300015", "爱尔眼科"), ("600763", "通策医疗"), ("000516", "国际医学"), ("603882", "金域医学"),
+        ("300244", "迪安诊断"), ("002044", "美年健康"), ("301239", "普瑞眼科"), ("301103", "何氏眼科"),
+    ],
+    "鸡肉概念": [
+        ("002299", "圣农发展"), ("002458", "益生股份"), ("300498", "温氏股份"), ("002746", "仙坛股份"),
+        ("002234", "民和股份"), ("000876", "新希望"), ("002100", "天康生物"), ("603477", "巨星农牧"),
+    ],
+    "流感": [
+        ("002603", "以岭药业"), ("002317", "众生药业"), ("000999", "华润三九"), ("002007", "华兰生物"),
+        ("300122", "智飞生物"), ("600196", "复星医药"), ("600276", "恒瑞医药"), ("688068", "热景生物"),
+    ],
+    "独家药品": [
+        ("600436", "片仔癀"), ("000538", "云南白药"), ("600085", "同仁堂"), ("600566", "济川药业"),
+        ("600535", "天士力"), ("000999", "华润三九"), ("002603", "以岭药业"), ("600422", "昆药集团"),
+    ],
+    "重组蛋白": [
+        ("688520", "神州细胞-U"), ("688331", "荣昌生物"), ("300122", "智飞生物"), ("300142", "沃森生物"),
+        ("688062", "迈威生物-U"), ("300009", "安科生物"), ("688180", "君实生物-U"), ("002007", "华兰生物"),
+    ],
+}
+
 INDEX_UNIVERSE = [
     {"symbol": "sh000001", "name": "上证指数", "group": "A股", "provider": "tencent", "gate": True},
     {"symbol": "sz399001", "name": "深证成指", "group": "A股", "provider": "tencent", "gate": True},
@@ -751,23 +866,131 @@ def build_execution_checklist(themes, market_gate, freshness):
     return items[:6]
 
 
-def build_sector_linkage(candidate_pool):
-    sectors = {}
-    for row in candidate_pool["all"]:
-        sectors.setdefault(row["theme"], []).append(
+def stock_symbol_from_code(code):
+    if str(code).startswith("6"):
+        return f"sh{code}"
+    if str(code).startswith(("4", "8")):
+        return f"bj{code}"
+    return f"sz{code}"
+
+
+def fetch_board_constituents(board_code, limit=10):
+    if not board_code:
+        return []
+    params = urllib.parse.urlencode(
+        {
+            "pn": "1",
+            "pz": str(max(limit, 10)),
+            "po": "1",
+            "np": "1",
+            "ut": "bd1d9ddb04089700cf9c27f6f7426281",
+            "fltt": "2",
+            "invt": "2",
+            "fid": "f3",
+            "fs": f"b:{board_code} f:!50",
+            "fields": "f2,f3,f4,f5,f6,f8,f9,f10,f12,f14,f15,f16,f17,f18,f20,f21,f23,f62",
+        }
+    )
+    req = urllib.request.Request(
+        f"https://29.push2.eastmoney.com/api/qt/clist/get?{params}",
+        headers={
+            "User-Agent": "Mozilla/5.0",
+            "Referer": "https://quote.eastmoney.com/center/boardlist.html",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=2.5) as resp:
+        data = json.loads(resp.read().decode("utf-8")).get("data", {}).get("diff") or []
+    if isinstance(data, dict):
+        data = list(data.values())
+    rows = []
+    for index, row in enumerate(data[:limit], 1):
+        rows.append(
             {
-                "code": row["code"],
-                "name": row["name"],
-                "role": row["role"],
-                "level": row.get("level"),
-                "score": row.get("score"),
-                "reason": row.get("reason"),
+                "code": row.get("f12"),
+                "name": row.get("f14"),
+                "role": "成分领涨" if index <= 3 else "成分观察",
+                "level": "板块成分",
+                "score": round((row.get("f3") or 0) * 2 + (row.get("f8") or 0), 1),
+                "pct": row.get("f3"),
+                "price": row.get("f2"),
+                "turnover": row.get("f8"),
+                "amount_100m_yuan": round((row.get("f6") or 0) / 100000000, 2),
+                "reason": f"板块成分 #{index}，涨跌幅 {row.get('f3', '--')}%，换手 {row.get('f8', '--')}%。",
             }
         )
-    return [
-        {"theme": theme, "stocks": sorted(stocks, key=lambda x: x.get("score", 0), reverse=True)[:6]}
-        for theme, stocks in sorted(sectors.items(), key=lambda item: max((x.get("score", 0) for x in item[1]), default=0), reverse=True)
-    ]
+    return rows
+
+
+def fallback_stocks_for_sector(theme_name, limit=8):
+    stocks = SECTOR_STOCK_FALLBACKS.get(theme_name)
+    if not stocks:
+        for key, value in SECTOR_STOCK_FALLBACKS.items():
+            if key in theme_name or theme_name in key:
+                stocks = value
+                break
+    if not stocks:
+        if any(key in theme_name for key in ["药", "医疗", "生物", "免疫", "流感", "蛋白"]):
+            stocks = SECTOR_STOCK_FALLBACKS["创新药"]
+        elif any(key in theme_name for key in ["数字", "计算机", "数据", "AI", "IPv6"]):
+            stocks = SECTOR_STOCK_FALLBACKS["数字经济"]
+        elif any(key in theme_name for key in ["猪", "鸡", "养殖", "农业", "乡村", "农化"]):
+            stocks = SECTOR_STOCK_FALLBACKS["养殖业"]
+        elif any(key in theme_name for key in ["金属", "锂", "钴", "资源"]):
+            stocks = SECTOR_STOCK_FALLBACKS["能源金属"]
+    rows = []
+    for index, (code, name) in enumerate((stocks or [])[:limit], 1):
+        rows.append(
+            {
+                "code": code,
+                "name": name,
+                "role": "核心观察" if index <= 3 else "关联观察",
+                "level": "扩展关联",
+                "score": max(40, 82 - index * 4),
+                "pct": None,
+                "price": None,
+                "turnover": None,
+                "amount_100m_yuan": None,
+                "reason": "板块常见关联股；需用事件催化、价值锚和当日量价再筛一次。",
+            }
+        )
+    return rows
+
+
+def build_sector_linkage(themes):
+    groups = []
+    seen = set()
+    board_api_disabled = False
+    for theme in themes[:24]:
+        if theme["name"] in seen:
+            continue
+        seen.add(theme["name"])
+        stocks = []
+        data_source = "东方财富板块成分"
+        if not board_api_disabled:
+            try:
+                stocks = fetch_board_constituents(theme.get("code"), limit=10)
+            except Exception:
+                board_api_disabled = True
+        if board_api_disabled:
+            data_source = "扩展关联股库"
+            stocks = fallback_stocks_for_sector(theme["name"], limit=8)
+        if not stocks:
+            data_source = "扩展关联股库"
+            stocks = fallback_stocks_for_sector(theme["name"], limit=8)
+        groups.append(
+            {
+                "theme": theme["name"],
+                "code": theme.get("code"),
+                "source": theme.get("source"),
+                "role": theme.get("role"),
+                "phase": theme.get("phase") or theme.get("emotion_stage"),
+                "flow_score_100m_yuan": theme.get("flow_score_100m_yuan"),
+                "score": theme.get("score"),
+                "data_source": data_source,
+                "stocks": stocks[:10],
+            }
+        )
+    return groups
 
 
 def build_event_templates():
@@ -985,7 +1208,7 @@ def main():
     freshness = build_data_freshness(args.data_date, date.today().isoformat())
     top_summary = build_top_summary(sorted_themes, market_gate, freshness)
     execution_checklist = build_execution_checklist(sorted_themes, market_gate, freshness)
-    sector_linkage = build_sector_linkage(candidate_pool)
+    sector_linkage = build_sector_linkage(sorted_themes)
     event_templates = build_event_templates()
     post_review_score = build_post_review_score(sorted_themes, market_gate, candidate_pool, alerts, freshness)
 

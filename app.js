@@ -639,19 +639,32 @@ function renderSectorLinkage(linkage) {
   }
   root.innerHTML = `
     <div class="sector-tabs">
-      ${groups.map((group, index) => `<button type="button" class="${index === 0 ? "active" : ""}" data-sector-index="${index}">${htmlEscape(group.theme)}</button>`).join("")}
+      ${groups.map((group, index) => `
+        <button type="button" class="${index === 0 ? "active" : ""}" data-sector-index="${index}">
+          ${htmlEscape(group.theme)}
+          <small>${group.stocks?.length || 0}</small>
+        </button>
+      `).join("")}
     </div>
+    <div id="sectorLinkageMeta" class="sector-linkage-meta"></div>
     <div id="sectorStocks" class="sector-stocks"></div>
   `;
   const renderGroup = (index) => {
     const group = groups[index];
-    document.getElementById("sectorStocks").innerHTML = group.stocks.map((stock) => `
+    document.getElementById("sectorLinkageMeta").innerHTML = `
+      <b>${htmlEscape(group.role || group.source || "板块观察")}</b>
+      <span>${htmlEscape(group.phase || "--")} · ${yuan.format(group.flow_score_100m_yuan || 0)}亿 · ${htmlEscape(group.data_source || "板块关联")}</span>
+    `;
+    document.getElementById("sectorStocks").innerHTML = (group.stocks || []).map((stock) => `
       <article class="sector-stock">
-        <b>${htmlEscape(stock.name)} <small>${htmlEscape(stock.code)}</small></b>
-        <span>${htmlEscape(stock.role)} · ${htmlEscape(stock.level)} · ${stock.score ?? "--"}分</span>
+        <div>
+          <b>${htmlEscape(stock.name)} <small>${htmlEscape(stock.code)}</small></b>
+          <strong class="${(stock.pct || 0) >= 0 ? "stock-up" : "stock-down"}">${stock.pct !== null && stock.pct !== undefined ? `${stock.pct}%` : "--"}</strong>
+        </div>
+        <span>${htmlEscape(stock.role)} · ${htmlEscape(stock.level)} · ${stock.score ?? "--"}分${stock.turnover ? ` · 换手 ${stock.turnover}%` : ""}</span>
         <p>${htmlEscape(stock.reason || "")}</p>
       </article>
-    `).join("");
+    `).join("") || `<p class="empty-line">这个板块暂未匹配到关联股。</p>`;
   };
   root.querySelectorAll("[data-sector-index]").forEach((button) => {
     button.addEventListener("click", () => {
