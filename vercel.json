@@ -2,6 +2,9 @@
   "functions": {
     "api/stock.js": {
       "maxDuration": 20
+    },
+    "api/live.js": {
+      "maxDuration": 20
     }
   }
 }
