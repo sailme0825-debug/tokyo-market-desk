@@ -155,6 +155,94 @@ function rawSectorRows(rows, source) {
   });
 }
 
+function cyclePhaseForSector(name, flow, source) {
+  if (/贵金属|银行|电力|煤炭|公用|保险/.test(name) && flow > 0) return "修复";
+  if (flow >= 150) return "高潮";
+  if (flow >= 60) return "加速";
+  if (flow >= 20) return "发酵";
+  if (flow > 0) return "启动";
+  if (flow > -20) return "分歧";
+  return "退潮";
+}
+
+function cycleRuleForPhase(phase) {
+  const rules = {
+    启动: "只做观察和首板/中军确认，不能提前重仓。",
+    发酵: "开始筛龙头和中军，买点必须是分歧承接或放量突破。",
+    加速: "只给前排核心，后排不追，仓位不再扩张。",
+    高潮: "一致性过强，优先兑现和等待强分歧后的回封。",
+    分歧: "看核心是否抗跌和回流，不用下跌本身当买点。",
+    修复: "防守或修复阶段，只看中军承接，不按主线仓位处理。",
+    退潮: "主动降级，停止新开仓，已有仓位按失效线处理。",
+  };
+  return rules[phase] || "等待资金与价格共振。";
+}
+
+function buildEmotionDashboardFromSectors(systemThemes, industryRows, conceptRows) {
+  const order = ["启动", "发酵", "加速", "高潮", "分歧", "修复", "退潮"];
+  const allSectors = [...industryRows, ...conceptRows].map((row) => {
+    const phase = cyclePhaseForSector(row.name, row.flow_score_100m_yuan, row.source);
+    return {
+      name: row.name,
+      code: row.code,
+      source: row.source,
+      phase,
+      phase_index: order.indexOf(phase),
+      flow: row.flow_score_100m_yuan,
+      rank: row.rank,
+      rule: cycleRuleForPhase(phase),
+    };
+  });
+  const systemItems = systemThemes.map((theme) => {
+    const phase = cyclePhaseForSector(theme.name, theme.flow_score_100m_yuan, "系统");
+    return {
+      name: theme.name,
+      source: "系统主线",
+      phase,
+      phase_index: order.indexOf(phase),
+      flow: theme.flow_score_100m_yuan,
+      rule: theme.intraday_rule,
+    };
+  });
+  const phaseCounts = Object.fromEntries(order.map((phase) => [phase, 0]));
+  for (const row of allSectors) phaseCounts[row.phase] += 1;
+  const leaders = [...allSectors].sort((a, b) => b.flow - a.flow).slice(0, 10);
+  const laggards = [...allSectors].sort((a, b) => a.flow - b.flow).slice(0, 10);
+  const phaseGroups = order.map((phase) => ({
+    phase,
+    count: phaseCounts[phase],
+    rule: cycleRuleForPhase(phase),
+    sectors: allSectors.filter((row) => row.phase === phase).sort((a, b) => b.flow - a.flow),
+  }));
+  const activeCount = phaseCounts["启动"] + phaseCounts["发酵"] + phaseCounts["加速"] + phaseCounts["高潮"];
+  const riskCount = phaseCounts["分歧"] + phaseCounts["退潮"];
+  const totalCount = allSectors.length || 1;
+  const heatScore = Math.round((activeCount / totalCount) * 100);
+  let overallPhase = "分歧";
+  if (phaseCounts["高潮"] >= 8 || phaseCounts["加速"] >= 20) overallPhase = "加速";
+  else if (phaseCounts["发酵"] + phaseCounts["启动"] >= riskCount) overallPhase = "发酵";
+  else if (phaseCounts["退潮"] > activeCount) overallPhase = "退潮";
+  else if (phaseCounts["修复"] > phaseCounts["加速"]) overallPhase = "修复";
+  return {
+    order,
+    summary: {
+      overall_phase: overallPhase,
+      heat_score: heatScore,
+      total_count: allSectors.length,
+      active_count: activeCount,
+      risk_count: riskCount,
+      strongest: leaders[0] || null,
+      weakest: laggards[0] || null,
+      action: cycleRuleForPhase(overallPhase),
+    },
+    phase_counts: phaseCounts,
+    leaders,
+    laggards,
+    phase_groups: phaseGroups,
+    items: systemItems,
+  };
+}
+
 function collectTheme(theme, industry, concept) {
   const rows = [];
   for (const row of [...industry, ...concept]) {
@@ -238,6 +326,8 @@ async function buildLiveReport() {
   ]);
 
   const themes = THEMES.map((theme) => collectTheme(theme, industry, concept)).sort((a, b) => b.flow_score_100m_yuan - a.flow_score_100m_yuan);
+  const industryRows = rawSectorRows(industry, "行业");
+  const conceptRows = rawSectorRows(concept, "概念");
   const indices = indexQuotes.map((item) => ({
     name: item.name,
     price: item.quote?.price ?? null,
@@ -271,10 +361,11 @@ async function buildLiveReport() {
     gate,
     indices,
     themes,
+    emotion_dashboard: buildEmotionDashboardFromSectors(themes, industryRows, conceptRows),
     sector_rankings: {
       system: themes,
-      industry: rawSectorRows(industry, "行业"),
-      concept: rawSectorRows(concept, "概念"),
+      industry: industryRows,
+      concept: conceptRows,
     },
     candidates,
     industry_top5: industry.map(publicRow),

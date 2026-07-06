@@ -1541,7 +1541,8 @@ h1 {
 
 .cycle-axis span {
   min-height: 28px;
-  display: inline-flex;
+  display: grid;
+  gap: 2px;
   align-items: center;
   justify-content: center;
   border-radius: 7px;
@@ -1549,6 +1550,18 @@ h1 {
   color: var(--muted);
   font-size: 11px;
   font-weight: 900;
+  text-align: center;
+  padding: 5px 3px;
+}
+
+.cycle-axis b {
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.cycle-axis small {
+  color: var(--blue);
+  font-size: 12px;
 }
 
 .emotion-list article {
@@ -1576,6 +1589,154 @@ h1 {
   color: var(--blue);
   font-size: 13px;
   text-align: right;
+}
+
+.emotion-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-summary div {
+  min-height: 82px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.emotion-summary span,
+.emotion-summary small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.emotion-summary strong {
+  display: block;
+  margin: 7px 0 4px;
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.15;
+}
+
+.emotion-action {
+  margin: 0 0 8px;
+  padding: 9px 10px;
+  border: 1px solid rgba(166, 107, 18, 0.23);
+  border-radius: 8px;
+  background: var(--amber-bg);
+  color: #74490d;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 850;
+}
+
+.emotion-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-columns section,
+.emotion-system,
+.emotion-phase-groups section {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+  padding: 9px;
+}
+
+.emotion-columns h3,
+.emotion-system h3,
+.emotion-phase-groups h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.emotion-mini-list,
+.emotion-phase-groups section > div {
+  display: grid;
+  gap: 6px;
+}
+
+.emotion-mini-list article,
+.emotion-phase-groups article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 8px;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.emotion-mini-list b,
+.emotion-phase-groups b {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emotion-mini-list span,
+.emotion-phase-groups span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.emotion-mini-list strong,
+.emotion-phase-groups article strong {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.emotion-weak {
+  border-color: rgba(194, 65, 50, 0.2) !important;
+  background: #fffafa !important;
+}
+
+.emotion-phase-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.emotion-phase-groups h3 {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.emotion-phase-groups h3 small {
+  color: var(--blue);
+  font-size: 12px;
+}
+
+.emotion-phase-groups p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 750;
+}
+
+.emotion-phase-groups section > div {
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 2px;
 }
 
 .bar-list {
@@ -1687,6 +1848,9 @@ h1 {
   .rulebook-grid,
   .stock-plan-grid,
   .judgment-grid,
+  .emotion-summary,
+  .emotion-columns,
+  .emotion-phase-groups,
   .verify-grid,
   .compliance-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1716,6 +1880,9 @@ h1 {
   .gate-metrics,
   .journal-stats,
   .cycle-axis,
+  .emotion-summary,
+  .emotion-columns,
+  .emotion-phase-groups,
   .stock-metrics,
   .live-mini-grid,
   .stock-plan-grid,

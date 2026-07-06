@@ -227,6 +227,7 @@ function renderLiveDecision(payload) {
   document.getElementById("liveAction").textContent = payload.gate.action;
   document.getElementById("liveUpdatedAt").textContent = `更新 ${payload.generated_at} · ${payload.refresh_seconds}s 口径`;
   syncTopSummaryWithLive(payload);
+  if (payload.emotion_dashboard) renderEmotionDashboard(payload.emotion_dashboard);
 
   document.getElementById("liveIndices").innerHTML = `
     <h3>指数门</h3>
@@ -679,8 +680,81 @@ function renderCandidate(row) {
 }
 
 function renderEmotionDashboard(dashboard) {
+  if (!dashboard) {
+    document.getElementById("emotionDashboard").innerHTML = `<p class="empty-line">暂无情绪周期数据。</p>`;
+    return;
+  }
+  if (!dashboard.summary) {
+    renderLegacyEmotionDashboard(dashboard);
+    return;
+  }
+  const summary = dashboard.summary;
   document.getElementById("emotionDashboard").innerHTML = `
-    <div class="cycle-axis">${dashboard.order.map((phase) => `<span>${phase}</span>`).join("")}</div>
+    <div class="emotion-summary">
+      <div>
+        <span>全市场阶段</span>
+        <strong>${htmlEscape(summary.overall_phase)}</strong>
+        <small>热度 ${summary.heat_score} · 活跃 ${summary.active_count}/${summary.total_count}</small>
+      </div>
+      <div>
+        <span>最强板块</span>
+        <strong>${htmlEscape(summary.strongest?.name || "--")}</strong>
+        <small>${summary.strongest ? `${htmlEscape(summary.strongest.source)} · ${yuan.format(summary.strongest.flow)}亿` : "--"}</small>
+      </div>
+      <div>
+        <span>最大退潮</span>
+        <strong>${htmlEscape(summary.weakest?.name || "--")}</strong>
+        <small>${summary.weakest ? `${htmlEscape(summary.weakest.source)} · ${yuan.format(summary.weakest.flow)}亿` : "--"}</small>
+      </div>
+    </div>
+    <p class="emotion-action">${htmlEscape(summary.action)}</p>
+    <div class="cycle-axis">
+      ${dashboard.order.map((phase) => `
+        <span>
+          <b>${phase}</b>
+          <small>${dashboard.phase_counts?.[phase] ?? 0}</small>
+        </span>
+      `).join("")}
+    </div>
+    <div class="emotion-columns">
+      <section>
+        <h3>强势榜</h3>
+        <div class="emotion-mini-list">${(dashboard.leaders || []).slice(0, 8).map(renderEmotionSector).join("")}</div>
+      </section>
+      <section>
+        <h3>退潮榜</h3>
+        <div class="emotion-mini-list">${(dashboard.laggards || []).slice(0, 8).map(renderEmotionSector).join("")}</div>
+      </section>
+    </div>
+    <div class="emotion-system">
+      <h3>系统主线定位</h3>
+      <div class="emotion-list">
+        ${(dashboard.items || []).map((item) => `
+          <article>
+            <div>
+              <b>${htmlEscape(item.name)}</b>
+              <span>${htmlEscape(item.rule)}</span>
+            </div>
+            <strong>${htmlEscape(item.phase)}</strong>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+    <div class="emotion-phase-groups">
+      ${(dashboard.phase_groups || []).map((group) => `
+        <section>
+          <h3>${htmlEscape(group.phase)} <small>${group.count}</small></h3>
+          <p>${htmlEscape(group.rule)}</p>
+          <div>${(group.sectors || []).slice(0, 18).map(renderEmotionSector).join("") || `<em>暂无</em>`}</div>
+        </section>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderLegacyEmotionDashboard(dashboard) {
+  document.getElementById("emotionDashboard").innerHTML = `
+    <div class="cycle-axis">${dashboard.order.map((phase) => `<span><b>${phase}</b><small>--</small></span>`).join("")}</div>
     <div class="emotion-list">
       ${dashboard.items.map((item) => `
         <article>
@@ -692,6 +766,17 @@ function renderEmotionDashboard(dashboard) {
         </article>
       `).join("")}
     </div>
+  `;
+}
+
+function renderEmotionSector(item) {
+  const flow = item.flow ?? 0;
+  return `
+    <article class="${flow < 0 ? "emotion-weak" : ""}">
+      <b>${item.rank ? `#${item.rank} ` : ""}${htmlEscape(item.name)}</b>
+      <span>${htmlEscape(item.source || "")} · ${htmlEscape(item.phase || "")}</span>
+      <strong class="${flow < 0 ? "stock-down" : "stock-up"}">${yuan.format(flow)}亿</strong>
+    </article>
   `;
 }
 

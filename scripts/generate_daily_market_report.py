@@ -429,33 +429,117 @@ def build_candidate_pool():
     }
 
 
-def build_emotion_dashboard(themes):
+def cycle_phase_for_sector(name, flow, source=""):
+    if any(key in name for key in ["贵金属", "银行", "电力", "煤炭", "公用", "保险"]) and flow > 0:
+        return "修复"
+    if flow >= 150:
+        return "高潮"
+    if flow >= 60:
+        return "加速"
+    if flow >= 20:
+        return "发酵"
+    if flow > 0:
+        return "启动"
+    if flow > -20:
+        return "分歧"
+    return "退潮"
+
+
+def cycle_rule_for_phase(phase):
+    rules = {
+        "启动": "只做观察和首板/中军确认，不能提前重仓。",
+        "发酵": "开始筛龙头和中军，买点必须是分歧承接或放量突破。",
+        "加速": "只给前排核心，后排不追，仓位不再扩张。",
+        "高潮": "一致性过强，优先兑现和等待强分歧后的回封。",
+        "分歧": "看核心是否抗跌和回流，不用下跌本身当买点。",
+        "修复": "防守或修复阶段，只看中军承接，不按主线仓位处理。",
+        "退潮": "主动降级，停止新开仓，已有仓位按失效线处理。",
+    }
+    return rules.get(phase, "等待资金与价格共振。")
+
+
+def sector_cycle_rows(rows, source):
+    result = []
+    order = ["启动", "发酵", "加速", "高潮", "分歧", "修复", "退潮"]
+    for index, row in enumerate(rows, 1):
+        flow = yi(row["f62"])
+        phase = cycle_phase_for_sector(row["f14"], flow, source)
+        result.append(
+            {
+                "name": row["f14"],
+                "code": row["f12"],
+                "source": source,
+                "phase": phase,
+                "phase_index": order.index(phase),
+                "flow": flow,
+                "rank": index,
+                "rule": cycle_rule_for_phase(phase),
+            }
+        )
+    return result
+
+
+def build_emotion_dashboard(themes, industry=None, concept=None):
     order = ["启动", "发酵", "加速", "高潮", "分歧", "修复", "退潮"]
     cards = []
     for theme in themes:
-        stage = theme["emotion_stage"]
-        if "高潮" in stage:
-            phase = "分歧"
-        elif "加速" in stage:
-            phase = "加速"
-        elif "轮动" in stage:
-            phase = "发酵"
-        elif "防守" in stage:
-            phase = "修复"
-        elif "退潮" in stage:
-            phase = "退潮"
-        else:
-            phase = "发酵"
+        phase = cycle_phase_for_sector(theme["name"], theme["flow_score_100m_yuan"], "系统")
         cards.append(
             {
                 "name": theme["name"],
+                "source": "系统主线",
                 "phase": phase,
                 "phase_index": order.index(phase),
                 "flow": theme["flow_score_100m_yuan"],
                 "rule": theme["trade_plan"]["bias"],
             }
         )
-    return {"order": order, "items": cards}
+    sector_rows = sector_cycle_rows(industry or [], "行业") + sector_cycle_rows(concept or [], "概念")
+    phase_counts = {phase: 0 for phase in order}
+    for row in sector_rows:
+        phase_counts[row["phase"]] += 1
+    leaders = sorted(sector_rows, key=lambda row: row["flow"], reverse=True)[:10]
+    laggards = sorted(sector_rows, key=lambda row: row["flow"])[:10]
+    phase_groups = [
+        {
+            "phase": phase,
+            "count": phase_counts[phase],
+            "rule": cycle_rule_for_phase(phase),
+            "sectors": sorted([row for row in sector_rows if row["phase"] == phase], key=lambda row: row["flow"], reverse=True),
+        }
+        for phase in order
+    ]
+    active_count = phase_counts["启动"] + phase_counts["发酵"] + phase_counts["加速"] + phase_counts["高潮"]
+    risk_count = phase_counts["分歧"] + phase_counts["退潮"]
+    total_count = len(sector_rows) or 1
+    heat_score = round((active_count / total_count) * 100)
+    overall_phase = "分歧"
+    if phase_counts["高潮"] >= 8 or phase_counts["加速"] >= 20:
+        overall_phase = "加速"
+    elif phase_counts["发酵"] + phase_counts["启动"] >= risk_count:
+        overall_phase = "发酵"
+    elif phase_counts["退潮"] > active_count:
+        overall_phase = "退潮"
+    elif phase_counts["修复"] > phase_counts["加速"]:
+        overall_phase = "修复"
+    return {
+        "order": order,
+        "summary": {
+            "overall_phase": overall_phase,
+            "heat_score": heat_score,
+            "total_count": len(sector_rows),
+            "active_count": active_count,
+            "risk_count": risk_count,
+            "strongest": leaders[0] if leaders else None,
+            "weakest": laggards[0] if laggards else None,
+            "action": cycle_rule_for_phase(overall_phase),
+        },
+        "phase_counts": phase_counts,
+        "leaders": leaders,
+        "laggards": laggards,
+        "phase_groups": phase_groups,
+        "items": cards,
+    }
 
 
 def build_alerts(themes, market_gate, candidate_pool):
@@ -697,7 +781,7 @@ def main():
     sorted_themes = sorted(theme_reports, key=lambda x: x["flow_score_100m_yuan"], reverse=True)
     market_gate = build_market_gate(industry, concept)
     candidate_pool = build_candidate_pool()
-    emotion_dashboard = build_emotion_dashboard(sorted_themes)
+    emotion_dashboard = build_emotion_dashboard(sorted_themes, industry, concept)
     alerts = build_alerts(sorted_themes, market_gate, candidate_pool)
     freshness = build_data_freshness(args.data_date, date.today().isoformat())
     top_summary = build_top_summary(sorted_themes, market_gate, freshness)
