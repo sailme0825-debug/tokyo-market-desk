@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tokyo A股情绪周期判断台</title>
+    <title>Tokyo 事件驱动价值投机台</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
@@ -11,7 +11,7 @@
       <section class="topbar" aria-label="概览">
         <div>
           <p class="kicker">Tokyo Market Desk</p>
-          <h1>A股情绪周期判断台</h1>
+          <h1>事件驱动价值投机台</h1>
         </div>
         <div class="status-strip">
           <span id="judgeDate">判断日 --</span>
@@ -21,6 +21,19 @@
       </section>
 
       <section id="freshnessBanner" class="freshness-banner" hidden></section>
+
+      <section class="personal-mode-panel" aria-label="个人交易模式">
+        <div class="mode-identity">
+          <span>个人模式</span>
+          <strong id="modeTitle">事件驱动的价值投机</strong>
+          <p id="modeDefinition">先找事件催化，再找价值锚，最后用情绪周期和价格结构选择交易窗口。</p>
+        </div>
+        <div id="modePillars" class="mode-pillars"></div>
+        <div class="mode-command">
+          <b>Tokyo 执行口径</b>
+          <span id="modeCommand">不把热度当理由，不把便宜当买点；只做可验证、可证伪、可退出的机会。</span>
+        </div>
+      </section>
 
       <section class="one-screen-panel" aria-label="一屏结论">
         <div class="decision-grid">
@@ -105,7 +118,7 @@
       <section class="stock-search-panel" aria-label="个股检索判断">
         <div class="section-title">
           <span>个股检索</span>
-          <strong>她模型 + v5/v6 直接判断</strong>
+          <strong>事件驱动价值投机 + 她模型 + v5/v6</strong>
         </div>
         <div class="stock-search-bar">
           <label for="stockQuery">股票代码或名称</label>
@@ -115,7 +128,7 @@
           </div>
         </div>
         <div id="stockResult" class="stock-result empty-state">
-          输入 A 股代码或名称，系统会先检索行情，再按你的两套规则给出研究判断、买卖点、失效条件和仓位约束。
+          输入 A 股代码或名称，系统会先检索行情，再按“事件催化、价值锚、价格结构、情绪周期”四层框架给出判断。
         </div>
       </section>
 
@@ -181,7 +194,7 @@
       <section class="panel rulebook-panel" aria-label="交易系统规则">
         <div class="panel-head">
           <span>交易系统规则</span>
-          <strong>她模型 + v5/v6</strong>
+          <strong>事件驱动价值投机 + 她模型 + v5/v6</strong>
         </div>
         <div id="systemRules" class="rulebook-grid"></div>
       </section>
@@ -220,9 +233,9 @@
           <strong>研究工具，不是荐股</strong>
         </div>
         <div class="compliance-grid">
-          <div><b>表达方式</b><span>使用“条件买点、退出条件、观察池”，避免公开页面写成无条件买入/卖出指令。</span></div>
+          <div><b>表达方式</b><span>使用“事件假设、价值锚、条件买点、退出条件”，避免公开页面写成无条件买入/卖出指令。</span></div>
           <div><b>责任边界</b><span>所有结论必须保留数据口径、失效条件、仓位约束和风险提示。</span></div>
-          <div><b>系统定位</b><span>这是个人交易复盘与决策辅助工具，不构成投资建议或收益承诺。</span></div>
+          <div><b>系统定位</b><span>这是个人事件驱动价值投机复盘与决策辅助工具，不构成投资建议或收益承诺。</span></div>
         </div>
       </section>
 

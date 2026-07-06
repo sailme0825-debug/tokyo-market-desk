@@ -107,6 +107,86 @@ h1 {
   font-weight: 850;
 }
 
+.personal-mode-panel {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1fr) minmax(240px, 0.45fr);
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.mode-identity,
+.mode-command,
+.mode-pillars article,
+.mode-audit-card,
+.mode-audit-grid article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.mode-identity,
+.mode-command {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 12px;
+}
+
+.mode-identity span,
+.mode-command b,
+.mode-audit-card span {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.mode-identity strong {
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.mode-identity p,
+.mode-command span {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 750;
+}
+
+.mode-pillars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mode-pillars article {
+  min-height: 84px;
+  padding: 10px;
+}
+
+.mode-pillars b {
+  display: block;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.mode-pillars span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 720;
+}
+
 .one-screen-panel {
   margin-top: 12px;
   border: 1px solid var(--line);
@@ -534,7 +614,7 @@ h1 {
 }
 
 .stock-metrics {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   margin-top: 8px;
 }
 
@@ -865,6 +945,67 @@ h1 {
   margin-top: 6px;
   font-size: 13px;
   font-weight: 900;
+}
+
+.mode-audit-card {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px;
+}
+
+.mode-audit-card > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mode-audit-card strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.mode-audit-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.mode-audit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mode-audit-grid article {
+  display: grid;
+  gap: 4px;
+  padding: 9px;
+  background: #ffffff;
+}
+
+.mode-audit-grid b,
+.mode-audit-grid span,
+.mode-audit-grid small {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.mode-audit-grid b {
+  color: var(--ink);
+}
+
+.mode-audit-grid span {
+  color: var(--blue);
+  font-weight: 950;
+}
+
+.mode-audit-grid small {
+  color: var(--muted);
+  font-weight: 700;
 }
 
 .stock-up {
@@ -1979,6 +2120,10 @@ h1 {
 }
 
 @media (max-width: 1180px) {
+  .personal-mode-panel {
+    grid-template-columns: 1fr;
+  }
+
   .pulse-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1989,6 +2134,7 @@ h1 {
   }
 
   .watch-grid,
+  .mode-audit-grid,
   .stock-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2000,6 +2146,7 @@ h1 {
   .summary-grid,
   .dashboard-grid,
   .live-grid,
+  .mode-pillars,
   .layout {
     grid-template-columns: 1fr;
   }
@@ -2053,6 +2200,7 @@ h1 {
   .emotion-explorer-head,
   .emotion-explorer-list,
   .stock-metrics,
+  .mode-audit-grid,
   .live-mini-grid,
   .stock-plan-grid,
   .stock-detail-page,

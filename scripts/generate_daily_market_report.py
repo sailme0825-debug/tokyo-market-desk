@@ -248,10 +248,16 @@ def dynamic_mainline_rows(industry, concept):
                 "intraday_rule": f"{role}：{cycle_rule_for_phase(phase)}",
                 "trade_plan": {
                     "bias": f"{role}，{phase}",
-                    "analysis": cycle_rule_for_phase(phase),
-                    "buy_points": [cycle_rule_for_phase(phase)],
-                    "sell_points": ["跌回资金榜后排、板块转退潮、核心股承接失败。"],
-                    "invalidation": "资金转负或核心中军无法承接。",
+                    "analysis": f"{cycle_rule_for_phase(phase)} 先确认板块背后的事件催化和价值锚，再决定是否进入投机窗口。",
+                    "buy_points": [
+                        "事件催化有时间表或验证点，价值锚能解释空间，板块资金继续回流。",
+                        "核心股/中军分歧承接、平台突破或回踩不破，不能只因板块热度买入。",
+                    ],
+                    "sell_points": [
+                        "事件落地不超预期、价值锚被证伪，或板块转退潮。",
+                        "跌回资金榜后排、核心中军承接失败、价格跌破买入依据。",
+                    ],
+                    "invalidation": "资金转负、事件预期落空、价值锚无法验证，或核心中军无法承接。",
                     "position": "按阶段降级，不超过系统仓位上限。",
                 },
                 "watch_points": [{"code": row["f12"], "name": row["f14"], "flow": flow}],
@@ -661,7 +667,7 @@ def build_top_summary(themes, market_gate, freshness):
         "market_gate": market_gate["status"],
         "mainline": main_theme,
         "action": action,
-        "taboo": "不追一致高开；不买后排情绪；不在市场门收紧时加仓。",
+        "taboo": "不追一致高开；不买后排情绪；不做无事件催化、无价值锚、无退出线的交易。",
         "freshness": freshness["status"],
     }
 
@@ -673,7 +679,7 @@ def build_execution_checklist(themes, market_gate, freshness):
     items.append({"title": "市场门", "body": market_gate["advice"]})
     for theme in themes[:4]:
         items.append({"title": theme["name"], "body": theme["trade_plan"]["bias"] + "；" + theme["expectation"]})
-    items.append({"title": "禁忌", "body": "不开盘追一致，不买后排，不用情绪替代系统。"})
+    items.append({"title": "禁忌", "body": "不开盘追一致，不买后排，不用情绪替代事件催化和价值锚。"})
     return items[:6]
 
 
@@ -699,9 +705,16 @@ def build_sector_linkage(candidate_pool):
 def build_event_templates():
     return [
         {
+            "name": "事件驱动价值投机总纲",
+            "watch": "事件是什么、何时验证、谁真正受益、市场是否已有一致预期。",
+            "buy_expectation": "事件未充分定价，价值锚能解释空间，资金开始回流且价格结构确认。",
+            "sell_news_risk": "事件落地不超预期、预期差消失、放量滞涨或核心股降级。",
+            "system_rule": "先事件，后价值，再投机；没有证伪点的机会不进入核心候选。"
+        },
+        {
             "name": "机器人/Tesla 催化",
             "watch": "发布会、订单、量产节点、供应链确认。",
-            "buy_expectation": "只在板块未高潮、核心零部件放量转强时看预期。",
+            "buy_expectation": "只在事件有时间表、供应链受益路径清晰、板块未高潮且核心零部件放量转强时看预期。",
             "sell_news_risk": "若事件前已连续加速，发布当天更偏兑现风险。",
             "system_rule": "先确认龙头/中军地位，再决定是否进入核心候选。"
         },
@@ -710,7 +723,7 @@ def build_event_templates():
             "watch": "利润增速、订单能见度、毛利率、是否超一致预期。",
             "buy_expectation": "预告前趋势温和、估值未透支、板块资金回流时才可计划。",
             "sell_news_risk": "业绩落地但股价放量滞涨，按买预期卖事实处理。",
-            "system_rule": "逻辑兑现不等于继续买，先看增量信息。"
+            "system_rule": "逻辑兑现不等于继续买，先看增量信息和估值锚是否被抬升。"
         },
         {
             "name": "政策会议/产业政策",
@@ -775,13 +788,47 @@ def build_post_review_score(themes, market_gate, candidate_pool, alerts, freshne
     return {"total": total, "conclusion": conclusion, "dimensions": dimensions}
 
 
+PERSONAL_MODE = {
+    "title": "事件驱动的价值投机",
+    "definition": "先找事件催化，再找价值锚，最后用情绪周期和价格结构选择交易窗口。",
+    "command": "不把热度当理由，不把便宜当买点；只做可验证、可证伪、可退出的机会。",
+    "pillars": [
+        {
+            "name": "事件催化",
+            "rule": "政策、订单、业绩、产品、涨价、并购重组必须有时间表和验证点。",
+        },
+        {
+            "name": "价值锚",
+            "rule": "估值、业绩弹性、产业地位或供需变化要能解释空间，不做纯情绪漂移。",
+        },
+        {
+            "name": "投机窗口",
+            "rule": "只在资金回流、主线扩散、分歧承接或放量突破时交易。",
+        },
+        {
+            "name": "退出纪律",
+            "rule": "事件落地不超预期、价值锚证伪、价格破位或情绪退潮，必须降级或退出。",
+        },
+    ],
+}
+
+
 SYSTEM_RULES = [
+    {
+        "title": "个人模式",
+        "tag": "事件驱动价值投机",
+        "items": [
+            "先问事件是什么、何时验证、谁真正受益，再看价格和情绪。",
+            "价值锚不是便宜，而是业绩弹性、产业地位、供需变化或估值重估空间。",
+            "投机只发生在窗口期：事件预期升温、资金回流、价格结构确认。",
+        ],
+    },
     {
         "title": "数据先验",
         "tag": "必须核验",
         "items": [
             "先确认东方财富 BK 口径和交易日期，再进入判断。",
-            "板块资金、个股地位、价格结构必须互相印证。",
+            "事件催化、价值锚、板块资金、个股地位、价格结构必须互相印证。",
             "数据不完整时，允许今日无核心候选。",
         ],
     },
@@ -798,7 +845,7 @@ SYSTEM_RULES = [
         "title": "买点规则",
         "tag": "只买确认",
         "items": [
-            "只买有效平台突破、上升趋势、放量确认。",
+            "只买有事件预期差或价值重估空间的有效平台突破、上升趋势、放量确认。",
             "情绪高潮后不追一致，优先等分歧后的回封或承接。",
             "大盘市场门未打开时，不因为个股热闹而加大风险。",
         ],
@@ -826,6 +873,7 @@ SYSTEM_RULES = [
         "tag": "纪律红线",
         "items": [
             "不追情绪高点，不抄下跌趋势的便宜。",
+            "不做没有事件催化的纯图形，也不做没有价格确认的纯价值幻想。",
             "不无限补仓，不在止损后用幻想替代规则。",
             "兴奋、恐惧、报复、想赚回来时，不开新仓。",
         ],
@@ -878,18 +926,19 @@ def main():
         "source_data_date": args.data_date,
         "judge_date": args.judge_date,
         "data_freshness": freshness,
+        "personal_mode": PERSONAL_MODE,
         "top_summary": top_summary,
         "execution_checklist": execution_checklist,
         "sector_linkage": sector_linkage,
         "event_templates": event_templates,
         "post_review_score": post_review_score,
         "market_view": {
-            "summary": "主线资金集中在机器人、汽车链和新能源车；半导体/芯片链大幅流出。下一交易日优先观察主线分歧后的承接，而不是追一致高潮。",
-            "cycle_position": "机器人高潮后分歧，汽车链承接，低空/军工轮动，贵金属防守，半导体弱修复观察。",
-            "buy_point_rule": "只买分歧后的确认：前排回封、分时均线承接、放量突破、板块资金共振。不开盘追一致，不买后排情绪。",
+            "summary": "按事件驱动价值投机框架，先筛有事件催化和价值锚的方向，再用板块资金和价格结构确认投机窗口；没有事件验证点的热度只作观察。",
+            "cycle_position": "事件预期升温时看主线扩散，情绪高潮时等分歧承接，事件落地不超预期时按兑现风险处理。",
+            "buy_point_rule": "只买四重确认：事件催化有验证点、价值锚能解释空间、板块资金回流、核心股价格结构确认。不开盘追一致，不买后排情绪。",
         },
         "systems": {
-            "research_system": "她模型/stock_research_lab：观察 -> 信号 -> 评估；核心候选最多 1-3 个，允许今日无核心候选。",
+            "research_system": "个人模式：事件驱动的价值投机；她模型负责观察 -> 信号 -> 评估，核心候选最多 1-3 个。",
             "risk_system": "v5/v6：市场门、相关性、单票不超过 30%、最多 3 批、价格止损/逻辑止损、避免冲动 T。",
             "rules": SYSTEM_RULES,
         },
@@ -904,7 +953,7 @@ def main():
         "industry_all": [row_to_public(row, i) for i, row in enumerate(industry, 1)],
         "concept_all": [row_to_public(row, i) for i, row in enumerate(concept, 1)],
         "verification": make_verification(industry, concept),
-        "disclaimer": "公开研究页面仅用于复盘和交易计划，不构成投资建议或收益承诺。",
+        "disclaimer": "公开研究页面仅用于个人事件驱动价值投机复盘和交易计划，不构成投资建议或收益承诺。",
     }
 
     SITE_DATA.mkdir(parents=True, exist_ok=True)

@@ -194,6 +194,9 @@ function judgeSystems(stock, quote, tech) {
   const hasVolume = (tech.volume_ratio_5d || 0) >= 1.25;
   const isExtended = (tech.range_position_20d || 0) >= 92 || (tech.pct_from_ma20 || 0) >= 18;
   const isWeak = tech.trend_score <= 1;
+  const hasValueAnchor = Boolean((quote.pe && quote.pe > 0 && quote.pe < 60) || (quote.market_cap_100m && quote.market_cap_100m >= 80));
+  const hasEventProxy = sectorMatches.length > 0;
+  const speculationWindow = isStrongTrend && hasVolume && !isExtended;
 
   let researchLevel = "观察池";
   let role = "等待确认";
@@ -201,10 +204,10 @@ function judgeSystems(stock, quote, tech) {
   if (isBreakout && hasVolume && isStrongTrend) {
     researchLevel = "核心候选";
     role = "趋势核心/中军候选";
-    researchSignal = "价格突破、均线多头、成交放大，满足她模型的信号层条件。";
+    researchSignal = "价格突破、均线多头、成交放大，满足她模型的信号层条件；还需核对事件催化是否真实。";
   } else if (isStrongTrend) {
     role = "趋势观察";
-    researchSignal = "趋势结构尚可，但还需要板块资金或突破确认。";
+    researchSignal = "趋势结构尚可，但还需要事件催化、板块资金或突破确认。";
   } else if (isWeak) {
     researchLevel = "不进入核心";
     role = "弱势/修复观察";
@@ -212,13 +215,13 @@ function judgeSystems(stock, quote, tech) {
   }
 
   let actionBias = "等待确认";
-  let buyZone = "等待放量突破平台、重新站上关键均线，或板块资金共振。";
+  let buyZone = "等待事件催化明确、放量突破平台、重新站上关键均线，或板块资金共振。";
   if (researchLevel === "核心候选" && !isExtended) {
     actionBias = "可计划，不追高";
-    buyZone = "回踩分时均线/5日线不破，或突破后换手回封。";
+    buyZone = "事件逻辑未证伪时，回踩分时均线/5日线不破，或突破后换手回封。";
   } else if (researchLevel === "核心候选" && isExtended) {
     actionBias = "强但偏高潮";
-    buyZone = "只等强分歧后的承接，不做一致高开追价。";
+    buyZone = "只等强分歧后的承接，并重新核对事件预期是否仍有增量。";
   } else if (researchLevel !== "观察池") {
     actionBias = "不主动买";
     buyZone = "除非重新修复趋势和资金，否则不纳入买点。";
@@ -230,6 +233,9 @@ function judgeSystems(stock, quote, tech) {
     "板块角色从核心降级为跟风，或原始逻辑被证伪。",
   ];
   const invalidation = isWeak ? "当前已经不满足趋势核心条件，需先修复再评估。" : "价格跌回 20 日平台下方、成交放大但不涨、或所属主线资金退潮。";
+  const modeSummary = hasEventProxy
+    ? "已识别到产业/题材线索，但仍需人工核对具体事件、时间表、受益路径和预期差。"
+    : "暂未自动识别明确事件线索，只能先按观察池处理，不能仅凭走势进入主仓。";
 
   let maxPosition = "试错仓 5%-10%";
   if (researchLevel === "核心候选" && !isExtended) {
@@ -270,6 +276,32 @@ function judgeSystems(stock, quote, tech) {
       ],
       next_actions: [buyZone, "若买点未出现，保持观察池，不预判成交。", "若市场门收紧，同等级个股自动降一级处理。"],
       do_not_do: ["不因单日大涨直接追高。", "不把观察池当核心仓。", "不在失效后用补仓替代止损。"],
+    },
+    event_value_speculation: {
+      label: "事件驱动价值投机",
+      summary: modeSummary,
+      checks: [
+        {
+          name: "事件催化",
+          status: hasEventProxy ? "待核实" : "不足",
+          note: hasEventProxy ? `自动匹配：${theme}` : "未识别政策、订单、业绩、产品或涨价线索。",
+        },
+        {
+          name: "价值锚",
+          status: hasValueAnchor ? "可评估" : "需补充",
+          note: `PE ${quote.pe ?? "--"}，总市值 ${quote.market_cap_100m ?? "--"} 亿；价值锚必须来自业绩弹性或产业地位。`,
+        },
+        {
+          name: "投机窗口",
+          status: speculationWindow ? "打开" : isExtended ? "偏晚" : "等待",
+          note: speculationWindow ? "趋势、量能、位置较适合计划交易。" : "还需要量价确认或等待分歧承接。",
+        },
+        {
+          name: "退出证伪",
+          status: "必须预设",
+          note: "事件落地不超预期、价值锚证伪、跌回平台或板块退潮即降级。",
+        },
+      ],
     },
     research_system: {
       level: researchLevel,

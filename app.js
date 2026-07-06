@@ -29,12 +29,44 @@ function flowClass(score) {
   return "flow-neutral";
 }
 
+const DEFAULT_PERSONAL_MODE = {
+  title: "事件驱动的价值投机",
+  definition: "先找事件催化，再找价值锚，最后用情绪周期和价格结构选择交易窗口。",
+  command: "不把热度当理由，不把便宜当买点；只做可验证、可证伪、可退出的机会。",
+  pillars: [
+    { name: "事件催化", rule: "政策、订单、业绩、产品、涨价、并购重组必须有时间表和验证点。" },
+    { name: "价值锚", rule: "估值、业绩弹性、产业地位或供需变化要能解释空间，不做纯情绪漂移。" },
+    { name: "投机窗口", rule: "只在资金回流、主线扩散、分歧承接或放量突破时交易。" },
+    { name: "退出纪律", rule: "事件落地不超预期、价值锚证伪、价格破位或情绪退潮，必须降级或退出。" },
+  ],
+};
+
+function getPersonalMode(report) {
+  return { ...DEFAULT_PERSONAL_MODE, ...(report.personal_mode || {}) };
+}
+
+function renderPersonalMode(mode) {
+  text("modeTitle", mode.title || DEFAULT_PERSONAL_MODE.title);
+  text("modeDefinition", mode.definition || DEFAULT_PERSONAL_MODE.definition);
+  text("modeCommand", mode.command || DEFAULT_PERSONAL_MODE.command);
+  const pillars = mode.pillars?.length ? mode.pillars : DEFAULT_PERSONAL_MODE.pillars;
+  document.getElementById("modePillars").innerHTML = pillars
+    .map((item) => `
+      <article>
+        <b>${htmlEscape(item.name)}</b>
+        <span>${htmlEscape(item.rule)}</span>
+      </article>
+    `)
+    .join("");
+}
+
 function renderStockResult(report) {
   const quote = report.quote;
   const tech = report.technical;
   const judgment = report.judgment;
   const research = judgment.research_system;
   const risk = judgment.risk_system;
+  const mode = judgment.event_value_speculation || {};
   const grade = judgment.grade || { level: "--", label: "未分级", summary: "等待系统判断。" };
   const pctClass = (quote.pct || 0) >= 0 ? "stock-up" : "stock-down";
   document.getElementById("stockResult").className = "stock-result";
@@ -66,6 +98,25 @@ function renderStockResult(report) {
       ${metric("趋势分", `${tech.trend_score}/4`)}
       ${metric("MA20偏离", tech.pct_from_ma20 !== null ? `${tech.pct_from_ma20}%` : "--")}
       ${metric("20日突破", tech.breakout_20d ? "是" : "否")}
+      ${metric("PE", quote.pe ?? "--")}
+      ${metric("总市值", quote.market_cap_100m ? `${yuan.format(quote.market_cap_100m)} 亿` : "--")}
+    </div>
+
+    <div class="mode-audit-card">
+      <div>
+        <span>个人模式审计</span>
+        <strong>${htmlEscape(mode.label || "事件驱动价值投机")}</strong>
+      </div>
+      <p>${htmlEscape(mode.summary || "先确认事件催化和价值锚，再用价格结构决定是否进入交易窗口。")}</p>
+      <div class="mode-audit-grid">
+        ${(mode.checks || []).map((item) => `
+          <article>
+            <b>${htmlEscape(item.name)}</b>
+            <span>${htmlEscape(item.status)}</span>
+            <small>${htmlEscape(item.note)}</small>
+          </article>
+        `).join("")}
+      </div>
     </div>
 
     <div class="judgment-grid">
@@ -93,7 +144,7 @@ function renderStockResult(report) {
     <div class="stock-plan-grid">
       <section class="trade-box buy-box">
         <h3><span>买</span> 只在这些条件下考虑</h3>
-        <ul><li>${htmlEscape(risk.buy_zone)}</li><li>必须叠加板块资金、价格结构、个股地位三者共振。</li><li>不在一致高潮和情绪冲动时开仓。</li></ul>
+        <ul><li>${htmlEscape(risk.buy_zone)}</li><li>必须叠加事件催化、价值锚、板块资金、价格结构四者共振。</li><li>不在一致高潮和情绪冲动时开仓。</li></ul>
       </section>
       <section class="trade-box sell-box">
         <h3><span>卖</span> 卖点/退出</h3>
@@ -352,9 +403,9 @@ function stageClassFromFlow(flow) {
 
 function intradayRuleFromFlow(name, flow) {
   if (flow <= -20) return "资金流出，按退潮/分歧处理。";
-  if (flow >= 20) return "资金靠前，等待中军和核心股确认。";
+  if (flow >= 20) return "资金靠前，先找事件催化和价值锚，再等待中军/核心股确认。";
   if (/贵金属|银行|电力|煤炭|公用/.test(name)) return "偏防守属性，观察弱势市场承接。";
-  return "资金强度一般，只作轮动观察。";
+  return "资金强度一般，只作轮动观察；没有事件催化不进入主仓。";
 }
 
 function renderPulseCards(themes) {
@@ -393,7 +444,7 @@ function renderThemes(themes) {
       const plan = theme.trade_plan || {
         bias: "等待确认",
         analysis: theme.expectation,
-        buy_points: ["等待板块资金、价格结构和个股地位同时确认。"],
+        buy_points: ["等待事件催化、价值锚、板块资金、价格结构同时确认。"],
         sell_points: ["确认失败或跌回平台。"],
         invalidation: "资金不持续。",
         position: "观察。"
@@ -860,6 +911,7 @@ function wireEmotionExplorer(dashboard) {
 async function boot() {
   const report = window.DAILY_REPORT || await loadReport();
 
+  renderPersonalMode(getPersonalMode(report));
   renderTopSummary(report);
   text("judgeDate", `判断日 ${report.judge_date}`);
   text("sourceDate", `数据日 ${report.source_data_date}`);
