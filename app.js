@@ -721,11 +721,11 @@ function renderCandidatePool(pool) {
   const watch = pool.watch || [];
   document.getElementById("candidatePool").innerHTML = `
     <div class="pool-section">
-      <h3>核心候选</h3>
+      <h3>核心候选 <small>${core.length}</small></h3>
       ${core.length ? core.map(renderCandidate).join("") : `<p class="empty-line">今日无核心候选，按系统等待。</p>`}
     </div>
     <div class="pool-section">
-      <h3>观察池</h3>
+      <h3>观察池 <small>${watch.length}</small></h3>
       <div class="candidate-list">${watch.map(renderCandidate).join("")}</div>
     </div>
     <p class="pool-note">${htmlEscape(pool.note)}</p>
@@ -737,11 +737,16 @@ function renderCandidate(row) {
     <article class="candidate-item">
       <div>
         <b>${htmlEscape(row.name)} <small>${htmlEscape(row.code)}</small></b>
-        <span>${htmlEscape(row.theme)} · ${htmlEscape(row.role)}</span>
+        <span>${htmlEscape(row.theme)} · ${htmlEscape(row.role)}${row.theme_phase ? ` · ${htmlEscape(row.theme_phase)}` : ""}</span>
       </div>
       <div>
         <strong>${row.score ?? "--"}</strong>
         <em>${htmlEscape(row.level)}</em>
+      </div>
+      <div class="candidate-metrics">
+        <span class="${(row.pct || 0) >= 0 ? "stock-up" : "stock-down"}">${row.pct !== null && row.pct !== undefined ? `${row.pct}%` : "--"}</span>
+        <span>换手 ${row.turnover !== null && row.turnover !== undefined ? `${row.turnover}%` : "--"}</span>
+        <span>成交 ${row.amount_100m_yuan !== null && row.amount_100m_yuan !== undefined ? `${row.amount_100m_yuan}亿` : "--"}</span>
       </div>
       <p>${htmlEscape(row.reason || "")}</p>
     </article>

@@ -248,6 +248,39 @@ def fetch_tencent_quote(symbol):
     }
 
 
+def quote_from_values(values):
+    if len(values) < 39:
+        return None
+    return {
+        "name": values[1],
+        "code": values[2],
+        "price": to_float(values[3]),
+        "change": to_float(values[31]),
+        "pct": to_float(values[32]),
+        "high": to_float(values[33]),
+        "low": to_float(values[34]),
+        "amount_10000": to_float(values[37]),
+        "turnover": to_float(values[38]) if len(values) > 38 else None,
+    }
+
+
+def fetch_tencent_quotes(symbols):
+    if not symbols:
+        return {}
+    quotes = {}
+    for start in range(0, len(symbols), 80):
+        chunk = symbols[start:start + 80]
+        raw = http_get(TENCENT_QUOTE + ",".join(chunk), encoding="gbk")
+        for part in raw.split(";\n"):
+            if '="' not in part:
+                continue
+            values = part.split('="', 1)[1].rsplit('"', 1)[0].split("~")
+            quote = quote_from_values(values)
+            if quote and quote.get("code"):
+                quotes[quote["code"]] = quote
+    return quotes
+
+
 def fetch_sina_global_quote(symbol):
     req = urllib.request.Request(
         f"https://hq.sinajs.cn/list={symbol}",
@@ -682,21 +715,51 @@ def score_candidate(item):
     }
 
 
-def build_candidate_pool():
-    candidates = []
-    for item in CANDIDATE_UNIVERSE:
-        try:
-            candidates.append(score_candidate(item))
-        except Exception as exc:
-            candidates.append({**item, "level": "数据缺失", "score": 0, "reason": str(exc)})
-    ranked = sorted(candidates, key=lambda row: row.get("score", 0), reverse=True)
-    core = [row for row in ranked if row.get("level") == "核心候选"][:3]
-    watch = [row for row in ranked if row.get("level") != "暂不纳入"][:8]
+def build_candidate_pool(sector_linkage=None):
+    candidates_by_code = {}
+    if sector_linkage:
+        for group in sector_linkage:
+            for stock in group.get("stocks", []):
+                row = {
+                    "code": stock.get("code"),
+                    "symbol": stock_symbol_from_code(stock.get("code")),
+                    "name": stock.get("name"),
+                    "theme": group.get("theme"),
+                    "role": stock.get("role") or group.get("role") or "板块关联",
+                    "level": stock.get("level") or "观察池",
+                    "score": stock.get("score") or 0,
+                    "pct": stock.get("pct"),
+                    "turnover": stock.get("turnover"),
+                    "amount_100m_yuan": stock.get("amount_100m_yuan"),
+                    "theme_phase": group.get("phase"),
+                    "reason": stock.get("reason"),
+                }
+                if not row["code"]:
+                    continue
+                old = candidates_by_code.get(row["code"])
+                if not old or row["score"] > old.get("score", 0):
+                    candidates_by_code[row["code"]] = row
+    if not candidates_by_code:
+        for item in CANDIDATE_UNIVERSE:
+            try:
+                row = score_candidate(item)
+            except Exception as exc:
+                row = {**item, "level": "数据缺失", "score": 0, "reason": str(exc)}
+            candidates_by_code[row["code"]] = row
+    ranked = sorted(candidates_by_code.values(), key=lambda row: row.get("score", 0), reverse=True)
+    core = [row for row in ranked if row.get("level") == "核心候选"][:10]
+    if len(core) < 6:
+        for row in ranked:
+            if row not in core and row.get("level") in ["强观察", "观察池"] and row.get("score", 0) >= 76:
+                core.append({**row, "level": "候选核心"})
+            if len(core) >= 6:
+                break
+    watch = [row for row in ranked if row.get("code") not in {item.get("code") for item in core}][:30]
     return {
         "core": core,
         "watch": watch,
         "all": ranked,
-        "note": "核心候选最多 1-3 个；若信号不完整，允许今日无核心候选。",
+        "note": "候选池来自动态主线板块关联股，并按当日涨跌、换手、成交额、板块阶段重新排序；核心不是买入指令，仍需事件催化和买点确认。",
     }
 
 
@@ -956,6 +1019,51 @@ def fallback_stocks_for_sector(theme_name, limit=8):
     return rows
 
 
+def enrich_linkage_groups(groups):
+    codes = []
+    for group in groups:
+        for stock in group.get("stocks", []):
+            code = stock.get("code")
+            if code and code not in codes:
+                codes.append(code)
+    quotes = fetch_tencent_quotes([stock_symbol_from_code(code) for code in codes])
+    for group in groups:
+        phase = group.get("phase") or ""
+        phase_bonus = {"发酵": 10, "加速": 8, "启动": 6, "修复": 2, "分歧": -5, "退潮": -20, "高潮": -8}.get(phase, 0)
+        for index, stock in enumerate(group.get("stocks", []), 1):
+            quote = quotes.get(stock.get("code")) or {}
+            pct_value = quote.get("pct")
+            turnover = quote.get("turnover")
+            amount = round((quote.get("amount_10000") or 0) / 10000, 2) if quote.get("amount_10000") is not None else stock.get("amount_100m_yuan")
+            base = 72 - min(index, 10) * 2
+            dynamic_score = base + phase_bonus + max(min(pct_value or 0, 10), -10) * 2 + min(turnover or 0, 12) * 1.2 + min(amount or 0, 80) * 0.08
+            if pct_value is not None:
+                stock["pct"] = pct_value
+            if quote.get("price") is not None:
+                stock["price"] = quote.get("price")
+            if turnover is not None:
+                stock["turnover"] = turnover
+            if amount is not None:
+                stock["amount_100m_yuan"] = amount
+            stock["score"] = round(dynamic_score, 1)
+            if stock["score"] >= 86 and (pct_value or 0) >= 1:
+                stock["level"] = "核心候选"
+            elif stock["score"] >= 72:
+                stock["level"] = "强观察"
+            else:
+                stock["level"] = "观察池"
+            stock["theme"] = group["theme"]
+            stock["theme_phase"] = phase
+            stock["reason"] = (
+                f"{group['theme']} · {phase or '待确认'}；"
+                f"涨跌幅 {pct_value if pct_value is not None else '--'}%，"
+                f"换手 {turnover if turnover is not None else '--'}%，"
+                f"成交额 {amount if amount is not None else '--'}亿。"
+            )
+        group["stocks"] = sorted(group.get("stocks", []), key=lambda row: row.get("score", 0), reverse=True)
+    return groups
+
+
 def build_sector_linkage(themes):
     groups = []
     seen = set()
@@ -990,7 +1098,7 @@ def build_sector_linkage(themes):
                 "stocks": stocks[:10],
             }
         )
-    return groups
+    return enrich_linkage_groups(groups)
 
 
 def build_event_templates():
@@ -1202,13 +1310,13 @@ def main():
     sorted_themes = dynamic_mainline_rows(industry, concept)
     watch_themes = sorted(theme_reports, key=lambda x: x["flow_score_100m_yuan"], reverse=True)
     market_gate = build_market_gate(industry, concept)
-    candidate_pool = build_candidate_pool()
+    sector_linkage = build_sector_linkage(sorted_themes)
+    candidate_pool = build_candidate_pool(sector_linkage)
     emotion_dashboard = build_emotion_dashboard(sorted_themes, industry, concept)
     alerts = build_alerts(sorted_themes, market_gate, candidate_pool)
     freshness = build_data_freshness(args.data_date, date.today().isoformat())
     top_summary = build_top_summary(sorted_themes, market_gate, freshness)
     execution_checklist = build_execution_checklist(sorted_themes, market_gate, freshness)
-    sector_linkage = build_sector_linkage(sorted_themes)
     event_templates = build_event_templates()
     post_review_score = build_post_review_score(sorted_themes, market_gate, candidate_pool, alerts, freshness)
 

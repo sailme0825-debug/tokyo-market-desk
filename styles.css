@@ -1548,6 +1548,12 @@ h1 {
   font-weight: 950;
 }
 
+.pool-section h3 small {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 950;
+}
+
 .candidate-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 76px;
@@ -1572,6 +1578,25 @@ h1 {
 .candidate-item p {
   grid-column: 1 / -1;
   margin: 0;
+}
+
+.candidate-metrics {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.candidate-metrics span {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 11px;
+  font-weight: 850;
 }
 
 .candidate-item strong {
