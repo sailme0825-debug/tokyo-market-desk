@@ -261,8 +261,11 @@ async function buildLiveReport() {
     .sort((a, b) => (b.pct || 0) - (a.pct || 0))
     .slice(0, 8);
 
+  const generatedAt = beijingTimestamp();
   return {
-    generated_at: beijingTimestamp(),
+    generated_at: generatedAt,
+    trading_date: generatedAt.slice(0, 10),
+    data_status: "当日实时",
     refresh_seconds: 60,
     data_sources: ["东方财富 BK 板块资金", "腾讯实时行情"],
     gate,

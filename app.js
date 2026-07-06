@@ -226,6 +226,7 @@ function renderLiveDecision(payload) {
   document.getElementById("liveGateStatus").textContent = `市场门：${payload.gate.status}`;
   document.getElementById("liveAction").textContent = payload.gate.action;
   document.getElementById("liveUpdatedAt").textContent = `更新 ${payload.generated_at} · ${payload.refresh_seconds}s 口径`;
+  syncTopSummaryWithLive(payload);
 
   document.getElementById("liveIndices").innerHTML = `
     <h3>指数门</h3>
@@ -261,6 +262,26 @@ function renderLiveDecision(payload) {
       `).join("")}
     </div>
   `;
+}
+
+function syncTopSummaryWithLive(payload) {
+  const liveTime = formatLiveTime(payload.generated_at);
+  text("sourceDate", `盘中 ${liveTime}`);
+  text("verifyStatus", payload.data_status || "当日实时");
+  text("quickFreshness", payload.data_status || "当日实时");
+  text("quickMarketGate", `市场门${payload.gate.status}`);
+  text("quickMainline", payload.gate.strongest_theme || "--");
+  text("quickAction", payload.gate.action);
+  const banner = document.getElementById("freshnessBanner");
+  banner.hidden = false;
+  banner.textContent = `实时盘中数据已接入：${liveTime}，静态日报仅作盘后复盘参考。`;
+  document.body.classList.remove("data-stale");
+  document.body.classList.add("data-live");
+}
+
+function formatLiveTime(value) {
+  if (!value) return "--";
+  return String(value).replace("+08:00", "").replace("T", " ");
 }
 
 function renderLiveSectorTabs(payload) {
