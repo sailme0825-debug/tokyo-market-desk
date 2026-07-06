@@ -716,6 +716,32 @@ function renderEmotionDashboard(dashboard) {
         </span>
       `).join("")}
     </div>
+    <div class="emotion-playbook">
+      <h3>阶段动作矩阵</h3>
+      <div>
+        ${getCyclePlaybook().map((item) => `
+          <article>
+            <b>${htmlEscape(item.phase)}</b>
+            <span>${htmlEscape(item.signal)}</span>
+            <p><strong>买</strong>${htmlEscape(item.buy)}</p>
+            <p><strong>卖</strong>${htmlEscape(item.sell)}</p>
+            <p><strong>仓</strong>${htmlEscape(item.position)}</p>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+    <div class="emotion-explorer">
+      <div class="emotion-explorer-head">
+        <h3>全板块阶段检索</h3>
+        <input id="emotionSectorSearch" type="search" placeholder="搜索板块 / 代码 / 阶段" autocomplete="off">
+      </div>
+      <div class="emotion-filter-tabs">
+        <button type="button" class="active" data-emotion-filter="全部">全部<small>${summary.total_count}</small></button>
+        ${dashboard.order.map((phase) => `<button type="button" data-emotion-filter="${htmlEscape(phase)}">${phase}<small>${dashboard.phase_counts?.[phase] ?? 0}</small></button>`).join("")}
+      </div>
+      <div id="emotionExplorerMeta" class="emotion-explorer-meta"></div>
+      <div id="emotionExplorerList" class="emotion-explorer-list"></div>
+    </div>
     <div class="emotion-columns">
       <section>
         <h3>强势榜</h3>
@@ -750,6 +776,7 @@ function renderEmotionDashboard(dashboard) {
       `).join("")}
     </div>
   `;
+  wireEmotionExplorer(dashboard);
 }
 
 function renderLegacyEmotionDashboard(dashboard) {
@@ -778,6 +805,55 @@ function renderEmotionSector(item) {
       <strong class="${flow < 0 ? "stock-down" : "stock-up"}">${yuan.format(flow)}亿</strong>
     </article>
   `;
+}
+
+function getCyclePlaybook() {
+  return [
+    { phase: "启动", signal: "资金刚转正，梯队未完全扩散。", buy: "只观察首批核心和中军，不急着重仓。", sell: "冲高无承接先放弃。", position: "0-10%" },
+    { phase: "发酵", signal: "资金连续回流，核心开始带队。", buy: "分歧承接、平台突破、回踩不破。", sell: "后排冲高回落不恋战。", position: "10-20%" },
+    { phase: "加速", signal: "一致性增强，前排快速拉开空间。", buy: "只允许前排核心确认，不追后排。", sell: "放量滞涨或炸板不回封。", position: "不加大总风险" },
+    { phase: "高潮", signal: "普涨、一致高开、后排补涨。", buy: "原则上不新开，等强分歧。", sell: "兑现、降仓、保护利润。", position: "降级" },
+    { phase: "分歧", signal: "资金摇摆，强弱开始分层。", buy: "只买核心抗跌后转强。", sell: "跌破买入依据直接处理。", position: "试错仓" },
+    { phase: "修复", signal: "退潮后局部回流或防守承接。", buy: "只看中军承接，不当主升浪。", sell: "反抽无量或回流失败。", position: "轻仓" },
+    { phase: "退潮", signal: "大面积流出，亏钱效应扩散。", buy: "不主动开新仓。", sell: "执行失效线，避免补仓。", position: "防守" },
+  ];
+}
+
+function flattenEmotionSectors(dashboard) {
+  return (dashboard.phase_groups || []).flatMap((group) =>
+    (group.sectors || []).map((sector) => ({ ...sector, phase: sector.phase || group.phase }))
+  );
+}
+
+function wireEmotionExplorer(dashboard) {
+  const root = document.getElementById("emotionDashboard");
+  const input = document.getElementById("emotionSectorSearch");
+  const list = document.getElementById("emotionExplorerList");
+  const meta = document.getElementById("emotionExplorerMeta");
+  const allRows = flattenEmotionSectors(dashboard);
+  let activePhase = "全部";
+
+  const render = () => {
+    const query = input.value.trim().toLowerCase();
+    const rows = allRows.filter((row) => {
+      const matchPhase = activePhase === "全部" || row.phase === activePhase;
+      const haystack = `${row.name || ""} ${row.code || ""} ${row.source || ""} ${row.phase || ""}`.toLowerCase();
+      return matchPhase && (!query || haystack.includes(query));
+    });
+    meta.textContent = `显示 ${rows.length} / ${allRows.length} 个板块`;
+    list.innerHTML = rows.map(renderEmotionSector).join("") || `<p class="empty-line">没有匹配板块。</p>`;
+  };
+
+  input.addEventListener("input", render);
+  root.querySelectorAll("[data-emotion-filter]").forEach((button) => {
+    button.addEventListener("click", () => {
+      activePhase = button.dataset.emotionFilter;
+      root.querySelectorAll("[data-emotion-filter]").forEach((node) => node.classList.remove("active"));
+      button.classList.add("active");
+      render();
+    });
+  });
+  render();
 }
 
 async function boot() {

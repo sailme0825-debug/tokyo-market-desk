@@ -1644,6 +1644,8 @@ h1 {
 
 .emotion-columns section,
 .emotion-system,
+.emotion-playbook,
+.emotion-explorer,
 .emotion-phase-groups section {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1653,10 +1655,166 @@ h1 {
 
 .emotion-columns h3,
 .emotion-system h3,
+.emotion-playbook h3,
+.emotion-explorer h3,
 .emotion-phase-groups h3 {
   margin: 0 0 8px;
   color: var(--ink);
   font-size: 13px;
+}
+
+.emotion-playbook {
+  margin-bottom: 8px;
+}
+
+.emotion-playbook > div {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.emotion-playbook article {
+  min-height: 150px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.emotion-playbook b {
+  display: block;
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.emotion-playbook span {
+  display: block;
+  margin: 5px 0 7px;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 850;
+}
+
+.emotion-playbook p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 750;
+}
+
+.emotion-playbook p strong {
+  margin-right: 4px;
+  color: var(--ink);
+}
+
+.emotion-explorer {
+  margin-bottom: 8px;
+}
+
+.emotion-explorer-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.5fr) minmax(160px, 0.5fr);
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.emotion-explorer-head h3 {
+  margin: 0;
+}
+
+.emotion-explorer input {
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 750;
+  padding: 7px 9px;
+}
+
+.emotion-filter-tabs {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.emotion-filter-tabs button {
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.emotion-filter-tabs button.active {
+  border-color: rgba(37, 99, 169, 0.28);
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+.emotion-filter-tabs small {
+  display: block;
+  margin-top: 2px;
+  color: var(--soft);
+  font-size: 10px;
+}
+
+.emotion-explorer-meta {
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.emotion-explorer-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  max-height: 360px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.emotion-explorer-list article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 8px;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.emotion-explorer-list b {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emotion-explorer-list span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.emotion-explorer-list strong {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .emotion-mini-list,
@@ -1825,6 +1983,11 @@ h1 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .emotion-playbook > div,
+  .emotion-filter-tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .watch-grid,
   .stock-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1851,6 +2014,8 @@ h1 {
   .emotion-summary,
   .emotion-columns,
   .emotion-phase-groups,
+  .emotion-explorer-head,
+  .emotion-explorer-list,
   .verify-grid,
   .compliance-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1883,6 +2048,10 @@ h1 {
   .emotion-summary,
   .emotion-columns,
   .emotion-phase-groups,
+  .emotion-playbook > div,
+  .emotion-filter-tabs,
+  .emotion-explorer-head,
+  .emotion-explorer-list,
   .stock-metrics,
   .live-mini-grid,
   .stock-plan-grid,
