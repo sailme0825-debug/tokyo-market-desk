@@ -59,10 +59,17 @@ CANDIDATE_UNIVERSE = [
 ]
 
 INDEX_UNIVERSE = [
-    {"symbol": "sh000001", "name": "上证指数"},
-    {"symbol": "sz399001", "name": "深证成指"},
-    {"symbol": "sz399006", "name": "创业板指"},
-    {"symbol": "sh000300", "name": "沪深300"},
+    {"symbol": "sh000001", "name": "上证指数", "group": "A股", "provider": "tencent", "gate": True},
+    {"symbol": "sz399001", "name": "深证成指", "group": "A股", "provider": "tencent", "gate": True},
+    {"symbol": "sz399006", "name": "创业板指", "group": "A股", "provider": "tencent", "gate": True},
+    {"symbol": "sh000300", "name": "沪深300", "group": "A股", "provider": "tencent", "gate": True},
+    {"symbol": "sh000688", "name": "科创50", "group": "A股", "provider": "tencent", "gate": True},
+    {"symbol": "bj899050", "name": "北证50", "group": "A股", "provider": "tencent", "gate": True},
+    {"symbol": "b_NKY", "name": "日经225", "group": "亚太", "provider": "sina_global", "gate": False},
+    {"symbol": "b_KOSPI", "name": "韩国KOSPI", "group": "亚太", "provider": "sina_global", "gate": False},
+    {"symbol": "usDJI", "name": "道琼斯", "group": "美股", "provider": "tencent", "gate": False},
+    {"symbol": "usIXIC", "name": "纳斯达克", "group": "美股", "provider": "tencent", "gate": False},
+    {"symbol": "usINX", "name": "标普500", "group": "美股", "provider": "tencent", "gate": False},
 ]
 
 
@@ -124,6 +131,39 @@ def fetch_tencent_quote(symbol):
         "amount_10000": to_float(values[37]),
         "turnover": to_float(values[38]) if len(values) > 38 else None,
     }
+
+
+def fetch_sina_global_quote(symbol):
+    req = urllib.request.Request(
+        f"https://hq.sinajs.cn/list={symbol}",
+        headers={
+            "User-Agent": "Mozilla/5.0",
+            "Referer": "https://finance.sina.com.cn/",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=12) as resp:
+        raw = resp.read().decode("gbk", errors="ignore")
+    if '="' not in raw:
+        return None
+    values = raw.split('="', 1)[1].rsplit('"', 1)[0].split(",")
+    if not values or not values[0]:
+        return None
+    if symbol.startswith("b_"):
+        return {
+            "name": values[0],
+            "code": symbol,
+            "price": to_float(values[1]) if len(values) > 1 else None,
+            "change": to_float(values[2]) if len(values) > 2 else None,
+            "pct": to_float(values[3]) if len(values) > 3 else None,
+            "datetime": f"{values[6] if len(values) > 6 else ''} {values[5] if len(values) > 5 else ''}".strip(),
+        }
+    return None
+
+
+def fetch_index_quote(item):
+    if item.get("provider") == "sina_global":
+        return fetch_sina_global_quote(item["symbol"])
+    return fetch_tencent_quote(item["symbol"])
 
 
 def fetch_tencent_klines(symbol, limit=80):
@@ -428,41 +468,69 @@ def make_verification(industry, concept):
 def build_market_gate(industry, concept):
     index_rows = []
     open_count = 0
+    overseas_positive = 0
+    overseas_total = 0
     for item in INDEX_UNIVERSE:
         try:
-            quote = fetch_tencent_quote(item["symbol"])
-            klines = fetch_tencent_klines(item["symbol"])
-            tech = technical_from(quote, klines)
-            is_open = tech["trend_score"] >= 3 and (quote or {}).get("pct", 0) >= -0.8
-            open_count += 1 if is_open else 0
+            quote = fetch_index_quote(item)
+            tech = {"trend_score": None}
+            if item.get("gate", True):
+                klines = fetch_tencent_klines(item["symbol"])
+                tech = technical_from(quote, klines)
+                is_open = tech["trend_score"] >= 3 and (quote or {}).get("pct", 0) >= -0.8
+                open_count += 1 if is_open else 0
+                status = "打开" if is_open else "谨慎"
+            else:
+                overseas_total += 1
+                overseas_positive += 1 if (quote or {}).get("pct", 0) >= 0 else 0
+                status = "红盘" if (quote or {}).get("pct", 0) >= 0 else "绿盘"
             index_rows.append(
                 {
                     "name": item["name"],
                     "symbol": item["symbol"],
+                    "group": item.get("group", "A股"),
+                    "gate": item.get("gate", True),
                     "price": (quote or {}).get("price"),
                     "pct": (quote or {}).get("pct"),
                     "trend_score": tech["trend_score"],
-                    "status": "打开" if is_open else "谨慎",
+                    "status": status,
                 }
             )
         except Exception as exc:
-            index_rows.append({"name": item["name"], "symbol": item["symbol"], "status": "数据缺失", "error": str(exc)})
+            index_rows.append(
+                {
+                    "name": item["name"],
+                    "symbol": item["symbol"],
+                    "group": item.get("group", "A股"),
+                    "gate": item.get("gate", True),
+                    "status": "数据缺失",
+                    "error": str(exc),
+                }
+            )
     positive_industry = sum(1 for row in industry if row["f62"] > 0)
     positive_concept = sum(1 for row in concept if row["f62"] > 0)
     heat = round((positive_industry / len(industry)) * 0.45 + (positive_concept / len(concept)) * 0.55, 2)
-    if open_count >= 3 and heat >= 0.45:
+    a_index_total = sum(1 for item in INDEX_UNIVERSE if item.get("gate", True))
+    overseas_wind = "外盘偏强" if overseas_positive >= 4 else ("外盘中性" if overseas_positive >= 2 else "外盘偏弱")
+    if open_count >= 4 and heat >= 0.45:
         status = "市场门打开"
         advice = "允许按系统做计划仓，但仍需分批和等待买点确认。"
-    elif open_count >= 2:
+    elif open_count >= 3:
         status = "市场门半开"
         advice = "只做主线前排和承接中军，后排与轮动降仓。"
     else:
         status = "市场门收紧"
         advice = "控制仓位，优先观察和防守，避免情绪化开新仓。"
+    if overseas_wind == "外盘偏弱":
+        advice += " 外盘偏弱时，次日高开或事件兑现要降低追价冲动。"
     return {
         "status": status,
         "advice": advice,
         "open_index_count": open_count,
+        "index_total_count": a_index_total,
+        "overseas_positive_count": overseas_positive,
+        "overseas_total_count": overseas_total,
+        "overseas_wind": overseas_wind,
         "sector_heat": heat,
         "positive_industry_count": positive_industry,
         "positive_concept_count": positive_concept,
@@ -925,6 +993,7 @@ def main():
         "generated_at": date.today().isoformat(),
         "source_data_date": args.data_date,
         "judge_date": args.judge_date,
+        "data_sources": ["东方财富 BK 板块资金", "腾讯实时行情", "新浪环球市场"],
         "data_freshness": freshness,
         "personal_mode": PERSONAL_MODE,
         "top_summary": top_summary,

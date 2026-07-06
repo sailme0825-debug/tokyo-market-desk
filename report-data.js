@@ -2,6 +2,11 @@ window.DAILY_REPORT = {
   "generated_at": "2026-07-06",
   "source_data_date": "2026-07-06",
   "judge_date": "2026-07-07",
+  "data_sources": [
+    "东方财富 BK 板块资金",
+    "腾讯实时行情",
+    "新浪环球市场"
+  ],
   "data_freshness": {
     "is_current": true,
     "status": "当日数据",
@@ -373,6 +378,10 @@ window.DAILY_REPORT = {
     "status": "市场门收紧",
     "advice": "控制仓位，优先观察和防守，避免情绪化开新仓。",
     "open_index_count": 0,
+    "index_total_count": 6,
+    "overseas_positive_count": 2,
+    "overseas_total_count": 5,
+    "overseas_wind": "外盘中性",
     "sector_heat": 0.26,
     "positive_industry_count": 47,
     "positive_concept_count": 86,
@@ -380,6 +389,8 @@ window.DAILY_REPORT = {
       {
         "name": "上证指数",
         "symbol": "sh000001",
+        "group": "A股",
+        "gate": true,
         "price": 4041.24,
         "pct": -0.06,
         "trend_score": 0,
@@ -388,6 +399,8 @@ window.DAILY_REPORT = {
       {
         "name": "深证成指",
         "symbol": "sz399001",
+        "group": "A股",
+        "gate": true,
         "price": 15416.8,
         "pct": -1.16,
         "trend_score": 1,
@@ -396,6 +409,8 @@ window.DAILY_REPORT = {
       {
         "name": "创业板指",
         "symbol": "sz399006",
+        "group": "A股",
+        "gate": true,
         "price": 3948.86,
         "pct": -1.77,
         "trend_score": 1,
@@ -404,10 +419,82 @@ window.DAILY_REPORT = {
       {
         "name": "沪深300",
         "symbol": "sh000300",
+        "group": "A股",
+        "gate": true,
         "price": 4842.0,
         "pct": -0.0,
         "trend_score": 1,
         "status": "谨慎"
+      },
+      {
+        "name": "科创50",
+        "symbol": "sh000688",
+        "group": "A股",
+        "gate": true,
+        "price": 1996.1,
+        "pct": 1.04,
+        "trend_score": 2,
+        "status": "谨慎"
+      },
+      {
+        "name": "北证50",
+        "symbol": "bj899050",
+        "group": "A股",
+        "gate": true,
+        "price": 1245.97,
+        "pct": -3.25,
+        "trend_score": 4,
+        "status": "谨慎"
+      },
+      {
+        "name": "日经225",
+        "symbol": "b_NKY",
+        "group": "亚太",
+        "gate": false,
+        "price": 69737.47,
+        "pct": -0.01,
+        "trend_score": null,
+        "status": "绿盘"
+      },
+      {
+        "name": "韩国KOSPI",
+        "symbol": "b_KOSPI",
+        "group": "亚太",
+        "gate": false,
+        "price": 8051.33,
+        "pct": -0.46,
+        "trend_score": null,
+        "status": "绿盘"
+      },
+      {
+        "name": "道琼斯",
+        "symbol": "usDJI",
+        "group": "美股",
+        "gate": false,
+        "price": 52900.07,
+        "pct": 1.14,
+        "trend_score": null,
+        "status": "红盘"
+      },
+      {
+        "name": "纳斯达克",
+        "symbol": "usIXIC",
+        "group": "美股",
+        "gate": false,
+        "price": 25832.67,
+        "pct": -0.8,
+        "trend_score": null,
+        "status": "绿盘"
+      },
+      {
+        "name": "标普500",
+        "symbol": "usINX",
+        "group": "美股",
+        "gate": false,
+        "price": 7483.24,
+        "pct": 0.0,
+        "trend_score": null,
+        "status": "红盘"
       }
     ]
   },

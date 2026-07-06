@@ -286,11 +286,11 @@ function renderLiveDecision(payload) {
       ${payload.indices.map((row) => `
         <div class="${(row.pct || 0) >= 0 ? "live-up" : "live-down"}">
           <b>${htmlEscape(row.name)}</b>
-          <span>${row.price ?? "--"} / ${row.pct ?? "--"}%</span>
+          <span>${htmlEscape(row.group || "指数")} · ${row.price ?? "--"} / ${row.pct ?? "--"}%</span>
         </div>
       `).join("")}
     </div>
-    <p>红盘指数 ${payload.gate.positive_index_count}/4，行业流入 ${payload.gate.positive_industry_count}，概念流入 ${payload.gate.positive_concept_count}。</p>
+    <p>A股红盘 ${payload.gate.positive_index_count}/${payload.gate.index_total_count || 6}，${htmlEscape(payload.gate.overseas_wind || "外盘待核")} ${payload.gate.overseas_positive_count ?? 0}/${payload.gate.overseas_total_count ?? 0}，行业流入 ${payload.gate.positive_industry_count}，概念流入 ${payload.gate.positive_concept_count}。</p>
   `;
 
   document.getElementById("liveThemes").innerHTML = `
@@ -564,13 +564,17 @@ function renderSystemRules(rules) {
 
 function renderMarketGate(gate) {
   text("marketGateStatus", gate.status);
+  const indexTotal = gate.index_total_count || gate.indices?.filter((row) => row.gate !== false).length || gate.indices?.length || 4;
+  const overseasTotal = gate.overseas_total_count ?? gate.indices?.filter((row) => row.gate === false).length ?? 0;
+  const overseasPositive = gate.overseas_positive_count ?? gate.indices?.filter((row) => row.gate === false && (row.pct || 0) >= 0).length ?? 0;
   document.getElementById("marketGate").innerHTML = `
     <div class="gate-summary">
       <strong>${htmlEscape(gate.status)}</strong>
       <span>${htmlEscape(gate.advice)}</span>
     </div>
     <div class="gate-metrics">
-      ${metric("打开指数", `${gate.open_index_count}/4`)}
+      ${metric("A股打开", `${gate.open_index_count ?? gate.positive_index_count ?? 0}/${indexTotal}`)}
+      ${metric("外盘风向", `${htmlEscape(gate.overseas_wind || "--")} ${overseasPositive}/${overseasTotal}`)}
       ${metric("板块热度", gate.sector_heat)}
       ${metric("行业流入", `${gate.positive_industry_count}`)}
       ${metric("概念流入", `${gate.positive_concept_count}`)}
@@ -579,7 +583,7 @@ function renderMarketGate(gate) {
       ${gate.indices.map((row) => `
         <div>
           <b>${htmlEscape(row.name)}</b>
-          <span>${row.price ?? "--"} / ${row.pct ?? "--"}% / ${htmlEscape(row.status)}</span>
+          <span>${htmlEscape(row.group || "A股")} / ${row.price ?? "--"} / ${row.pct ?? "--"}% / ${htmlEscape(row.status)}</span>
         </div>
       `).join("")}
     </div>

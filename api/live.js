@@ -34,10 +34,17 @@ const THEMES = [
 ];
 
 const INDEX_UNIVERSE = [
-  { symbol: "sh000001", name: "上证指数" },
-  { symbol: "sz399001", name: "深证成指" },
-  { symbol: "sz399006", name: "创业板指" },
-  { symbol: "sh000300", name: "沪深300" },
+  { symbol: "sh000001", name: "上证指数", group: "A股", provider: "tencent", gate: true },
+  { symbol: "sz399001", name: "深证成指", group: "A股", provider: "tencent", gate: true },
+  { symbol: "sz399006", name: "创业板指", group: "A股", provider: "tencent", gate: true },
+  { symbol: "sh000300", name: "沪深300", group: "A股", provider: "tencent", gate: true },
+  { symbol: "sh000688", name: "科创50", group: "A股", provider: "tencent", gate: true },
+  { symbol: "bj899050", name: "北证50", group: "A股", provider: "tencent", gate: true },
+  { symbol: "b_NKY", name: "日经225", group: "亚太", provider: "sina_global", gate: false },
+  { symbol: "b_KOSPI", name: "韩国KOSPI", group: "亚太", provider: "sina_global", gate: false },
+  { symbol: "usDJI", name: "道琼斯", group: "美股", provider: "tencent", gate: false },
+  { symbol: "usIXIC", name: "纳斯达克", group: "美股", provider: "tencent", gate: false },
+  { symbol: "usINX", name: "标普500", group: "美股", provider: "tencent", gate: false },
 ];
 
 const CANDIDATE_UNIVERSE = [
@@ -114,6 +121,39 @@ async function fetchQuote(symbol) {
     low: toFloat(values[34]),
     amount_10000: toFloat(values[37]),
     turnover: toFloat(values[38]),
+  };
+}
+
+async function fetchSinaGlobalQuote(symbol) {
+  const response = await fetch(`https://hq.sinajs.cn/list=${symbol}`, {
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+      Referer: "https://finance.sina.com.cn/",
+    },
+  });
+  if (!response.ok) throw new Error(`新浪环球市场返回 ${response.status}`);
+  const raw = new TextDecoder("gbk").decode(await response.arrayBuffer());
+  const match = raw.match(/="([^"]*)"/);
+  if (!match || !match[1]) return null;
+  const values = match[1].split(",");
+  if (symbol.startsWith("b_")) {
+    return {
+      name: values[0],
+      code: symbol,
+      price: toFloat(values[1]),
+      change: toFloat(values[2]),
+      pct: toFloat(values[3]),
+      datetime: `${values[6] || ""} ${values[5] || ""}`.trim(),
+    };
+  }
+  return null;
+}
+
+async function fetchIndexQuote(item) {
+  const quote = item.provider === "sina_global" ? await fetchSinaGlobalQuote(item.symbol) : await fetchQuote(item.symbol);
+  return {
+    ...item,
+    quote,
   };
 }
 
@@ -347,25 +387,33 @@ function ruleForTheme(name, flow, stage) {
 }
 
 function judgeGate(indices, industry, concept, themes) {
-  const positiveIndexCount = indices.filter((row) => (row.pct || 0) >= 0).length;
+  const gateIndices = indices.filter((row) => row.gate !== false);
+  const overseasIndices = indices.filter((row) => row.gate === false);
+  const positiveIndexCount = gateIndices.filter((row) => (row.pct || 0) >= 0).length;
+  const overseasPositiveCount = overseasIndices.filter((row) => (row.pct || 0) >= 0).length;
   const positiveIndustryCount = industry.filter((row) => (row.f62 || 0) > 0).length;
   const positiveConceptCount = concept.filter((row) => (row.f62 || 0) > 0).length;
   const strongest = themes[0];
 
   let status = "收紧";
   let action = "不主动开新仓，只做已有持仓风控和确认后的核心观察。";
-  if (positiveIndexCount >= 3 && strongest?.flow_score_100m_yuan >= 100) {
+  if (positiveIndexCount >= 4 && strongest?.flow_score_100m_yuan >= 100) {
     status = "打开";
     action = "可做计划内买点：核心分歧承接、放量突破、回踩不破三类。";
-  } else if (positiveIndexCount >= 2 || strongest?.flow_score_100m_yuan >= 80) {
+  } else if (positiveIndexCount >= 3 || strongest?.flow_score_100m_yuan >= 80) {
     status = "半开";
     action = "只允许小仓试错，不追高，不把轮动后排当核心。";
   }
+  const overseasWind = overseasPositiveCount >= 4 ? "外盘偏强" : overseasPositiveCount >= 2 ? "外盘中性" : "外盘偏弱";
 
   return {
     status,
     action,
     positive_index_count: positiveIndexCount,
+    index_total_count: gateIndices.length,
+    overseas_positive_count: overseasPositiveCount,
+    overseas_total_count: overseasIndices.length,
+    overseas_wind: overseasWind,
     positive_industry_count: positiveIndustryCount,
     positive_concept_count: positiveConceptCount,
     strongest_theme: strongest?.name || "--",
@@ -387,7 +435,7 @@ async function buildLiveReport() {
   const [industry, concept, indexQuotes, candidateQuotes] = await Promise.all([
     fetchBk("m:90+s:4"),
     fetchBk("m:90+t:3"),
-    Promise.all(INDEX_UNIVERSE.map(async (item) => ({ ...item, quote: await fetchQuote(item.symbol) }))),
+    Promise.all(INDEX_UNIVERSE.map((item) => fetchIndexQuote(item).catch((error) => ({ ...item, quote: null, error: error.message })))),
     Promise.all(CANDIDATE_UNIVERSE.map(async (item) => ({ ...item, quote: await fetchQuote(item.symbol) }))),
   ]);
 
@@ -397,9 +445,13 @@ async function buildLiveReport() {
   const watchThemes = THEMES.map((theme) => collectTheme(theme, industry, concept)).sort((a, b) => b.flow_score_100m_yuan - a.flow_score_100m_yuan);
   const indices = indexQuotes.map((item) => ({
     name: item.name,
+    symbol: item.symbol,
+    group: item.group || "A股",
+    gate: item.gate !== false,
     price: item.quote?.price ?? null,
     pct: item.quote?.pct ?? null,
-    status: (item.quote?.pct || 0) >= 0 ? "红盘" : "绿盘",
+    status: item.quote ? ((item.quote?.pct || 0) >= 0 ? "红盘" : "绿盘") : "缺失",
+    error: item.error,
   }));
   const gate = judgeGate(indices, industry, concept, themes);
   const candidates = candidateQuotes
@@ -424,7 +476,7 @@ async function buildLiveReport() {
     trading_date: generatedAt.slice(0, 10),
     data_status: "当日实时",
     refresh_seconds: 60,
-    data_sources: ["东方财富 BK 板块资金", "腾讯实时行情"],
+    data_sources: ["东方财富 BK 板块资金", "腾讯实时行情", "新浪环球市场"],
     gate,
     indices,
     themes,
@@ -452,7 +504,7 @@ function buildFallbackReport(error) {
     refresh_seconds: 300,
     data_sources: [...(daily.data_sources || []), "本地日报缓存"],
     gate: daily.market_gate || daily.gate || {},
-    indices: daily.indices || [],
+    indices: daily.indices || daily.market_gate?.indices || [],
     themes: daily.themes || [],
     watch_themes: daily.watch_themes || [],
     emotion_dashboard: daily.emotion_dashboard || {},
