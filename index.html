@@ -44,6 +44,25 @@
         <div id="quickTaboo" class="quick-taboo">--</div>
       </section>
 
+      <section class="live-panel" aria-label="盘中实时判断">
+        <div class="section-title">
+          <span>盘中实时判断</span>
+          <strong id="liveUpdatedAt">等待刷新</strong>
+        </div>
+        <div class="live-toolbar">
+          <div>
+            <b id="liveGateStatus">--</b>
+            <span id="liveAction">点击刷新，读取盘中指数、板块资金和核心候选。</span>
+          </div>
+          <button id="liveRefreshButton" type="button">刷新盘中判断</button>
+        </div>
+        <div class="live-grid">
+          <div id="liveIndices" class="live-block"></div>
+          <div id="liveThemes" class="live-block"></div>
+          <div id="liveCandidates" class="live-block live-candidates"></div>
+        </div>
+      </section>
+
       <section class="summary-grid" aria-label="每日判断">
         <div class="panel main-panel">
           <div class="panel-head">

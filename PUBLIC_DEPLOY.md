@@ -30,7 +30,7 @@
 http://127.0.0.1:8790
 ```
 
-所以公开版默认只保证“每日市场判断”自动更新。
+所以 GitHub Pages 版默认只保证“每日市场判断”自动更新；本地或 Vercel 版可以使用个股检索和盘中实时判断。
 
 如果要让别人也能在线搜索个股，有两种方式。
 
@@ -40,6 +40,7 @@ http://127.0.0.1:8790
 
 ```text
 api/stock.js
+api/live.js
 vercel.json
 ```
 
@@ -47,9 +48,10 @@ vercel.json
 
 ```text
 /api/stock?q=股票
+/api/live
 ```
 
-前端在 `*.vercel.app` 域名下会自动调用同源 API，无需额外配置。
+前端在 `*.vercel.app` 域名下会自动调用同源 API，无需额外配置。盘中实时判断默认 60 秒刷新一次。
 
 如果使用 Vercel 自定义域名，把：
 
@@ -67,7 +69,7 @@ window.SITE_CONFIG = {
 
 ## 方案 B：外部公网 API
 
-把 `work/stock_judgment_server.py` 或 `api/stock.js` 部署成公网 API，然后在：
+把 `work/stock_judgment_server.py`、`api/stock.js`、`api/live.js` 部署成公网 API，然后在：
 
 ```text
 site-config.js

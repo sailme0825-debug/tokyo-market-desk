@@ -186,6 +186,7 @@ function getStockApiBase() {
   const configured = window.SITE_CONFIG?.stockApiBase?.trim();
   if (configured === "same-origin") return location.origin;
   if (configured) return configured.replace(/\/$/, "");
+  if (location.protocol === "file:") return "http://127.0.0.1:8790";
   if (["127.0.0.1", "localhost"].includes(location.hostname)) {
     return "http://127.0.0.1:8790";
   }
@@ -193,6 +194,83 @@ function getStockApiBase() {
     return location.origin;
   }
   return "";
+}
+
+async function refreshLiveDecision() {
+  const button = document.getElementById("liveRefreshButton");
+  const liveAction = document.getElementById("liveAction");
+  button.disabled = true;
+  liveAction.textContent = "正在读取盘中指数、板块资金和核心候选...";
+  try {
+    const apiBase = getStockApiBase();
+    if (!apiBase) {
+      throw new Error("公开 GitHub Pages 暂无实时 API；本地启动 8790 或部署到 Vercel 后可用。");
+    }
+    const response = await fetch(`${apiBase}/api/live`, { cache: "no-store" });
+    const payload = await response.json();
+    if (!response.ok || payload.error) throw new Error(payload.error || "盘中判断失败");
+    renderLiveDecision(payload);
+  } catch (error) {
+    document.getElementById("liveGateStatus").textContent = "不可用";
+    document.getElementById("liveUpdatedAt").textContent = "实时 API 未连接";
+    liveAction.textContent = error.message;
+    document.getElementById("liveIndices").innerHTML = `<p class="empty-line">本地请启动：python3 work/stock_judgment_server.py</p>`;
+    document.getElementById("liveThemes").innerHTML = "";
+    document.getElementById("liveCandidates").innerHTML = "";
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function renderLiveDecision(payload) {
+  document.getElementById("liveGateStatus").textContent = `市场门：${payload.gate.status}`;
+  document.getElementById("liveAction").textContent = payload.gate.action;
+  document.getElementById("liveUpdatedAt").textContent = `更新 ${payload.generated_at} · ${payload.refresh_seconds}s 口径`;
+
+  document.getElementById("liveIndices").innerHTML = `
+    <h3>指数门</h3>
+    <div class="live-mini-grid">
+      ${payload.indices.map((row) => `
+        <div class="${(row.pct || 0) >= 0 ? "live-up" : "live-down"}">
+          <b>${htmlEscape(row.name)}</b>
+          <span>${row.price ?? "--"} / ${row.pct ?? "--"}%</span>
+        </div>
+      `).join("")}
+    </div>
+    <p>红盘指数 ${payload.gate.positive_index_count}/4，行业流入 ${payload.gate.positive_industry_count}，概念流入 ${payload.gate.positive_concept_count}。</p>
+  `;
+
+  document.getElementById("liveThemes").innerHTML = `
+    <h3>板块情绪</h3>
+    <div class="live-theme-list">
+      ${payload.themes.slice(0, 5).map((theme) => `
+        <article>
+          <div>
+            <b>${htmlEscape(theme.name)}</b>
+            <span>${htmlEscape(theme.emotion_stage)} · ${htmlEscape(theme.role)}</span>
+          </div>
+          <strong>${yuan.format(theme.flow_score_100m_yuan)}亿</strong>
+          <p>${htmlEscape(theme.intraday_rule)}</p>
+        </article>
+      `).join("")}
+    </div>
+  `;
+
+  document.getElementById("liveCandidates").innerHTML = `
+    <h3>核心候选快照</h3>
+    <div class="live-candidate-list">
+      ${payload.candidates.map((stock) => `
+        <article>
+          <div>
+            <b>${htmlEscape(stock.name)} <small>${htmlEscape(stock.code)}</small></b>
+            <span>${htmlEscape(stock.theme)} · ${htmlEscape(stock.role)}</span>
+          </div>
+          <strong class="${(stock.pct || 0) >= 0 ? "stock-up" : "stock-down"}">${stock.pct ?? "--"}%</strong>
+          <p>${htmlEscape(stock.action)}</p>
+        </article>
+      `).join("")}
+    </div>
+  `;
 }
 
 function renderPulseCards(themes) {
@@ -564,6 +642,11 @@ async function boot() {
   document.getElementById("stockQuery").addEventListener("keydown", (event) => {
     if (event.key === "Enter") searchStock();
   });
+  document.getElementById("liveRefreshButton").addEventListener("click", refreshLiveDecision);
+  refreshLiveDecision();
+  if (getStockApiBase()) {
+    setInterval(refreshLiveDecision, 60000);
+  }
 }
 
 async function loadReport() {
