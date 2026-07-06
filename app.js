@@ -242,19 +242,9 @@ function renderLiveDecision(payload) {
 
   document.getElementById("liveThemes").innerHTML = `
     <h3>板块情绪</h3>
-    <div class="live-theme-list">
-      ${payload.themes.slice(0, 5).map((theme) => `
-        <article>
-          <div>
-            <b>${htmlEscape(theme.name)}</b>
-            <span>${htmlEscape(theme.emotion_stage)} · ${htmlEscape(theme.role)}</span>
-          </div>
-          <strong>${yuan.format(theme.flow_score_100m_yuan)}亿</strong>
-          <p>${htmlEscape(theme.intraday_rule)}</p>
-        </article>
-      `).join("")}
-    </div>
+    ${renderLiveSectorTabs(payload)}
   `;
+  wireLiveSectorTabs();
 
   document.getElementById("liveCandidates").innerHTML = `
     <h3>核心候选快照</h3>
@@ -271,6 +261,77 @@ function renderLiveDecision(payload) {
       `).join("")}
     </div>
   `;
+}
+
+function renderLiveSectorTabs(payload) {
+  const rankings = payload.sector_rankings || {
+    system: payload.themes || [],
+    industry: payload.industry_top5 || [],
+    concept: payload.concept_top5 || [],
+  };
+  const sections = [
+    ["system", "系统主线", rankings.system || []],
+    ["industry", "行业资金", rankings.industry || []],
+    ["concept", "概念资金", rankings.concept || []],
+  ];
+  return `
+    <div class="live-sector-tabs">
+      ${sections.map(([key, label], index) => `<button type="button" class="${index === 0 ? "active" : ""}" data-live-sector="${key}">${label}</button>`).join("")}
+    </div>
+    <div class="live-sector-panels">
+      ${sections.map(([key, , rows], index) => `
+        <div class="live-theme-list ${index === 0 ? "active" : ""}" data-live-sector-panel="${key}">
+          ${rows.map((row) => renderLiveSectorRow(row)).join("") || `<p class="empty-line">暂无数据。</p>`}
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function wireLiveSectorTabs() {
+  const root = document.getElementById("liveThemes");
+  root.querySelectorAll("[data-live-sector]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const key = button.dataset.liveSector;
+      root.querySelectorAll("[data-live-sector]").forEach((node) => node.classList.remove("active"));
+      root.querySelectorAll("[data-live-sector-panel]").forEach((node) => node.classList.remove("active"));
+      button.classList.add("active");
+      root.querySelector(`[data-live-sector-panel="${key}"]`)?.classList.add("active");
+    });
+  });
+}
+
+function renderLiveSectorRow(row) {
+  const flow = row.flow_score_100m_yuan ?? row.main_net_inflow_100m_yuan ?? 0;
+  const rank = row.rank ? `#${row.rank} ` : "";
+  const stage = row.emotion_stage || stageClassFromFlow(flow);
+  const role = row.role || row.source || "资金";
+  const rule = row.intraday_rule || intradayRuleFromFlow(row.name, flow);
+  return `
+    <article class="${flow < 0 ? "live-sector-weak" : ""}">
+      <div>
+        <b>${rank}${htmlEscape(row.name)}</b>
+        <span>${htmlEscape(stage)} · ${htmlEscape(role)} ${row.code ? `· ${htmlEscape(row.code)}` : ""}</span>
+      </div>
+      <strong class="${flow < 0 ? "stock-down" : "stock-up"}">${yuan.format(flow)}亿</strong>
+      <p>${htmlEscape(rule)}</p>
+    </article>
+  `;
+}
+
+function stageClassFromFlow(flow) {
+  if (flow >= 60) return "强流入";
+  if (flow >= 20) return "温和流入";
+  if (flow > 0) return "弱流入";
+  if (flow <= -20) return "明显流出";
+  return "震荡";
+}
+
+function intradayRuleFromFlow(name, flow) {
+  if (flow <= -20) return "资金流出，按退潮/分歧处理。";
+  if (flow >= 20) return "资金靠前，等待中军和核心股确认。";
+  if (/贵金属|银行|电力|煤炭|公用/.test(name)) return "偏防守属性，观察弱势市场承接。";
+  return "资金强度一般，只作轮动观察。";
 }
 
 function renderPulseCards(themes) {

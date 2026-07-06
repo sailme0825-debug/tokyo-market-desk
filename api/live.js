@@ -122,6 +122,39 @@ function publicRow(row, rank) {
   };
 }
 
+function stageForFlow(flow) {
+  if (flow >= 60) return "强流入";
+  if (flow >= 20) return "温和流入";
+  if (flow > 0) return "弱流入";
+  if (flow <= -60) return "强流出";
+  if (flow <= -20) return "明显流出";
+  return "震荡";
+}
+
+function intradayRuleForRawSector(name, flow, rank, source) {
+  if (flow <= -20) return "资金流出，先按退潮/分歧处理，不做主动买点。";
+  if (rank <= 3 && flow >= 20) return `${source}前排，先找板块中军和核心股承接，避免追后排。`;
+  if (flow > 0) return "有资金回流，但要等价格结构和个股地位确认。";
+  if (/贵金属|银行|电力|煤炭|公用/.test(name)) return "偏防守属性，适合观察市场弱势时的资金避险。";
+  return "资金强度一般，降低优先级，只作轮动观察。";
+}
+
+function rawSectorRows(rows, source, limit) {
+  return rows.slice(0, limit).map((row, index) => {
+    const flow = yi(row.f62);
+    return {
+      rank: index + 1,
+      code: row.f12,
+      name: row.f14,
+      source,
+      role: source === "行业" ? "行业资金" : "概念资金",
+      flow_score_100m_yuan: flow,
+      emotion_stage: stageForFlow(flow),
+      intraday_rule: intradayRuleForRawSector(row.f14, flow, index + 1, source),
+    };
+  });
+}
+
 function collectTheme(theme, industry, concept) {
   const rows = [];
   for (const row of [...industry, ...concept]) {
@@ -235,9 +268,14 @@ async function buildLiveReport() {
     gate,
     indices,
     themes,
+    sector_rankings: {
+      system: themes,
+      industry: rawSectorRows(industry, "行业", 12),
+      concept: rawSectorRows(concept, "概念", 16),
+    },
     candidates,
-    industry_top5: industry.slice(0, 5).map(publicRow),
-    concept_top5: concept.slice(0, 5).map(publicRow),
+    industry_top5: industry.slice(0, 12).map(publicRow),
+    concept_top5: concept.slice(0, 16).map(publicRow),
     system_boundary: "盘中实时判断只做条件过滤和风险提示，不给无条件买卖指令。",
   };
 }

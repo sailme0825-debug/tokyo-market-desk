@@ -354,6 +354,44 @@ h1 {
   gap: 8px;
 }
 
+.live-sector-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 9px;
+}
+
+.live-sector-tabs button {
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.live-sector-tabs button.active {
+  border-color: rgba(37, 99, 169, 0.28);
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+.live-sector-panels {
+  max-height: 520px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.live-theme-list {
+  display: none;
+}
+
+.live-theme-list.active {
+  display: grid;
+}
+
 .live-mini-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -408,6 +446,11 @@ h1 {
   gap: 7px 10px;
   align-items: start;
   padding: 9px;
+}
+
+.live-theme-list article.live-sector-weak {
+  border-color: rgba(194, 65, 50, 0.2);
+  background: #fffafa;
 }
 
 .live-theme-list strong,
