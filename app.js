@@ -184,9 +184,13 @@ async function searchStock() {
 
 function getStockApiBase() {
   const configured = window.SITE_CONFIG?.stockApiBase?.trim();
+  if (configured === "same-origin") return location.origin;
   if (configured) return configured.replace(/\/$/, "");
   if (["127.0.0.1", "localhost"].includes(location.hostname)) {
     return "http://127.0.0.1:8790";
+  }
+  if (location.hostname.endsWith(".vercel.app")) {
+    return location.origin;
   }
   return "";
 }

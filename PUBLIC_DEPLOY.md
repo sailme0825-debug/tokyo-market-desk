@@ -32,7 +32,42 @@ http://127.0.0.1:8790
 
 所以公开版默认只保证“每日市场判断”自动更新。
 
-如果要让别人也能在线搜索个股，需要把 `work/stock_judgment_server.py` 部署成公网 API，然后在：
+如果要让别人也能在线搜索个股，有两种方式。
+
+## 方案 A：Vercel 一体部署
+
+本目录已经内置：
+
+```text
+api/stock.js
+vercel.json
+```
+
+把整个目录导入 Vercel 后，Vercel 会同时托管页面和：
+
+```text
+/api/stock?q=股票
+```
+
+前端在 `*.vercel.app` 域名下会自动调用同源 API，无需额外配置。
+
+如果使用 Vercel 自定义域名，把：
+
+```text
+site-config.js
+```
+
+改成：
+
+```js
+window.SITE_CONFIG = {
+  stockApiBase: "same-origin"
+};
+```
+
+## 方案 B：外部公网 API
+
+把 `work/stock_judgment_server.py` 或 `api/stock.js` 部署成公网 API，然后在：
 
 ```text
 site-config.js
