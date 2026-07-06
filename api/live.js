@@ -1,5 +1,9 @@
 const BK_API = "https://data.eastmoney.com/dataapi/bkzj/getbkzj";
 const TENCENT_QUOTE = "https://qt.gtimg.cn/q=";
+const UPSTREAM_TIMEOUT_MS = 5000;
+const CACHE_TTL_MS = 60000;
+let cachedLiveReport = null;
+let cachedLiveAt = 0;
 
 const THEMES = [
   {
@@ -68,7 +72,7 @@ function beijingTimestamp() {
 
 async function httpGet(url, encoding = "utf-8") {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  const timeout = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
   try {
     const response = await fetch(url, {
       signal: controller.signal,
@@ -438,6 +442,44 @@ async function buildLiveReport() {
   };
 }
 
+function buildFallbackReport(error) {
+  const daily = require("../data/daily-report.json");
+  const generatedAt = beijingTimestamp();
+  return {
+    generated_at: generatedAt,
+    trading_date: daily.source_data_date || daily.generated_at || generatedAt.slice(0, 10),
+    data_status: "静态回退",
+    refresh_seconds: 300,
+    data_sources: [...(daily.data_sources || []), "本地日报缓存"],
+    gate: daily.market_gate || daily.gate || {},
+    indices: daily.indices || [],
+    themes: daily.themes || [],
+    watch_themes: daily.watch_themes || [],
+    emotion_dashboard: daily.emotion_dashboard || {},
+    sector_rankings: {
+      system: daily.themes || [],
+      industry: daily.industry_all || daily.industry_top10 || [],
+      concept: daily.concept_all || daily.concept_top10 || [],
+    },
+    candidates: daily.candidate_pool || [],
+    industry_top5: (daily.industry_top10 || []).slice(0, 5),
+    concept_top5: (daily.concept_top10 || []).slice(0, 5),
+    system_boundary: daily.system_boundary || "盘中实时判断只做条件过滤和风险提示，不给无条件买卖指令。",
+    error_notice: `实时源暂不可用，已使用静态日报缓存：${error?.message || "unknown"}`,
+  };
+}
+
+async function getLiveReport() {
+  const now = Date.now();
+  if (cachedLiveReport && now - cachedLiveAt < CACHE_TTL_MS) {
+    return { ...cachedLiveReport, data_status: "当日实时缓存" };
+  }
+  const report = await buildLiveReport();
+  cachedLiveReport = report;
+  cachedLiveAt = now;
+  return report;
+}
+
 async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
@@ -456,12 +498,15 @@ async function handler(req, res) {
   }
 
   try {
-    res.end(JSON.stringify(await buildLiveReport()));
+    res.end(JSON.stringify(await getLiveReport()));
   } catch (error) {
-    res.statusCode = 500;
-    res.end(JSON.stringify({ error: error.message || "实时判断失败" }));
+    if (cachedLiveReport) {
+      res.end(JSON.stringify({ ...cachedLiveReport, data_status: "实时缓存回退", error_notice: error.message || "实时判断失败" }));
+      return;
+    }
+    res.end(JSON.stringify(buildFallbackReport(error)));
   }
 }
 
 module.exports = handler;
-module.exports._private = { buildLiveReport };
+module.exports._private = { buildLiveReport, buildFallbackReport, getLiveReport };
