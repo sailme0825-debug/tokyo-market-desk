@@ -625,6 +625,9 @@ function buildFallbackReport(error) {
 }
 
 async function getLiveReport() {
+  if (process.env.VERCEL) {
+    return buildFallbackReport(new Error("公开部署使用静态日报缓存；盘中实时请走本地行情服务"));
+  }
   const now = Date.now();
   if (cachedLiveReport && now - cachedLiveAt < CACHE_TTL_MS) {
     return { ...cachedLiveReport, data_status: "当日实时缓存" };
