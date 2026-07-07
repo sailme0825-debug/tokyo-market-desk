@@ -1,6 +1,7 @@
 const BK_API = "https://data.eastmoney.com/dataapi/bkzj/getbkzj";
 const TENCENT_QUOTE = "https://qt.gtimg.cn/q=";
 const UPSTREAM_TIMEOUT_MS = 5000;
+const REPORT_TIMEOUT_MS = 7500;
 const CACHE_TTL_MS = 60000;
 let cachedLiveReport = null;
 let cachedLiveAt = 0;
@@ -133,7 +134,12 @@ async function fetchQuotes(symbols) {
   const quotes = new Map();
   for (let index = 0; index < unique.length; index += 80) {
     const chunk = unique.slice(index, index + 80);
-    const raw = await httpGet(TENCENT_QUOTE + chunk.join(","), "gbk");
+    let raw = "";
+    try {
+      raw = await httpGet(TENCENT_QUOTE + chunk.join(","), "gbk");
+    } catch {
+      continue;
+    }
     raw.split(";\n").forEach((part) => {
       if (!part.includes('="')) return;
       const values = part.split('="', 2)[1].replace(/";?\s*$/, "").split("~");
@@ -623,7 +629,16 @@ async function getLiveReport() {
   if (cachedLiveReport && now - cachedLiveAt < CACHE_TTL_MS) {
     return { ...cachedLiveReport, data_status: "当日实时缓存" };
   }
-  const report = await buildLiveReport();
+  let timeoutId;
+  const timeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => reject(new Error("实时源超时，切换静态日报缓存")), REPORT_TIMEOUT_MS);
+  });
+  let report;
+  try {
+    report = await Promise.race([buildLiveReport(), timeout]);
+  } finally {
+    clearTimeout(timeoutId);
+  }
   cachedLiveReport = report;
   cachedLiveAt = now;
   return report;
