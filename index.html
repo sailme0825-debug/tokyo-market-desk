@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tokyo 事件驱动价值投机台</title>
-    <link rel="stylesheet" href="./styles.css?v=compact-warning-layout">
+    <link rel="stylesheet" href="./styles.css?v=market-news-panel">
   </head>
   <body>
     <main class="shell">
@@ -113,6 +113,14 @@
           </div>
           <div id="alertList" class="alert-list"></div>
         </div>
+      </section>
+
+      <section class="market-news-panel" aria-label="国内外市场资讯">
+        <div class="section-title">
+          <span>市场资讯</span>
+          <strong id="marketNewsStatus">国内 / 海外</strong>
+        </div>
+        <div id="marketNews" class="market-news"></div>
       </section>
 
       <section class="stock-search-panel" aria-label="个股检索判断">
@@ -251,6 +259,6 @@
 
     <script src="./site-config.js"></script>
     <script src="./report-data.js"></script>
-    <script src="./app.js?v=compact-live-layout"></script>
+    <script src="./app.js?v=market-news-panel"></script>
   </body>
 </html>

@@ -279,6 +279,7 @@ function renderLiveDecision(payload) {
   document.getElementById("liveUpdatedAt").textContent = `更新 ${payload.generated_at} · ${payload.refresh_seconds}s 口径`;
   syncTopSummaryWithLive(payload);
   if (payload.emotion_dashboard) renderEmotionDashboard(payload.emotion_dashboard);
+  renderMarketNews(buildMarketNewsFromLive(payload));
 
   document.getElementById("liveIndices").innerHTML = `
     <h3>指数门</h3>
@@ -313,6 +314,95 @@ function renderLiveDecision(payload) {
         </article>
       `).join("")}
     </div>
+  `;
+}
+
+function buildMarketNewsFromLive(payload) {
+  const themes = payload.themes || [];
+  const rankings = payload.sector_rankings || {};
+  const industry = rankings.industry || payload.industry_top5 || [];
+  const concept = rankings.concept || payload.concept_top5 || [];
+  const overseas = (payload.indices || []).filter((row) => row.gate === false);
+  const domestic = [
+    {
+      tag: "A股市场门",
+      title: payload.gate.status || "--",
+      message: `A股红盘 ${payload.gate.positive_index_count}/${payload.gate.index_total_count || 6}，行业流入 ${payload.gate.positive_industry_count ?? "--"}，概念流入 ${payload.gate.positive_concept_count ?? "--"}。`,
+      impact: payload.gate.action || "按市场门判断仓位。",
+    },
+  ];
+  if (themes[0]) {
+    domestic.push({
+      tag: "主线资金",
+      title: themes[0].name,
+      message: `${themes[0].role || "主线观察"} · ${themes[0].emotion_stage || themes[0].phase || "--"} · 净流入 ${themes[0].flow_score_100m_yuan ?? "--"} 亿。`,
+      impact: "先确认事件催化、价值锚和核心股承接，再判断是否进入投机窗口。",
+    });
+  }
+  if (industry[0]) {
+    domestic.push({
+      tag: "行业前排",
+      title: industry[0].name,
+      message: `行业资金前排，净流入 ${industry[0].main_net_inflow_100m_yuan ?? industry[0].flow_score_100m_yuan ?? "--"} 亿。`,
+      impact: "作为资金方向线索，不替代事件和价格确认。",
+    });
+  }
+  if (concept[0]) {
+    domestic.push({
+      tag: "概念前排",
+      title: concept[0].name,
+      message: `概念资金前排，净流入 ${concept[0].main_net_inflow_100m_yuan ?? concept[0].flow_score_100m_yuan ?? "--"} 亿。`,
+      impact: "区分真实事件催化和短线情绪轮动。",
+    });
+  }
+  return {
+    as_of: payload.data_status || "盘中实时",
+    domestic,
+    overseas: [
+      {
+        tag: "外盘风向",
+        title: payload.gate.overseas_wind || "--",
+        message: `海外/日韩美指数红盘 ${payload.gate.overseas_positive_count ?? 0}/${payload.gate.overseas_total_count ?? overseas.length}。`,
+        impact: "外盘只做情绪和风险偏好参考，不替代 A 股市场门。",
+      },
+      ...overseas.slice(0, 5).map((row) => ({
+        tag: row.group || "海外",
+        title: row.name,
+        message: `${row.status || "--"} · ${row.price ?? "--"} · ${row.pct ?? "--"}%。`,
+        impact: "若外盘与 A 股主线同向，提高观察权重；若背离，降低追价冲动。",
+      })),
+    ],
+    note: "盘中市场消息由指数、板块资金和外盘风向生成。",
+  };
+}
+
+function renderMarketNews(news) {
+  const root = document.getElementById("marketNews");
+  if (!root) return;
+  const domestic = news?.domestic || [];
+  const overseas = news?.overseas || [];
+  text("marketNewsStatus", news?.as_of ? `国内 / 海外 · ${news.as_of}` : "国内 / 海外");
+  root.innerHTML = `
+    <section>
+      <h3>国内市场消息 <small>${domestic.length}</small></h3>
+      <div>${domestic.map(renderNewsItem).join("") || `<p class="empty-line">暂无国内消息。</p>`}</div>
+    </section>
+    <section>
+      <h3>海外市场消息 <small>${overseas.length}</small></h3>
+      <div>${overseas.map(renderNewsItem).join("") || `<p class="empty-line">暂无海外消息。</p>`}</div>
+    </section>
+    <p>${htmlEscape(news?.note || "市场消息仅用于事件线索过滤。")}</p>
+  `;
+}
+
+function renderNewsItem(item) {
+  return `
+    <article class="news-item">
+      <span>${htmlEscape(item.tag || "--")}</span>
+      <b>${htmlEscape(item.title || "--")}</b>
+      <p>${htmlEscape(item.message || "")}</p>
+      <small>${htmlEscape(item.impact || "")}</small>
+    </article>
   `;
 }
 
@@ -947,6 +1037,7 @@ async function boot() {
 
   renderMarketGate(report.market_gate);
   renderAlerts(report.alerts || []);
+  renderMarketNews(report.market_news || {});
   renderCandidatePool(report.candidate_pool);
   renderEmotionDashboard(report.emotion_dashboard);
   renderExecutionChecklist(report.execution_checklist || []);

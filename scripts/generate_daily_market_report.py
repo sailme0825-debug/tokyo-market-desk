@@ -1017,6 +1017,71 @@ def build_execution_checklist(themes, market_gate, freshness):
     return items[:6]
 
 
+def build_market_news(themes, market_gate, industry, concept, freshness):
+    domestic = [
+        {
+            "tag": "A股市场门",
+            "title": market_gate["status"],
+            "message": f"A股指数打开 {market_gate['open_index_count']}/{market_gate['index_total_count']}，行业流入 {market_gate['positive_industry_count']}，概念流入 {market_gate['positive_concept_count']}。",
+            "impact": market_gate["advice"],
+        }
+    ]
+    if themes:
+        strongest = themes[0]
+        domestic.append(
+            {
+                "tag": "主线资金",
+                "title": strongest["name"],
+                "message": f"{strongest['role']} · {strongest['emotion_stage']} · 净流入 {strongest['flow_score_100m_yuan']} 亿。",
+                "impact": "先确认事件催化、价值锚和核心股承接，再判断是否进入投机窗口。",
+            }
+        )
+    if industry:
+        domestic.append(
+            {
+                "tag": "行业前排",
+                "title": industry[0].get("f14", "--"),
+                "message": f"东方财富 BK 行业口径主力净流入 {yi(industry[0].get('f62'))} 亿。",
+                "impact": "只作为资金方向线索，仍需和事件、业绩弹性、价格结构互相印证。",
+            }
+        )
+    if concept:
+        domestic.append(
+            {
+                "tag": "概念前排",
+                "title": concept[0].get("f14", "--"),
+                "message": f"东方财富 BK 概念口径主力净流入 {yi(concept[0].get('f62'))} 亿。",
+                "impact": "概念热度需要区分真实事件催化和短线情绪轮动。",
+            }
+        )
+
+    overseas_indices = [row for row in market_gate.get("indices", []) if row.get("gate") is False]
+    overseas = [
+        {
+            "tag": "外盘风向",
+            "title": market_gate.get("overseas_wind", "--"),
+            "message": f"海外/日韩美指数红盘 {market_gate.get('overseas_positive_count', 0)}/{market_gate.get('overseas_total_count', 0)}。",
+            "impact": "外盘只做情绪和风险偏好参考，不替代 A 股市场门。",
+        }
+    ]
+    for row in overseas_indices[:5]:
+        overseas.append(
+            {
+                "tag": row.get("group", "海外"),
+                "title": row.get("name", "--"),
+                "message": f"{row.get('status', '--')} · {row.get('price', '--')} · {row.get('pct', '--')}%。",
+                "impact": "若外盘和 A 股主线同向，可提高观察权重；若背离，降低追价冲动。",
+            }
+        )
+
+    return {
+        "as_of": freshness["status"],
+        "domestic": domestic[:5],
+        "overseas": overseas[:6],
+        "note": "市场消息由指数、板块资金和外盘风向生成；用于事件线索过滤，不构成投资建议。",
+    }
+
+
 def stock_symbol_from_code(code):
     if str(code).startswith("6"):
         return f"sh{code}"
@@ -1423,6 +1488,7 @@ def main():
     freshness = build_data_freshness(args.data_date, date.today().isoformat())
     top_summary = build_top_summary(sorted_themes, market_gate, freshness)
     execution_checklist = build_execution_checklist(sorted_themes, market_gate, freshness)
+    market_news = build_market_news(sorted_themes, market_gate, industry, concept, freshness)
     event_templates = build_event_templates()
     post_review_score = build_post_review_score(sorted_themes, market_gate, candidate_pool, alerts, freshness)
 
@@ -1435,6 +1501,7 @@ def main():
         "personal_mode": PERSONAL_MODE,
         "top_summary": top_summary,
         "execution_checklist": execution_checklist,
+        "market_news": market_news,
         "sector_linkage": sector_linkage,
         "event_templates": event_templates,
         "post_review_score": post_review_score,
