@@ -237,10 +237,20 @@ h1 {
 
 .summary-grid {
   grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  align-items: start;
+}
+
+.summary-grid > .panel {
+  align-self: start;
 }
 
 .dashboard-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.dashboard-grid > .panel {
+  align-self: start;
 }
 
 .layout {
@@ -318,20 +328,20 @@ h1 {
 
 .system-list {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
-  padding: 12px;
+  padding: 8px;
   list-style: none;
 }
 
 .system-list li {
-  padding: 10px 11px;
+  padding: 8px 9px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 7px;
   background: #fbfcfd;
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 12px;
+  line-height: 1.38;
   font-weight: 700;
 }
 
@@ -696,6 +706,11 @@ h1 {
   gap: 8px;
 }
 
+.alert-list {
+  gap: 6px;
+  padding: 8px;
+}
+
 .mini-table,
 .local-list {
   margin-top: 8px;
@@ -750,9 +765,12 @@ h1 {
 }
 
 .alert-item {
+  min-height: 0;
   display: grid;
-  gap: 5px;
-  padding: 10px;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 8px 9px;
 }
 
 .alert-item.watch {
@@ -762,7 +780,8 @@ h1 {
 
 .alert-item b {
   color: var(--ink);
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 1.25;
 }
 
 .alert-item span,
@@ -772,6 +791,15 @@ h1 {
   font-size: 12px;
   line-height: 1.45;
   font-weight: 700;
+}
+
+.alert-item span {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 11px;
+  line-height: 1.32;
 }
 
 .stock-search-bar {
