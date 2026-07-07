@@ -400,30 +400,40 @@ h1 {
 
 .live-grid {
   display: grid;
-  grid-template-columns: 0.78fr 1fr 1.12fr;
-  gap: 10px;
-  padding: 12px;
+  grid-template-columns: minmax(270px, 0.86fr) minmax(380px, 1.34fr) minmax(340px, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 10px;
 }
 
 .live-block {
-  min-height: 180px;
-  padding: 11px;
+  align-self: start;
+  min-height: 0;
+  padding: 9px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fbfcfd;
 }
 
 .live-block h3 {
-  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 7px;
   color: var(--ink);
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.2;
 }
 
 .live-block > p {
-  margin: 10px 0 0;
+  margin: 7px 0 0;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel);
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 11px;
+  line-height: 1.35;
   font-weight: 750;
 }
 
@@ -431,25 +441,26 @@ h1 {
 .live-theme-list,
 .live-candidate-list {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .live-sector-tabs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  margin-bottom: 9px;
+  gap: 5px;
+  margin-bottom: 7px;
 }
 
 .live-sector-tabs button {
-  min-height: 32px;
+  min-height: 28px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 7px;
   background: var(--panel);
   color: var(--muted);
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
+  padding: 0 4px;
 }
 
 .live-sector-tabs small {
@@ -466,7 +477,7 @@ h1 {
 }
 
 .live-sector-panels {
-  max-height: 520px;
+  max-height: 342px;
   overflow: auto;
   padding-right: 2px;
 }
@@ -483,6 +494,12 @@ h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.live-candidate-list {
+  max-height: 402px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
 .live-mini-grid div,
 .live-theme-list article,
 .live-candidate-list article {
@@ -492,8 +509,22 @@ h1 {
 }
 
 .live-mini-grid div {
-  min-height: 58px;
-  padding: 9px;
+  min-height: 0;
+  padding: 7px;
+}
+
+#liveIndices .live-mini-grid div {
+  display: grid;
+  grid-template-columns: minmax(56px, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: 4px;
+  padding: 6px 7px;
+}
+
+#liveIndices .live-mini-grid span {
+  margin-top: 0;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .live-mini-grid b,
@@ -501,7 +532,7 @@ h1 {
 .live-candidate-list b {
   display: block;
   color: var(--ink);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.25;
 }
 
@@ -509,10 +540,10 @@ h1 {
 .live-theme-list span,
 .live-candidate-list span {
   display: block;
-  margin-top: 5px;
+  margin-top: 3px;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 11px;
+  line-height: 1.25;
   font-weight: 750;
 }
 
@@ -530,9 +561,9 @@ h1 {
 .live-candidate-list article {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 7px 10px;
+  gap: 5px 8px;
   align-items: start;
-  padding: 9px;
+  padding: 7px;
 }
 
 .live-theme-list article.live-sector-weak {
@@ -543,7 +574,7 @@ h1 {
 .live-theme-list strong,
 .live-candidate-list strong {
   color: var(--ink);
-  font-size: 13px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -552,9 +583,17 @@ h1 {
   grid-column: 1 / -1;
   margin: 0;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 11px;
+  line-height: 1.35;
   font-weight: 700;
+}
+
+.live-theme-list p,
+.live-candidate-list p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .market-gate,

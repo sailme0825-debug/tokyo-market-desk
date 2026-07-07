@@ -286,7 +286,7 @@ function renderLiveDecision(payload) {
       ${payload.indices.map((row) => `
         <div class="${(row.pct || 0) >= 0 ? "live-up" : "live-down"}">
           <b>${htmlEscape(row.name)}</b>
-          <span>${htmlEscape(row.group || "指数")} · ${row.price ?? "--"} / ${row.pct ?? "--"}%</span>
+          <span>${row.price ?? "--"} · ${row.pct ?? "--"}%</span>
         </div>
       `).join("")}
     </div>
