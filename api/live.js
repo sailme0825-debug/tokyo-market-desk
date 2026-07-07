@@ -107,7 +107,11 @@ async function fetchQuote(symbol) {
   const match = raw.match(/="([\s\S]*)";?\s*$/);
   if (!match) return null;
   const values = match[1].split("~");
-  if (values.length < 39) return null;
+  return quoteFromValues(values);
+}
+
+function quoteFromValues(values) {
+  if (!values || values.length < 39) return null;
   return {
     name: values[1],
     code: values[2],
@@ -122,6 +126,22 @@ async function fetchQuote(symbol) {
     amount_10000: toFloat(values[37]),
     turnover: toFloat(values[38]),
   };
+}
+
+async function fetchQuotes(symbols) {
+  const unique = [...new Set(symbols.filter(Boolean))];
+  const quotes = new Map();
+  for (let index = 0; index < unique.length; index += 80) {
+    const chunk = unique.slice(index, index + 80);
+    const raw = await httpGet(TENCENT_QUOTE + chunk.join(","), "gbk");
+    raw.split(";\n").forEach((part) => {
+      if (!part.includes('="')) return;
+      const values = part.split('="', 2)[1].replace(/";?\s*$/, "").split("~");
+      const quote = quoteFromValues(values);
+      if (quote?.code) quotes.set(quote.code, quote);
+    });
+  }
+  return quotes;
 }
 
 async function fetchSinaGlobalQuote(symbol) {
@@ -431,12 +451,103 @@ function candidateAction(quote) {
   return "中性震荡，等待板块资金和价格方向选择。";
 }
 
+function stockSymbolFromCode(code) {
+  if (String(code || "").startsWith("6")) return `sh${code}`;
+  if (String(code || "").startsWith("4") || String(code || "").startsWith("8")) return `bj${code}`;
+  return `sz${code}`;
+}
+
+function staticLinkageGroups() {
+  try {
+    return require("../data/daily-report.json").sector_linkage || [];
+  } catch {
+    return [];
+  }
+}
+
+function staticCandidatePool() {
+  try {
+    return require("../data/daily-report.json").candidate_pool?.all || [];
+  } catch {
+    return [];
+  }
+}
+
+function matchLinkageGroup(theme, groups) {
+  return groups.find((group) => group.theme === theme.name)
+    || groups.find((group) => theme.name.includes(group.theme) || group.theme.includes(theme.name))
+    || null;
+}
+
+async function buildDynamicCandidates(themes) {
+  const groups = staticLinkageGroups();
+  const rowsByCode = new Map();
+  for (const theme of themes.slice(0, 16)) {
+    const group = matchLinkageGroup(theme, groups);
+    if (!group) continue;
+    for (const stock of (group.stocks || []).slice(0, 10)) {
+      if (!stock.code) continue;
+      const old = rowsByCode.get(stock.code);
+      const candidate = {
+        code: stock.code,
+        name: stock.name,
+        theme: theme.name,
+        role: stock.role || theme.role || "板块关联",
+        phase: theme.phase || theme.emotion_stage,
+        theme_score: theme.score || 0,
+        base_score: stock.score || 0,
+      };
+      if (!old || candidate.theme_score + candidate.base_score > old.theme_score + old.base_score) {
+        rowsByCode.set(stock.code, candidate);
+      }
+    }
+  }
+  if (!rowsByCode.size) {
+    const pool = staticCandidatePool();
+    for (const item of pool.slice(0, 80)) {
+      rowsByCode.set(item.code, {
+        ...item,
+        phase: item.phase || "动态候选",
+        theme_score: item.score || 0,
+        base_score: item.score || 0,
+      });
+    }
+  }
+  if (!rowsByCode.size) {
+    for (const item of CANDIDATE_UNIVERSE) rowsByCode.set(item.code, { ...item, phase: "预设观察", theme_score: 0, base_score: 60 });
+  }
+  const rows = [...rowsByCode.values()];
+  const quotes = await fetchQuotes(rows.map((row) => stockSymbolFromCode(row.code)));
+  return rows
+    .map((row, index) => {
+      const quote = quotes.get(row.code);
+      const pct = quote?.pct ?? null;
+      const turnover = quote?.turnover ?? null;
+      const amount = quote?.amount_10000 ? Number((quote.amount_10000 / 10000).toFixed(2)) : null;
+      const score = Number(((row.theme_score || 0) * 0.45 + (row.base_score || 0) * 0.35 + Math.max(Math.min(pct || 0, 10), -10) * 2.5 + Math.min(turnover || 0, 15) * 1.1 + Math.min(amount || 0, 100) * 0.08 - index * 0.03).toFixed(1));
+      let level = "观察池";
+      if (score >= 92 && (pct || 0) >= 1) level = "核心候选";
+      else if (score >= 78) level = "强观察";
+      return {
+        ...row,
+        price: quote?.price ?? null,
+        pct,
+        turnover,
+        amount_100m_yuan: amount,
+        score,
+        level,
+        action: quote ? candidateAction(quote) : "行情暂缺，先按观察处理。",
+      };
+    })
+    .sort((a, b) => (b.score || 0) - (a.score || 0))
+    .slice(0, 24);
+}
+
 async function buildLiveReport() {
-  const [industry, concept, indexQuotes, candidateQuotes] = await Promise.all([
+  const [industry, concept, indexQuotes] = await Promise.all([
     fetchBk("m:90+s:4"),
     fetchBk("m:90+t:3"),
     Promise.all(INDEX_UNIVERSE.map((item) => fetchIndexQuote(item).catch((error) => ({ ...item, quote: null, error: error.message })))),
-    Promise.all(CANDIDATE_UNIVERSE.map(async (item) => ({ ...item, quote: await fetchQuote(item.symbol) }))),
   ]);
 
   const industryRows = rawSectorRows(industry, "行业");
@@ -454,21 +565,7 @@ async function buildLiveReport() {
     error: item.error,
   }));
   const gate = judgeGate(indices, industry, concept, themes);
-  const candidates = candidateQuotes
-    .filter((item) => item.quote)
-    .map((item) => ({
-      code: item.code,
-      name: item.name,
-      theme: item.theme,
-      role: item.role,
-      price: item.quote.price,
-      pct: item.quote.pct,
-      turnover: item.quote.turnover,
-      amount_100m_yuan: item.quote.amount_10000 ? Number((item.quote.amount_10000 / 10000).toFixed(2)) : null,
-      action: candidateAction(item.quote),
-    }))
-    .sort((a, b) => (b.pct || 0) - (a.pct || 0))
-    .slice(0, 8);
+  const candidates = await buildDynamicCandidates(themes);
 
   const generatedAt = beijingTimestamp();
   return {
@@ -513,7 +610,7 @@ function buildFallbackReport(error) {
       industry: daily.industry_all || daily.industry_top10 || [],
       concept: daily.concept_all || daily.concept_top10 || [],
     },
-    candidates: daily.candidate_pool || [],
+    candidates: [...(daily.candidate_pool?.core || []), ...(daily.candidate_pool?.watch || [])].slice(0, 24),
     industry_top5: (daily.industry_top10 || []).slice(0, 5),
     concept_top5: (daily.concept_top10 || []).slice(0, 5),
     system_boundary: daily.system_boundary || "盘中实时判断只做条件过滤和风险提示，不给无条件买卖指令。",
